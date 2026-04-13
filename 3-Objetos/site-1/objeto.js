@@ -6,9 +6,8 @@ const aluno = {
 }
 
 
-aluno_copia = aluno
 
-aluno_copia.idade = 25
 
-console.log(aluno_copia)
+
+console.log(aluno.nome)
 console.log(aluno)
