@@ -1,0 +1,131 @@
+:root {
+    --bg-color: #0b0e14;
+    --card-bg: rgba(23, 28, 38, 0.8);
+    --accent-color: #00f2ff;
+    --text-color: #e0e6ed;
+    --border-color: #2d3748;
+}
+
+body {
+    background-color: var(--bg-color);
+    background-image: radial-gradient(circle at top right, #1a202c, #0b0e14);
+    color: var(--text-color);
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* Container do Enunciado */
+.enunciado {
+    max-width: 600px;
+    background: var(--card-bg);
+    border-left: 5px solid var(--accent-color);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.enunciado h2 {
+    margin-top: 0;
+    color: var(--accent-color);
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.enunciado p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #a0aec0;
+}
+
+.enunciado code {
+    background: #1a202c;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #fff;
+}
+
+/* Painel do Ar Condicionado */
+.painel-ac {
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+    padding: 40px;
+    border-radius: 30px;
+    text-align: center;
+    width: 320px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    position: relative;
+}
+
+.display-digital {
+    background: #000;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #333;
+    box-shadow: inset 0 0 15px rgba(0, 242, 255, 0.1);
+}
+
+#visor-temp {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 64px;
+    font-weight: bold;
+    color: var(--accent-color);
+    text-shadow: 0 0 20px rgba(0, 242, 255, 0.5);
+    margin: 0;
+}
+
+.controles {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+/* Esconde as setas no Chrome, Safari, Edge e Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    background: #1a202c;
+    border: 1px solid var(--border-color);
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 18px;
+    text-align: center;
+    outline: none;
+}
+
+button {
+    background: linear-gradient(135deg, #00f2ff, #0077ff);
+    color: #000;
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 242, 255, 0.3);
+}
+
+.label-status {
+    font-size: 12px;
+    color: #718096;
+    text-transform: uppercase;
+}
