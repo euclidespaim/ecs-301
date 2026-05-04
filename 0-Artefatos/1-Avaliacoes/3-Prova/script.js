@@ -8,9 +8,6 @@ class SistemaAC  {
     // MISSÃO 1: Criar o SETTER 'temperatura(valor)'
     // Use if/else para validar o limite de 16 a 30.
 
-    // MISSÃO 1: O SETTER (O Filtro de Segurança)
-   
-    
     // MISSÃO 2: Criar o GETTER 'temperatura()'
     // Deve retornar o valor seguido da unidade "°C".
 };
