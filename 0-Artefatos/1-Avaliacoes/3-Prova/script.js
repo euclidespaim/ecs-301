@@ -1,27 +1,30 @@
-class SistemaAC  {
+class ControleAudio {
+    // 1. Atributo Privado (O "Cofre")
+    #volume = 20;
+
     constructor() {
-        Object.seal(this); // Impede adição ou remoção de propriedades, mas permite alteração dos valores existentes
+        // Impede a criação de propriedades "falsas" (O Lacre)
+        Object.seal(this);
     }
 
-    #temp = 22; // O # define um propriedade interna ES2022 (private field)
+    // MISSÃO 1: O SETTER 'volume(valor)'
+    
 
-    // MISSÃO 1: Criar o SETTER 'temperatura(valor)'
-    // Use if/else para validar o limite de 16 a 30.
+    // MISSÃO 2: O GETTER 'volume'
+    
+}
 
-    // MISSÃO 2: Criar o GETTER 'temperatura()'
-    // Deve retornar o valor seguido da unidade "°C".
-};
+// Instanciando o novo objeto
+const sistemaSom = new ControleAudio();
 
-const arCondicionado = new SistemaAC();
-
-// Lógica de Integração
+// Função de Integração (chamada pelo seu botão no HTML)
 function enviarComando() {
-    const input = document.getElementById('input-usuario');
-    const visor = document.getElementById('visor-temp');
+    const input = document.getElementById('input-volume');
+    const visor = document.getElementById('visor-volume');
 
     // Tenta atribuir via SETTER
-    arCondicionado.temperatura = Number(input.value);
+    sistemaSom.volume = Number(input.value);
 
-    // Lê o valor via GETTER e mostra na tela
-    visor.innerText = arCondicionado.temperatura;
+    // Lê via GETTER
+    visor.innerText = sistemaSom.volume;
 }
