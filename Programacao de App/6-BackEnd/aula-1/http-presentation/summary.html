@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Resumo de Referência Rápida: Métodos HTTP</title>
+  <style>
+    /* Print-optimized stylesheet for exactly 2 A4 pages */
+    @page {
+      size: A4;
+      margin: 0.5cm 0.7cm;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      color: #1a202c;
+      background-color: #ffffff;
+      line-height: 1.2;
+      font-size: 7.5pt;
+    }
+
+    .page {
+      width: 100%;
+      position: relative;
+    }
+
+    /* Page break rule */
+    .page-break {
+      page-break-before: always;
+      break-before: page;
+      padding-top: 3px;
+    }
+
+    header {
+      border-bottom: 2px solid #2b6cb0;
+      padding-bottom: 2px;
+      margin-bottom: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .header-title h1 {
+      font-size: 11pt;
+      color: #2b6cb0;
+      font-weight: bold;
+    }
+
+    .header-title p {
+      font-size: 6.5pt;
+      color: #4a5568;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 1px;
+    }
+
+    .header-meta {
+      font-size: 6.5pt;
+      color: #718096;
+      text-align: right;
+      font-weight: bold;
+    }
+
+    h2.section-title {
+      font-size: 8pt;
+      color: #2d3748;
+      margin-bottom: 2px;
+      margin-top: 3px;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 1px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .intro-text {
+      margin-bottom: 3px;
+      color: #4a5568;
+      font-size: 7pt;
+      text-align: justify;
+    }
+
+    /* Table styling */
+    table.summary-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 4px;
+      font-size: 6.5pt;
+    }
+
+    table.summary-table th, table.summary-table td {
+      border: 1px solid #cbd5e0;
+      padding: 2px 3px;
+      text-align: left;
+    }
+
+    table.summary-table th {
+      background-color: #f7fafc;
+      color: #2d3748;
+      font-weight: bold;
+    }
+
+    .method-badge {
+      font-family: monospace;
+      font-weight: bold;
+      padding: 1px 2px;
+      border-radius: 2px;
+      font-size: 5.8pt;
+      display: inline-block;
+      text-align: center;
+      width: 42px;
+      border: 1px solid #a0aec0;
+    }
+
+    .badge-get { background-color: #ebf8ff; color: #2b6cb0; border-color: #bee3f8; }
+    .badge-post { background-color: #f0fff4; color: #22543d; border-color: #c6f6d5; }
+    .badge-put { background-color: #fffaf0; color: #744210; border-color: #feebc8; }
+    .badge-patch { background-color: #faf5ff; color: #553c9a; border-color: #e9d8fd; }
+    .badge-delete { background-color: #fff5f5; color: #742a2a; border-color: #fed7d7; }
+    .badge-head { background-color: #fffff0; color: #744210; border-color: #fffff0; }
+    .badge-options { background-color: #e6fffa; color: #234e52; border-color: #b2f5ea; }
+    .badge-other { background-color: #edf2f7; color: #4a5568; border-color: #e2e8f0; }
+
+    /* Cards Grid */
+    .grid-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px;
+      margin-bottom: 2px;
+    }
+
+    .method-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      padding: 3px 5px;
+      background-color: #ffffff;
+    }
+
+    .example-code {
+      font-family: monospace;
+      background-color: #edf2f7;
+      padding: 1px 2px;
+      border-radius: 2px;
+      font-size: 6pt;
+      display: block;
+      margin-top: 1px;
+      color: #2d3748;
+      border: 1px solid #e2e8f0;
+    }
+
+    .footer-note {
+      border-top: 1px solid #e2e8f0;
+      padding-top: 1px;
+      font-size: 6pt;
+      color: #a0aec0;
+      display: flex;
+      justify-content: space-between;
+      margin-top: 4px;
+    }
+
+    .anatomy-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 3px;
+    }
+
+    .anatomy-block {
+      background-color: #f7fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      padding: 4px 6px;
+    }
+
+    .anatomy-block h3 {
+      font-size: 7.2pt;
+      color: #2b6cb0;
+      margin-bottom: 2px;
+      font-weight: bold;
+    }
+
+    .anatomy-block pre {
+      font-family: monospace;
+      font-size: 5.8pt;
+      white-space: pre-wrap;
+      color: #2d3748;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PAGE 1 -->
+  <div class="page">
+    <header>
+      <div class="header-title">
+        <h1>Guia de Referência Rápida: Métodos HTTP</h1>
+        <p>Desenvolvimento Web &amp; Comunicação Cliente-Servidor</p>
+      </div>
+      <div class="header-meta">
+        Página 1 de 2
+      </div>
+    </header>
+
+    <h2 class="section-title">1. Teoria de Comunicação HTTP</h2>
+    <p class="intro-text">
+      O <strong>HTTP (Hypertext Transfer Protocol)</strong> é o protocolo de comunicação padrão da Web, estruturado no modelo de <strong>Requisição e Resposta</strong>. O cliente (navegador/aplicação) inicia o contato enviando uma mensagem de solicitação contendo uma URL (recurso de destino) e um <strong>Método HTTP</strong> (ou verbo), especificando qual ação semântica deseja aplicar sobre o recurso. O servidor processa a requisição e retorna uma resposta com um código de status (ex: 200 OK, 201 Created).
+    </p>
+
+    <h2 class="section-title">2. Propriedades Semânticas Fundamentais</h2>
+    <p class="intro-text">
+      Para arquitetar APIs RESTful robustas, os métodos devem aderir a duas propriedades importantes:
+    </p>
+    <ul style="font-size: 7pt; color: #4a5568; margin-left: 15px; margin-bottom: 4px; line-height: 1.2;">
+      <li><strong>Métodos Seguros (Safe):</strong> Ações exclusivas de leitura. Não alteram o estado do recurso no servidor nem produzem efeitos colaterais. Podem ser cacheados com segurança (ex: GET, HEAD, OPTIONS).</li>
+      <li><strong>Métodos Idempotentes:</strong> Múltiplas execuções idênticas e consecutivas da mesma requisição deixam o servidor exatamente no mesmo estado que uma única execução. Previne erros de duplicação em instabilidades de rede (ex: GET, PUT, DELETE).</li>
+    </ul>
+    <p style="font-size: 6.8pt; color: #718096; font-style: italic; margin-top: 2px; margin-bottom: 4px; padding-left: 5px; border-left: 2px solid #cbd5e0;">
+      * <strong>Entendendo a Idempotência na prática:</strong> É como o botão de chamada de um elevador: apertá-lo 1 ou 10 vezes tem o mesmo resultado final (o elevador vem uma só vez). Em APIs, se a rede oscilar ao enviar uma exclusão (DELETE) ou substituição (PUT), reenviar a requisição é seguro. Com POST (não-idempotente), isso geraria duplicatas.
+    </p>
+
+    <h2 class="section-title">3. Tabela Comparativa de Métodos</h2>
+    <table class="summary-table">
+      <thead>
+        <tr>
+          <th>Método</th>
+          <th>Ação CRUD</th>
+          <th>Seguro</th>
+          <th>Idempotente</th>
+          <th>Corpo Req.</th>
+          <th>Corpo Resp.</th>
+          <th>Caso de Uso Típico</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="method-badge badge-get">GET</span></td>
+          <td>Read (Leitura)</td>
+          <td style="color: #2f855a; font-weight: bold;">Sim</td>
+          <td style="color: #2f855a; font-weight: bold;">Sim</td>
+          <td>Não</td>
+          <td>Sim</td>
+          <td>Buscar dados, listar recursos ou pesquisar filtros.</td>
+        </tr>
+        <tr>
+          <td><span class="method-badge badge-post">POST</span></td>
+          <td>Create (Criação)</td>
+          <td style="color: #c53030; font-weight: bold;">Não</td>
+          <td style="color: #c53030; font-weight: bold;">Não</td>
+          <td>Sim (JSON)</td>
+          <td>Sim</td>
+          <td>Cadastrar novos registros ou enviar formulários.</td>
+        </tr>
+        <tr>
+          <td><span class="method-badge badge-put">PUT</span></td>
+          <td>Update (Edição)</td>
+          <td style="color: #c53030; font-weight: bold;">Não</td>
+          <td style="color: #2f855a; font-weight: bold;">Sim</td>
+          <td>Sim (Completo)</td>
+          <td>Sim/Não</td>
+          <td>Substituir um recurso inteiro por novos dados.</td>
+        </tr>
+        <tr>
+          <td><span class="method-badge badge-patch">PATCH</span></td>
+          <td>Update (Edição)</td>
+          <td style="color: #c53030; font-weight: bold;">Não</td>
+          <td style="color: #c53030; font-weight: bold;">Não</td>
+          <td>Sim (Parcial)</td>
+          <td>Sim</td>
+          <td>Modificar campos específicos de um registro.</td>
+        </tr>
+        <tr>
+          <td><span class="method-badge badge-delete">DELETE</span></td>
+          <td>Delete (Exclusão)</td>
+          <td style="color: #c53030; font-weight: bold;">Não</td>
+          <td style="color: #2f855a; font-weight: bold;">Sim</td>
+          <td>Não (Raro)</td>
+          <td>Sim/Não</td>
+          <td>Excluir um recurso específico do banco de dados.</td>
+        </tr>
+        <tr>
+          <td><span class="method-badge badge-head">HEAD</span></td>
+          <td>-</td>
+          <td style="color: #2f855a; font-weight: bold;">Sim</td>
+          <td style="color: #2f855a; font-weight: bold;">Sim</td>
+          <td>Não</td>
+          <td>Não</td>
+          <td>Consultar cabeçalhos (tamanho, tipo, existência).</td>
+        </tr>
+        <tr>
+          <td><span class="method-badge badge-options">OPTIONS</span></td>
+          <td>-</td>
+          <td style="color: #2f855a; font-weight: bold;">Sim</td>
+          <td style="color: #2f855a; font-weight: bold;">Sim</td>
+          <td>Não</td>
+          <td>Sim</td>
+          <td>Verificar verbos permitidos e CORS no servidor.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 class="section-title">4. Definições dos Métodos Principais (CRUD)</h2>
+    <div class="grid-container">
+      
+      <div class="method-card">
+        <span class="method-badge badge-get">GET</span>
+        <p style="margin-top: 2px; font-size: 7pt; color: #2d3748;"><strong>Leitura:</strong> Recupera o recurso solicitado. Parâmetros são expostos na URL via Query String. Não altera estado do servidor.</p>
+        <span class="example-code">GET /usuarios?ordenacao=nome HTTP/1.1</span>
+      </div>
+
+      <div class="method-card">
+        <span class="method-badge badge-post">POST</span>
+        <p style="margin-top: 2px; font-size: 7pt; color: #2d3748;"><strong>Criação:</strong> Envia dados no corpo para criar um novo registro. Não seguro e não idempotente (duplo clique gera duplicados).</p>
+        <span class="example-code">POST /usuarios HTTP/1.1 (body: JSON)</span>
+      </div>
+
+      <div class="method-card">
+        <span class="method-badge badge-put">PUT</span>
+        <p style="margin-top: 2px; font-size: 7pt; color: #2d3748;"><strong>Substituição Integral:</strong> Atualiza completamente um recurso. Campos omitidos serão removidos ou resetados no servidor.</p>
+        <span class="example-code">PUT /usuarios/1 HTTP/1.1 (body: JSON)</span>
+      </div>
+
+      <div class="method-card">
+        <span class="method-badge badge-patch">PATCH</span>
+        <p style="margin-top: 2px; font-size: 7pt; color: #2d3748;"><strong>Atualização Parcial:</strong> Altera apenas os atributos específicos fornecidos no corpo da requisição, preservando os demais.</p>
+        <span class="example-code">PATCH /usuarios/1 HTTP/1.1 (body: JSON)</span>
+      </div>
+
+      <div class="method-card" style="grid-column: span 2;">
+        <span class="method-badge badge-delete">DELETE</span>
+        <p style="margin-top: 2px; font-size: 7pt; color: #2d3748;"><strong>Exclusão:</strong> Remove o recurso. Idempotente: uma vez deletado, permanece deletado. Chamadas subsequentes costumam retornar 404 (Não Encontrado), mantendo a idempotência (estado final do servidor não muda).</p>
+        <span class="example-code">DELETE /usuarios/1 HTTP/1.1</span>
+      </div>
+
+    </div>
+
+    <div class="footer-note">
+      <span>Guia de Referência Rápida: Métodos HTTP</span>
+      <span>Página 1 de 2</span>
+    </div>
+  </div>
+
+  <!-- PAGE 2 -->
+  <div class="page page-break">
+    <header>
+      <div class="header-title">
+        <h1>Guia de Referência Rápida: Métodos HTTP</h1>
+        <p>Desenvolvimento Web &amp; Comunicação Cliente-Servidor</p>
+      </div>
+      <div class="header-meta">
+        Página 2 de 2
+      </div>
+    </header>
+
+    <h2 class="section-title">5. Métodos Auxiliares, Diagnóstico e Infraestrutura</h2>
+    <div class="grid-container">
+      
+      <div class="method-card">
+        <span class="method-badge badge-head" style="margin-right: 2px;">HEAD</span>
+        <span class="method-badge badge-options">OPTIONS</span>
+        <p style="margin-top: 2px; font-size: 7pt; color: #2d3748;">
+          <strong>HEAD:</strong> Mesmos cabeçalhos do GET, mas sem corpo. Valida metadados (tamanho, tipo).<br>
+          <strong>OPTIONS:</strong> Obtém cabeçalhos de controle e verbos permitidos. Essencial para CORS Preflight.
+        </p>
+      </div>
+
+      <div class="method-card">
+        <span class="method-badge badge-other" style="margin-right: 2px;">CONNECT</span>
+        <span class="method-badge badge-other">TRACE</span>
+        <p style="margin-top: 2px; font-size: 7pt; color: #2d3748;">
+          <strong>CONNECT:</strong> Estabelece túnel TCP/IP direto, permitindo HTTPS criptografado através de proxies.<br>
+          <strong>TRACE:</strong> Retorna de loopback a requisição recebida, auditando modificações de cabeçalho.
+        </p>
+      </div>
+
+    </div>
+
+    <h2 class="section-title">6. Anatomia de uma Transação HTTP (Exemplo Cru)</h2>
+    <div class="anatomy-container">
+      <div class="anatomy-block">
+        <h3>Requisição (Cliente → Servidor)</h3>
+        <pre>POST /usuarios HTTP/1.1
+Host: api.exemplo.com
+Content-Type: application/json
+Content-Length: 31
+
+{"nome":"Pedro","cargo":"Dev"}</pre>
+      </div>
+      <div class="anatomy-block">
+        <h3>Resposta (Servidor → Cliente)</h3>
+        <pre>HTTP/1.1 201 Created
+Content-Type: application/json
+Content-Length: 41
+
+{"id":4,"nome":"Pedro","cargo":"Dev"}</pre>
+      </div>
+    </div>
+
+    <h2 class="section-title">7. Códigos de Status HTTP Comuns</h2>
+    <div style="font-size: 7pt; color: #4a5568; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; line-height: 1.2;">
+      <div>
+        <strong style="color: #2f855a; font-size: 7.2pt; display: block; margin-bottom: 1px;">2xx Sucesso (Success)</strong>
+        <p>• <strong>200 OK:</strong> Sucesso padrão. Comum em GET, PUT e PATCH.</p>
+        <p>• <strong>201 Created:</strong> Recurso criado com sucesso. Resposta do POST.</p>
+        <p>• <strong>204 No Content:</strong> Sucesso, sem corpo (ex: DELETE e OPTIONS).</p>
+      </div>
+      <div>
+        <strong style="color: #c53030; font-size: 7.2pt; display: block; margin-bottom: 1px;">4xx &amp; 5xx Erros (Errors)</strong>
+        <p>• <strong>400 Bad Request:</strong> Requisição inválida (corpo ou parâmetros incorretos).</p>
+        <p>• <strong>404 Not Found:</strong> Recurso ou rota não encontrada no servidor.</p>
+        <p>• <strong>500 Internal Server Error:</strong> Erro interno crítico do servidor.</p>
+      </div>
+    </div>
+
+    <div class="footer-note">
+      <span>Guia de Referência Rápida: Métodos HTTP</span>
+      <span>Página 2 de 2</span>
+    </div>
+  </div>
+
+</body>
+</html>

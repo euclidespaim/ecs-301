@@ -1,0 +1,2299 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Central de Aulas - Desenvolvimento Web (Backend)</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='5' y='5' width='90' height='90' rx='15' fill='%230a0e17' stroke='%2300ff66' stroke-width='8'/%3E%3Ctext x='18' y='70' font-size='60' font-family='monospace' font-weight='bold' fill='%2300ff66'%3E%3E_%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="grid-bg"></div>
+
+  <div class="app-container">
+    
+    <!-- HUD Top Header -->
+    <header class="hud-header">
+      <div class="hud-title-group">
+        <div class="logo-icon">&gt;_</div>
+        <div class="hud-title-text">
+          <h1>CENTRAL DE AULAS</h1>
+          <span>TRILHA DE DESENVOLVIMENTO WEB // BACKEND</span>
+        </div>
+      </div>
+
+      <!-- Student Profile Identity -->
+      <div class="hud-profile" style="display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 0.75rem; border-right: 1px solid var(--border-color); padding-right: 20px;">
+        <span style="color: var(--text-muted); font-weight: bold;">ESTUDANTE:</span>
+        <input type="text" id="student-name-input" placeholder="DIGITE SEU NOME" class="hud-input" autocomplete="off" style="background: transparent; border: none; border-bottom: 1px solid var(--border-color); color: var(--neon-green); font-family: var(--font-mono); font-size: 0.8rem; padding: 2px 4px; width: 160px; outline: none; text-transform: uppercase; transition: var(--transition-fast);">
+      </div>
+
+      <!-- Class Time Progress Tracker -->
+      <div class="hud-timeline-container">
+        <div class="timeline-info">
+          <span>PROGRESSO DO CURSO</span>
+          <span id="mission-progress-percent">0% CONCLUÍDO</span>
+        </div>
+        <div class="timeline-bar-bg">
+          <div class="timeline-bar-fill" id="mission-progress-bar"></div>
+        </div>
+      </div>
+
+      <!-- System Widgets -->
+      <div class="hud-widgets">
+        <div class="widget-status" id="server-status-widget">
+          <div class="status-dot checking" id="status-indicator"></div>
+          <span id="status-text">MONITORANDO PORTA 3000...</span>
+        </div>
+        <div class="widget-audio" style="display: flex; gap: 8px;">
+          <button class="btn-icon" id="btn-theme-toggle" title="Alternar Tema (Claro/Escuro)" style="font-size: 1rem; display: flex; align-items: center; justify-content: center;">🌓</button>
+          <button class="btn-icon" id="audio-toggle" title="Alternar Efeitos Sonoros">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="workspace-grid">
+      
+      <!-- Left Navigation Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-title">Ementa de Backend</div>
+        
+        <!-- AULA 01 ACCORDION -->
+        <div class="class-accordion-group expanded" id="folder-aula1">
+          <button class="accordion-header">
+            <span class="accordion-header-title">Aula 01: Operação Backend</span>
+            <svg class="accordion-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          
+          <ul class="accordion-body">
+            <li>
+              <button class="mission-btn active" data-section="aula1-mod1" id="btn-aula1-mod1">
+                <div class="mission-meta">
+                  <span class="mission-tag">Mod 1.1 / Teoria</span>
+                  <span class="mission-duration">15m</span>
+                </div>
+                <span class="mission-title">Fundamentos de Backend</span>
+                <div class="mission-status"><div class="mission-status-dot"></div><span class="mission-status-label">Pendente</span></div>
+              </button>
+            </li>
+            <li>
+              <button class="mission-btn" data-section="aula1-mod2" id="btn-aula1-mod2">
+                <div class="mission-meta">
+                  <span class="mission-tag">Mod 1.2 / Quiz</span>
+                  <span class="mission-duration">10m</span>
+                </div>
+                <span class="mission-title">Quiz de Fixação</span>
+                <div class="mission-status"><div class="mission-status-dot"></div><span class="mission-status-label">Pendente</span></div>
+              </button>
+            </li>
+            <li>
+              <button class="mission-btn" data-section="aula1-mod3" id="btn-aula1-mod3">
+                <div class="mission-meta">
+                  <span class="mission-tag">Mod 1.3 / Prática</span>
+                  <span class="mission-duration">15m</span>
+                </div>
+                <span class="mission-title">Ex. A: Ler Dados (GET)</span>
+                <div class="mission-status"><div class="mission-status-dot"></div><span class="mission-status-label">Pendente</span></div>
+              </button>
+            </li>
+            <li>
+              <button class="mission-btn" data-section="aula1-mod4" id="btn-aula1-mod4">
+                <div class="mission-meta">
+                  <span class="mission-tag">Mod 1.4 / Prática</span>
+                  <span class="mission-duration">15m</span>
+                </div>
+                <span class="mission-title">Ex. B: Cadastrar (POST)</span>
+                <div class="mission-status"><div class="mission-status-dot"></div><span class="mission-status-label">Pendente</span></div>
+              </button>
+            </li>
+            <li>
+              <button class="mission-btn" data-section="aula1-mod5" id="btn-aula1-mod5">
+                <div class="mission-meta">
+                  <span class="mission-tag">Mod 1.5 / Prática</span>
+                  <span class="mission-duration">20m</span>
+                </div>
+                <span class="mission-title">Ex. C: Editar & Deletar</span>
+                <div class="mission-status"><div class="mission-status-dot"></div><span class="mission-status-label">Pendente</span></div>
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <!-- AULA 02 ACCORDION -->
+        <div class="class-accordion-group" id="folder-aula2">
+          <button class="accordion-header">
+            <span class="accordion-header-title">Aula 02: JS Assíncrono</span>
+            <svg class="accordion-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          
+          <ul class="accordion-body">
+            <li>
+              <button class="mission-btn" data-section="aula2-mod1" id="btn-aula2-mod1">
+                <div class="mission-meta">
+                  <span class="mission-tag">Mod 2.1 / Teoria</span>
+                  <span class="mission-duration">15m</span>
+                </div>
+                <span class="mission-title">Promises e Event Loop</span>
+                <div class="mission-status"><div class="mission-status-dot"></div><span class="mission-status-label">Pendente</span></div>
+              </button>
+            </li>
+            <li>
+              <button class="mission-btn" data-section="aula2-mod2" id="btn-aula2-mod2">
+                <div class="mission-meta">
+                  <span class="mission-tag">Mod 2.2 / Sintaxe</span>
+                  <span class="mission-duration">15m</span>
+                </div>
+                <span class="mission-title">Refatorando com Async</span>
+                <div class="mission-status"><div class="mission-status-dot"></div><span class="mission-status-label">Pendente</span></div>
+              </button>
+            </li>
+            <li>
+              <button class="mission-btn" data-section="aula2-mod3" id="btn-aula2-mod3">
+                <div class="mission-meta">
+                  <span class="mission-tag">Mod 2.3 / Controle</span>
+                  <span class="mission-duration">20m</span>
+                </div>
+                <span class="mission-title">Try/Catch e Resiliência</span>
+                <div class="mission-status"><div class="mission-status-dot"></div><span class="mission-status-label">Pendente</span></div>
+              </button>
+            </li>
+            <li>
+              <button class="mission-btn" data-section="aula2-mod4" id="btn-aula2-mod4">
+                <div class="mission-meta">
+                  <span class="mission-tag">Mod 2.4 / Lab</span>
+                  <span class="mission-duration">25m</span>
+                </div>
+                <span class="mission-title">Validação do Payload</span>
+                <div class="mission-status"><div class="mission-status-dot"></div><span class="mission-status-label">Pendente</span></div>
+              </button>
+            </li>
+            <li>
+              <button class="mission-btn" data-section="aula2-mod5" id="btn-aula2-mod5">
+                <div class="mission-meta">
+                  <span class="mission-tag">Mod 2.5 / Teste</span>
+                  <span class="mission-duration">15m</span>
+                </div>
+                <span class="mission-title">Desafio Try-Catch</span>
+                <div class="mission-status"><div class="mission-status-dot"></div><span class="mission-status-label">Pendente</span></div>
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <!-- AULA 03 ACCORDION -->
+        <div class="class-accordion-group" id="folder-aula3">
+          <button class="accordion-header">
+            <span class="accordion-header-title">Aula 03: Filtros Dinâmicos</span>
+            <svg class="accordion-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          
+          <ul class="accordion-body">
+            <li>
+              <button class="mission-btn" data-section="aula3-mod1" id="btn-aula3-mod1">
+                <div class="mission-meta">
+                  <span class="mission-tag">Mod 3.1 / Teoria</span>
+                  <span class="mission-duration">15m</span>
+                </div>
+                <span class="mission-title">Query Parameters (URLs)</span>
+                <div class="mission-status"><div class="mission-status-dot"></div><span class="mission-status-label">Pendente</span></div>
+              </button>
+            </li>
+            <li>
+              <button class="mission-btn" data-section="aula3-mod2" id="btn-aula3-mod2">
+                <div class="mission-meta">
+                  <span class="mission-tag">Mod 3.2 / Métodos</span>
+                  <span class="mission-duration">20m</span>
+                </div>
+                <span class="mission-title">Array Map e Filter</span>
+                <div class="mission-status"><div class="mission-status-dot"></div><span class="mission-status-label">Pendente</span></div>
+              </button>
+            </li>
+            <li>
+              <button class="mission-btn" data-section="aula3-mod3" id="btn-aula3-mod3">
+                <div class="mission-meta">
+                  <span class="mission-tag">Mod 3.3 / UI</span>
+                  <span class="mission-duration">20m</span>
+                </div>
+                <span class="mission-title">Construindo a Busca</span>
+                <div class="mission-status"><div class="mission-status-dot"></div><span class="mission-status-label">Pendente</span></div>
+              </button>
+            </li>
+            <li>
+              <button class="mission-btn" data-section="aula3-mod4" id="btn-aula3-mod4">
+                <div class="mission-meta">
+                  <span class="mission-tag">Mod 3.4 / Lab</span>
+                  <span class="mission-duration">20m</span>
+                </div>
+                <span class="mission-title">Pesquisa em Tempo Real</span>
+                <div class="mission-status"><div class="mission-status-dot"></div><span class="mission-status-label">Pendente</span></div>
+              </button>
+            </li>
+            <li>
+              <button class="mission-btn" data-section="aula3-mod5" id="btn-aula3-mod5">
+                <div class="mission-meta">
+                  <span class="mission-tag">Mod 3.5 / Salvar</span>
+                  <span class="mission-duration">15m</span>
+                </div>
+                <span class="mission-title">Conexões Dinâmicas</span>
+                <div class="mission-status"><div class="mission-status-dot"></div><span class="mission-status-label">Pendente</span></div>
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <!-- AULA 04 ACCORDION -->
+        <div class="class-accordion-group" id="folder-aula4">
+          <button class="accordion-header">
+            <span class="accordion-header-title">Aula 04: Criando a API</span>
+            <svg class="accordion-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          
+          <ul class="accordion-body">
+            <li>
+              <button class="mission-btn" data-section="aula4-mod1" id="btn-aula4-mod1">
+                <div class="mission-meta">
+                  <span class="mission-tag">Mod 4.1 / Teoria</span>
+                  <span class="mission-duration">15m</span>
+                </div>
+                <span class="mission-title">Node.js e Node Modules</span>
+                <div class="mission-status"><div class="mission-status-dot"></div><span class="mission-status-label">Pendente</span></div>
+              </button>
+            </li>
+            <li>
+              <button class="mission-btn" data-section="aula4-mod2" id="btn-aula4-mod2">
+                <div class="mission-meta">
+                  <span class="mission-tag">Mod 4.2 / Express</span>
+                  <span class="mission-duration">20m</span>
+                </div>
+                <span class="mission-title">Rotas e Middlewares</span>
+                <div class="mission-status"><div class="mission-status-dot"></div><span class="mission-status-label">Pendente</span></div>
+              </button>
+            </li>
+            <li>
+              <button class="mission-btn" data-section="aula4-mod3" id="btn-aula4-mod3">
+                <div class="mission-meta">
+                  <span class="mission-tag">Mod 4.3 / Endpoints</span>
+                  <span class="mission-duration">20m</span>
+                </div>
+                <span class="mission-title">Escrita em Memória</span>
+                <div class="mission-status"><div class="mission-status-dot"></div><span class="mission-status-label">Pendente</span></div>
+              </button>
+            </li>
+            <li>
+              <button class="mission-btn" data-section="aula4-mod4" id="btn-aula4-mod4">
+                <div class="mission-meta">
+                  <span class="mission-tag">Mod 4.4 / Lab</span>
+                  <span class="mission-duration">20m</span>
+                </div>
+                <span class="mission-title">Levantando o Servidor</span>
+                <div class="mission-status"><div class="mission-status-dot"></div><span class="mission-status-label">Pendente</span></div>
+              </button>
+            </li>
+            <li>
+              <button class="mission-btn" data-section="aula4-mod5" id="btn-aula4-mod5">
+                <div class="mission-meta">
+                  <span class="mission-tag">Mod 4.5 / Modulo</span>
+                  <span class="mission-duration">15m</span>
+                </div>
+                <span class="mission-title">Modularização ESM</span>
+                <div class="mission-status"><div class="mission-status-dot"></div><span class="mission-status-label">Pendente</span></div>
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <!-- AULA 05 ACCORDION -->
+        <div class="class-accordion-group" id="folder-aula5">
+          <button class="accordion-header">
+            <span class="accordion-header-title">Aula 05: Persistência Real</span>
+            <svg class="accordion-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          
+          <ul class="accordion-body">
+            <li>
+              <button class="mission-btn" data-section="aula5-mod1" id="btn-aula5-mod1">
+                <div class="mission-meta">
+                  <span class="mission-tag">Mod 5.1 / Teoria</span>
+                  <span class="mission-duration">15m</span>
+                </div>
+                <span class="mission-title">File System (FS Module)</span>
+                <div class="mission-status"><div class="mission-status-dot"></div><span class="mission-status-label">Pendente</span></div>
+              </button>
+            </li>
+            <li>
+              <button class="mission-btn" data-section="aula5-mod2" id="btn-aula5-mod2">
+                <div class="mission-meta">
+                  <span class="mission-tag">Mod 5.2 / Escrita</span>
+                  <span class="mission-duration">20m</span>
+                </div>
+                <span class="mission-title">Integração do fs.promises</span>
+                <div class="mission-status"><div class="mission-status-dot"></div><span class="mission-status-label">Pendente</span></div>
+              </button>
+            </li>
+            <li>
+              <button class="mission-btn" data-section="aula5-mod3" id="btn-aula5-mod3">
+                <div class="mission-meta">
+                  <span class="mission-tag">Mod 5.3 / Fluxo</span>
+                  <span class="mission-duration">20m</span>
+                </div>
+                <span class="mission-title">GET e POST Manuais</span>
+                <div class="mission-status"><div class="mission-status-dot"></div><span class="mission-status-label">Pendente</span></div>
+              </button>
+            </li>
+            <li>
+              <button class="mission-btn" data-section="aula5-mod4" id="btn-aula5-mod4">
+                <div class="mission-meta">
+                  <span class="mission-tag">Mod 5.4 / Lab</span>
+                  <span class="mission-duration">20m</span>
+                </div>
+                <span class="mission-title">PUT e DELETE Manuais</span>
+                <div class="mission-status"><div class="mission-status-dot"></div><span class="mission-status-label">Pendente</span></div>
+              </button>
+            </li>
+            <li>
+              <button class="mission-btn" data-section="aula5-mod5" id="btn-aula5-mod5">
+                <div class="mission-meta">
+                  <span class="mission-tag">Mod 5.5 / Fim</span>
+                  <span class="mission-duration">15m</span>
+                </div>
+                <span class="mission-title">Homologação Final</span>
+                <div class="mission-status"><div class="mission-status-dot"></div><span class="mission-status-label">Pendente</span></div>
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <!-- REVISAO ACCORDION -->
+        <div class="class-accordion-group" id="folder-revisao">
+          <button class="accordion-header" id="header-revisao">
+            <span class="accordion-header-title">⚡ Revisão & Exercícios</span>
+            <svg class="accordion-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          
+          <ul class="accordion-body">
+            <li>
+              <button class="mission-btn" data-section="revisao-simulado" id="btn-revisao-simulado">
+                <div class="mission-meta">
+                  <span class="mission-tag">Simulado 1</span>
+                  <span class="mission-duration">CRUD</span>
+                </div>
+                <span class="mission-title">Simulado de CRUD</span>
+                <div class="mission-status"><div class="mission-status-dot"></div><span class="mission-status-label">Pendente</span></div>
+              </button>
+            </li>
+            <li>
+              <button class="mission-btn" data-section="revisao-simulado2" id="btn-revisao-simulado2">
+                <div class="mission-meta">
+                  <span class="mission-tag">Simulado 2</span>
+                  <span class="mission-duration">PATCH</span>
+                </div>
+                <span class="mission-title">Simulado Avançado (PATCH)</span>
+                <div class="mission-status"><div class="mission-status-dot"></div><span class="mission-status-label">Pendente</span></div>
+              </button>
+            </li>
+            <li>
+              <button class="mission-btn" data-section="revisao-simulado3" id="btn-revisao-simulado3">
+                <div class="mission-meta">
+                  <span class="mission-tag">Exercício 3</span>
+                  <span class="mission-duration">Filtros</span>
+                </div>
+                <span class="mission-title">Filtros por Query Params</span>
+                <div class="mission-status"><div class="mission-status-dot"></div><span class="mission-status-label">Pendente</span></div>
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <!-- AVALIACAO 1 ACCORDION -->
+        <div class="class-accordion-group locked" id="folder-avaliacao">
+          <button class="accordion-header" id="header-avaliacao">
+            <span class="accordion-header-title" id="accordion-title-avaliacao">🔒 Avaliação 01: Teste Prático</span>
+            <svg class="accordion-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          
+          <ul class="accordion-body">
+            <li>
+              <button class="mission-btn" data-section="avaliacao1" id="btn-avaliacao1">
+                <div class="mission-meta">
+                  <span class="mission-tag">Prova Prática</span>
+                  <span class="mission-duration">Avaliação</span>
+                </div>
+                <span class="mission-title">Validador de Endpoints</span>
+                <div class="mission-status"><div class="mission-status-dot"></div><span class="mission-status-label">Bloqueado</span></div>
+              </button>
+            </li>
+          </ul>
+        </div>
+
+      </aside>
+
+      <!-- Main Display Panel -->
+      <main class="main-content">
+        
+        <!-- AULA 01 CONTENTS -->
+        <!-- SECTION 1.1 -->
+        <section class="content-section active" id="aula1-mod1">
+          <div class="section-header">
+            <div class="section-subtitle">
+              <span>Módulo 1.1 // Fundamentos Teóricos</span>
+              <span class="env-badge browser">Navegador</span>
+            </div>
+            <h2 class="section-title">Bem-vindos à Matrix: O que é o Backend?</h2>
+            <div class="section-time-indicator">⏱ 15 Minutos</div>
+          </div>
+          <p style="margin-bottom: 24px;">
+            Enquanto o <strong>Frontend</strong> roda diretamente no dispositivo do usuário (construindo a interface visual e capturando interações), o <strong>Backend</strong> processa a lógica de negócios, gerencia permissões e lê/escreve dados em um repositório centralizado de forma segura.
+          </p>
+          <div class="grid-cards">
+            <div class="cyber-card green">
+              <div class="card-icon">📁</div>
+              <h3 class="card-title">Anatomia do HTTP</h3>
+              <p class="card-content" style="font-size: 0.85rem;">
+                A comunicação Cliente-Servidor ocorre via protocolo <strong>HTTP</strong>. Toda requisição possui:<br>
+                • <strong>Método (Verbo)</strong>: Ação solicitada (GET, POST, PUT, DELETE).<br>
+                • <strong>URL/Endpoint</strong>: O caminho do recurso.<br>
+                • <strong>Headers</strong>: Metadados (ex: tipo de dados enviado).<br>
+                • <strong>Body (Payload)</strong>: Os dados enviados em formato JSON.
+              </p>
+            </div>
+            <div class="cyber-card">
+              <div class="card-icon">🖧</div>
+              <h3 class="card-title">Códigos de Status (HTTP)</h3>
+              <p class="card-content" style="font-size: 0.85rem;">
+                O servidor responde com códigos padronizados:<br>
+                • <strong>200 OK / 201 Created</strong>: Operação bem sucedida.<br>
+                • <strong>400 Bad Request</strong>: Erro na estrutura enviada.<br>
+                • <strong>404 Not Found</strong>: O endpoint não existe.<br>
+                • <strong>500 Internal Error</strong>: Falha no processamento do servidor.
+              </p>
+            </div>
+            <div class="cyber-card yellow">
+              <div class="card-icon">🛡</div>
+              <h3 class="card-title">Mecanismo de CORS</h3>
+              <p class="card-content" style="font-size: 0.85rem;">
+                <strong>Cross-Origin Resource Sharing</strong> é uma barreira de segurança. O navegador impede que uma página em uma origem (ex: seu site de aulas) faça requisições automáticas a outra origem (ex: seu servidor local) sem permissão. O <code>json-server</code> libera isso definindo headers especiais.
+              </p>
+            </div>
+          </div>
+
+          <!-- HTTP VERBS DICTIONARY -->
+          <h3 class="card-title" style="color: var(--neon-cyan); margin-top: 36px; margin-bottom: 16px; font-family: var(--font-mono); font-size: 1.1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">📖 Dicionário de Verbos HTTP (Métodos)</h3>
+          <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 24px;">
+            Os métodos HTTP indicam a ação semântica que o cliente deseja realizar no servidor. Mantemos a ordem do acrônimo <strong>CRUD</strong> para operações principais, seguidos de outros métodos auxiliares e metadados:
+          </p>
+
+          <div class="verbs-container" style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 36px;">
+            <!-- POST -->
+            <div class="cyber-card" style="border-left: 4px solid var(--neon-green); background: rgba(16, 22, 38, 0.4); padding: 16px; border-radius: var(--radius-md);">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                <span class="env-badge" style="background: rgba(0, 255, 102, 0.15); color: var(--neon-green); font-weight: bold; font-family: var(--font-mono); font-size: 0.85rem; padding: 4px 12px; border: 1px solid var(--neon-green);">POST</span>
+                <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-cyan);">[C]reate de CRUD</span>
+              </div>
+              <h4 style="margin: 0 0 8px 0; font-size: 0.95rem; color: #fff;">Lógica: Criação de Recurso</h4>
+              <p style="margin: 0 0 8px 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+                Envia dados no corpo (body) da requisição para criar um novo registro no servidor. Geralmente resulta em um status <code>201 Created</code>. Não é um método idempotente (fazer a mesma chamada várias vezes criará vários registros duplicados).
+              </p>
+              <div style="font-size: 0.8rem; font-family: var(--font-mono); color: var(--neon-yellow);">
+                <strong>Quando Usar:</strong> Ao cadastrar um novo usuário, enviar um formulário de contato ou realizar um novo post em um blog.
+              </div>
+            </div>
+
+            <!-- GET -->
+            <div class="cyber-card" style="border-left: 4px solid var(--neon-cyan); background: rgba(16, 22, 38, 0.4); padding: 16px; border-radius: var(--radius-md);">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                <span class="env-badge" style="background: rgba(0, 240, 255, 0.15); color: var(--neon-cyan); font-weight: bold; font-family: var(--font-mono); font-size: 0.85rem; padding: 4px 12px; border: 1px solid var(--neon-cyan);">GET</span>
+                <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-cyan);">[R]ead de CRUD</span>
+              </div>
+              <h4 style="margin: 0 0 8px 0; font-size: 0.95rem; color: #fff;">Lógica: Leitura e Recuperação</h4>
+              <p style="margin: 0 0 8px 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+                Solicita a representação de um recurso específico. Requisições utilizando GET devem apenas retornar dados e não devem ter efeitos colaterais de modificação. É seguro e idempotente.
+              </p>
+              <div style="font-size: 0.8rem; font-family: var(--font-mono); color: var(--neon-yellow);">
+                <strong>Quando Usar:</strong> Ao pesquisar uma lista de agentes, carregar um feed de notícias ou abrir a página de perfil de um usuário.
+              </div>
+            </div>
+
+            <!-- PUT -->
+            <div class="cyber-card" style="border-left: 4px solid var(--neon-yellow); background: rgba(16, 22, 38, 0.4); padding: 16px; border-radius: var(--radius-md);">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                <span class="env-badge" style="background: rgba(255, 221, 87, 0.15); color: var(--neon-yellow); font-weight: bold; font-family: var(--font-mono); font-size: 0.85rem; padding: 4px 12px; border: 1px solid var(--neon-yellow);">PUT</span>
+                <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-cyan);">[U]pdate de CRUD</span>
+              </div>
+              <h4 style="margin: 0 0 8px 0; font-size: 0.95rem; color: #fff;">Lógica: Substituição Completa</h4>
+              <p style="margin: 0 0 8px 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+                Substitui todas as representações atuais do recurso de destino pelos dados enviados no corpo (payload). Se o recurso não existir, pode criá-lo (dependendo da lógica da API). É idempotente (enviar a mesma requisição PUT repetidamente deixa o recurso no mesmo estado).
+              </p>
+              <div style="font-size: 0.8rem; font-family: var(--font-mono); color: var(--neon-yellow);">
+                <strong>Quando Usar:</strong> Para atualizar o registro inteiro de um agente (enviando nome, status, data de cadastro de uma vez para substituir o antigo).
+              </div>
+            </div>
+
+            <!-- DELETE -->
+            <div class="cyber-card" style="border-left: 4px solid var(--neon-red); background: rgba(16, 22, 38, 0.4); padding: 16px; border-radius: var(--radius-md);">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                <span class="env-badge" style="background: rgba(255, 56, 96, 0.15); color: var(--neon-red); font-weight: bold; font-family: var(--font-mono); font-size: 0.85rem; padding: 4px 12px; border: 1px solid var(--neon-red);">DELETE</span>
+                <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-cyan);">[D]elete de CRUD</span>
+              </div>
+              <h4 style="margin: 0 0 8px 0; font-size: 0.95rem; color: #fff;">Lógica: Exclusão de Recurso</h4>
+              <p style="margin: 0 0 8px 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+                Remove o recurso especificado no endpoint (ex: <code>/agentes/3</code>). É um método idempotente (tentar excluir o recurso após ele já ter sido deletado não mudará o estado do banco, embora o status de retorno possa mudar de 200/204 para 404).
+              </p>
+              <div style="font-size: 0.8rem; font-family: var(--font-mono); color: var(--neon-yellow);">
+                <strong>Quando Usar:</strong> Ao apagar uma conta de usuário, remover um agente inativo do banco de dados ou cancelar uma inscrição.
+              </div>
+            </div>
+
+            <!-- PATCH -->
+            <div class="cyber-card" style="border-left: 4px solid #b82cf6; background: rgba(16, 22, 38, 0.4); padding: 16px; border-radius: var(--radius-md);">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                <span class="env-badge" style="background: rgba(184, 44, 246, 0.15); color: #b82cf6; font-weight: bold; font-family: var(--font-mono); font-size: 0.85rem; padding: 4px 12px; border: 1px solid #b82cf6;">PATCH</span>
+                <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-cyan);">Modificador Auxiliar</span>
+              </div>
+              <h4 style="margin: 0 0 8px 0; font-size: 0.95rem; color: #fff;">Lógica: Modificação Parcial</h4>
+              <p style="margin: 0 0 8px 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+                Aplica modificações parciais a um recurso. Ao contrário do PUT que exige o envio de todo o objeto para sobrescrevê-lo, o PATCH permite enviar apenas os atributos específicos que devem ser alterados.
+              </p>
+              <div style="font-size: 0.8rem; font-family: var(--font-mono); color: var(--neon-yellow);">
+                <strong>Quando Usar:</strong> Para atualizar apenas o status de um agente (ex: mudar de 'Oculto' para 'Ativo') sem alterar nem reenviar o nome dele.
+              </div>
+            </div>
+
+            <!-- HEAD -->
+            <div class="cyber-card" style="border-left: 4px solid #f68d2c; background: rgba(16, 22, 38, 0.4); padding: 16px; border-radius: var(--radius-md);">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                <span class="env-badge" style="background: rgba(246, 141, 44, 0.15); color: #f68d2c; font-weight: bold; font-family: var(--font-mono); font-size: 0.85rem; padding: 4px 12px; border: 1px solid #f68d2c;">HEAD</span>
+                <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-cyan);">Modificador Auxiliar</span>
+              </div>
+              <h4 style="margin: 0 0 8px 0; font-size: 0.95rem; color: #fff;">Lógica: Apenas Cabeçalhos (Headers)</h4>
+              <p style="margin: 0 0 8px 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+                Solicita uma resposta idêntica à de uma requisição GET, porém **sem o corpo de resposta** (body). Ele retorna apenas os headers (metadados). É extremamente leve e rápido.
+              </p>
+              <div style="font-size: 0.8rem; font-family: var(--font-mono); color: var(--neon-yellow);">
+                <strong>Quando Usar:</strong> Para verificar se um arquivo grande mudou (verificando o header `Last-Modified` ou `Content-Length`) antes de baixá-lo ou checar se um link/URL está ativo sem puxar o HTML.
+              </div>
+            </div>
+
+            <!-- OPTIONS -->
+            <div class="cyber-card" style="border-left: 4px solid #2cf6b8; background: rgba(16, 22, 38, 0.4); padding: 16px; border-radius: var(--radius-md);">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                <span class="env-badge" style="background: rgba(44, 246, 184, 0.15); color: #2cf6b8; font-weight: bold; font-family: var(--font-mono); font-size: 0.85rem; padding: 4px 12px; border: 1px solid #2cf6b8;">OPTIONS</span>
+                <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-cyan);">Metadados / Segurança</span>
+              </div>
+              <h4 style="margin: 0 0 8px 0; font-size: 0.95rem; color: #fff;">Lógica: Opções de Comunicação</h4>
+              <p style="margin: 0 0 8px 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+                Retorna quais métodos HTTP e cabeçalhos são permitidos para o recurso de destino. É o método de segurança utilizado pelo mecanismo de CORS do navegador para fazer as requisições "preflight" (pré-voo) antes de enviar chamadas de escrita/modificação reais.
+              </p>
+              <div style="font-size: 0.8rem; font-family: var(--font-mono); color: var(--neon-yellow);">
+                <strong>Quando Usar:</strong> Usado de forma automática pelo navegador (ou manualmente para depuração) para inspecionar quais métodos a API suporta (ex: checar se a API aceita DELETE ou PUT).
+              </div>
+            </div>
+
+            <!-- TRACE -->
+            <div class="cyber-card" style="border-left: 4px solid #f62c8c; background: rgba(16, 22, 38, 0.4); padding: 16px; border-radius: var(--radius-md);">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                <span class="env-badge" style="background: rgba(246, 44, 140, 0.15); color: #f62c8c; font-weight: bold; font-family: var(--font-mono); font-size: 0.85rem; padding: 4px 12px; border: 1px solid #f62c8c;">TRACE</span>
+                <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-cyan);">Diagnóstico / Loopback</span>
+              </div>
+              <h4 style="margin: 0 0 8px 0; font-size: 0.95rem; color: #fff;">Lógica: Loopback de Teste</h4>
+              <p style="margin: 0 0 8px 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+                Realiza um teste de loopback de mensagem ao longo do caminho para o recurso de destino. O servidor retorna exatamente a requisição recebida (incluindo cabeçalhos) de volta para o cliente no corpo da resposta.
+              </p>
+              <div style="font-size: 0.8rem; font-family: var(--font-mono); color: var(--neon-yellow);">
+                <strong>Quando Usar:</strong> Para depuração e diagnóstico de rede, permitindo verificar se servidores proxy intermediários, firewalls ou balanceadores de carga modificaram seus cabeçalhos originais de requisição.
+              </div>
+            </div>
+
+            <!-- CONNECT -->
+            <div class="cyber-card" style="border-left: 4px solid #708090; background: rgba(16, 22, 38, 0.4); padding: 16px; border-radius: var(--radius-md);">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                <span class="env-badge" style="background: rgba(112, 128, 144, 0.15); color: #708090; font-weight: bold; font-family: var(--font-mono); font-size: 0.85rem; padding: 4px 12px; border: 1px solid #708090;">CONNECT</span>
+                <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-cyan);">Túnel de Rede</span>
+              </div>
+              <h4 style="margin: 0 0 8px 0; font-size: 0.95rem; color: #fff;">Lógica: Túnel TCP/IP</h4>
+              <p style="margin: 0 0 8px 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+                Estabelece um túnel de comunicação direta bidirecional com o servidor identificado pelo recurso de destino. Ele é usado principalmente para redirecionar conexões TCP brutas de maneira transparente através de proxies HTTP.
+              </p>
+              <div style="font-size: 0.8rem; font-family: var(--font-mono); color: var(--neon-yellow);">
+                <strong>Quando Usar:</strong> Utilizado automaticamente por navegadores e servidores proxy para estabelecer uma conexão criptografada segura via SSL/TLS (túnel HTTPS) ao se comunicar com sites seguros.
+              </div>
+            </div>
+          </div>
+
+          <div class="interactive-metaphor-box">
+            <h3 class="card-title" style="color: var(--neon-cyan); margin-bottom: 8px;">Mapeamento de Dados (Fluxo Técnico)</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px;">
+              Clique nos componentes abaixo para disparar o trajeto das mensagens HTTP e ver a distribuição dos dados:
+            </p>
+            <div class="metaphor-nodes">
+              <div class="metaphor-node" id="node-salon" data-desc="frontend">
+                <h4>O Cliente</h4>
+                <span>Frontend (Navegador)</span>
+              </div>
+              <div class="metaphor-connector" id="conn-1">
+                <div class="metaphor-packet" id="packet-1"></div>
+              </div>
+              <div class="metaphor-node" id="node-waiter" data-desc="api">
+                <h4>A Requisição</h4>
+                <span>Mensagem HTTP (CORS)</span>
+              </div>
+              <div class="metaphor-connector" id="conn-2">
+                <div class="metaphor-packet" id="packet-2"></div>
+              </div>
+              <div class="metaphor-node" id="node-kitchen" data-desc="backend">
+                <h4>O Servidor</h4>
+                <span>Banco de Dados JSON</span>
+              </div>
+            </div>
+            <div class="metaphor-desc-box" id="metaphor-desc">
+              Selecione um componente para interceptar os dados e visualizar o tráfego HTTP.
+            </div>
+          </div>
+          <div class="checklist-container">
+            <div class="checklist-title">Checklist do Módulo 1.1</div>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula1-mod1"><span class="checklist-text">Compreendi os conceitos de Frontend (Cliente) e Backend (Servidor).</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula1-mod1"><span class="checklist-text">Entendi a estrutura de uma requisição HTTP (Método, Endpoint, Body).</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula1-mod1"><span class="checklist-text">Entendi o que são os códigos de status (200, 201, 404, 500).</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula1-mod1"><span class="checklist-text">Compreendi o propósito do mecanismo de segurança CORS.</span></label>
+          </div>
+        </section>
+
+        <!-- SECTION 1.2 -->
+        <section class="content-section" id="aula1-mod2">
+          <div class="section-header">
+            <div class="section-subtitle">
+              <span>Módulo 1.2 // Verificação de Conceitos</span>
+              <span class="env-badge browser">Navegador</span>
+            </div>
+            <h2 class="section-title">Quiz de Fixação: Fundamentos Web</h2>
+            <div class="section-time-indicator">⏱ 10 Minutos</div>
+          </div>
+          <p style="margin-bottom: 24px; color: var(--text-muted); font-size: 0.9rem;">
+            Responda às perguntas abaixo para testar seu entendimento sobre a arquitetura cliente-servidor, verbos HTTP e mecanismos de segurança da web.
+          </p>
+
+          <div class="quiz-container" style="display: flex; flex-direction: column; gap: 20px; margin-bottom: 32px;">
+            <!-- Pergunta 1 -->
+            <div class="cyber-card" data-question="1" style="padding: 20px;">
+              <h3 style="font-size: 0.95rem; margin-bottom: 12px; color: var(--neon-cyan); font-family: var(--font-mono);">Q1. Qual é a principal diferença de responsabilidade entre o Frontend e o Backend?</h3>
+              <div class="quiz-options" style="display: flex; flex-direction: column; gap: 8px;">
+                <label class="quiz-option" style="display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 10px 14px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 0.85rem; transition: var(--transition-fast);">
+                  <input type="radio" name="q1" value="A">
+                  <span>O Frontend processa as regras de negócio seguras e o Backend cria os botões e cores da tela.</span>
+                </label>
+                <label class="quiz-option" style="display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 10px 14px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 0.85rem; transition: var(--transition-fast);">
+                  <input type="radio" name="q1" value="B">
+                  <span>O Frontend roda no navegador do usuário cuidando da interface visual, enquanto o Backend roda no servidor cuidando dos dados e da lógica de persistência.</span>
+                </label>
+                <label class="quiz-option" style="display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 10px 14px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 0.85rem; transition: var(--transition-fast);">
+                  <input type="radio" name="q1" value="C">
+                  <span>Não há diferença; ambos rodam em banco de dados e processam requisições HTTP da mesma forma.</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Pergunta 2 -->
+            <div class="cyber-card" data-question="2" style="padding: 20px;">
+              <h3 style="font-size: 0.95rem; margin-bottom: 12px; color: var(--neon-cyan); font-family: var(--font-mono);">Q2. Se a sua chamada HTTP de cadastro no servidor local retornar o código de status 201, isso significa que:</h3>
+              <div class="quiz-options" style="display: flex; flex-direction: column; gap: 8px;">
+                <label class="quiz-option" style="display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 10px 14px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 0.85rem; transition: var(--transition-fast);">
+                  <input type="radio" name="q2" value="A">
+                  <span>Ocorreu um erro interno de processamento e a requisição deve ser refeita.</span>
+                </label>
+                <label class="quiz-option" style="display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 10px 14px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 0.85rem; transition: var(--transition-fast);">
+                  <input type="radio" name="q2" value="B">
+                  <span>O recurso solicitado não foi encontrado no banco de dados.</span>
+                </label>
+                <label class="quiz-option" style="display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 10px 14px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 0.85rem; transition: var(--transition-fast);">
+                  <input type="radio" name="q2" value="C">
+                  <span>A requisição foi bem-sucedida e um novo registro/recurso foi criado no servidor.</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Pergunta 3 -->
+            <div class="cyber-card" data-question="3" style="padding: 20px;">
+              <h3 style="font-size: 0.95rem; margin-bottom: 12px; color: var(--neon-cyan); font-family: var(--font-mono);">Q3. Qual verbo HTTP deve ser utilizado quando desejamos atualizar parcialmente os dados de um agente (por exemplo, alterar apenas seu status de "Oculto" para "Ativo")?</h3>
+              <div class="quiz-options" style="display: flex; flex-direction: column; gap: 8px;">
+                <label class="quiz-option" style="display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 10px 14px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 0.85rem; transition: var(--transition-fast);">
+                  <input type="radio" name="q3" value="A">
+                  <span>POST</span>
+                </label>
+                <label class="quiz-option" style="display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 10px 14px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 0.85rem; transition: var(--transition-fast);">
+                  <input type="radio" name="q3" value="B">
+                  <span>PATCH</span>
+                </label>
+                <label class="quiz-option" style="display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 10px 14px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 0.85rem; transition: var(--transition-fast);">
+                  <input type="radio" name="q3" value="C">
+                  <span>GET</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Pergunta 4 -->
+            <div class="cyber-card" data-question="4" style="padding: 20px;">
+              <h3 style="font-size: 0.95rem; margin-bottom: 12px; color: var(--neon-cyan); font-family: var(--font-mono);">Q4. Por que ocorre o bloqueio de CORS ao fazer requisições de um site hospedado na Vercel (HTTPS) para o seu servidor local (HTTP localhost)?</h3>
+              <div class="cyber-card" style="padding: 10px; background: rgba(0,0,0,0.1); border: none; font-size: 0.82rem; margin-bottom: 10px; color: var(--text-muted);">
+                Dica: Lembre-se do mecanismo de segurança que restringe requisições cruzadas entre origens diferentes e redes públicas para privadas.
+              </div>
+              <div class="quiz-options" style="display: flex; flex-direction: column; gap: 8px;">
+                <label class="quiz-option" style="display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 10px 14px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 0.85rem; transition: var(--transition-fast);">
+                  <input type="radio" name="q4" value="A">
+                  <span>Porque o navegador impede por segurança que um site de origem pública e criptografada (HTTPS) acesse livremente recursos na rede privada/local do usuário (HTTP localhost) sem permissão explícita.</span>
+                </label>
+                <label class="quiz-option" style="display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 10px 14px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 0.85rem; transition: var(--transition-fast);">
+                  <input type="radio" name="q4" value="B">
+                  <span>Porque o json-server não aceita conexões vindas do Google Chrome.</span>
+                </label>
+                <label class="quiz-option" style="display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 10px 14px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 0.85rem; transition: var(--transition-fast);">
+                  <input type="radio" name="q4" value="C">
+                  <span>Porque a Vercel desliga servidores locais automaticamente por motivos de economia de energia.</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 16px; align-items: center; margin-top: 24px; margin-bottom: 24px;">
+            <button class="btn-primary" id="btn-submit-quiz" style="padding: 10px 24px;">Verificar Respostas</button>
+            <div id="quiz-feedback" style="font-family: var(--font-mono); font-size: 0.85rem; display: none;"></div>
+          </div>
+
+          <div class="checklist-container">
+            <div class="checklist-title">Checklist do Módulo 1.2</div>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" id="check-quiz-completed" data-section="aula1-mod2" disabled><span class="checklist-text">Quiz de Fundamentos respondido com 100% de acerto (Pendente)</span></label>
+          </div>
+        </section>
+        <!-- SECTION 1.3 -->
+        <section class="content-section" id="aula1-mod3">
+          <div class="section-header">
+            <div class="section-subtitle">
+              <span>Módulo 1.3 // Prática de Leitura</span>
+              <span class="env-badge mixed">Navegador + VS Code</span>
+            </div>
+            <h2 class="section-title">Exercício A: Ler Dados (GET)</h2>
+            <div class="section-time-indicator">⏱ 15 Minutos</div>
+          </div>
+          
+          <p style="margin-bottom: 24px; color: var(--text-muted); font-size: 0.9rem;">
+            O primeiro desafio prático consiste em configurar o seu ambiente de desenvolvimento e realizar uma chamada de leitura <code>GET</code> para recuperar a lista de agentes do seu banco de dados local.
+          </p>
+
+          <div class="grid-cards" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin-bottom: 24px;">
+            <div class="cyber-card">
+              <div class="card-icon">📁</div>
+              <h3 class="card-title">1. Inicializar o Banco Local</h3>
+              <p class="card-content" style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted);">
+                Crie um arquivo chamado <code>db.json</code> na pasta do seu projeto contendo:<br>
+                <code style="font-size: 0.75rem; display: block; margin-top: 4px; background: rgba(0,0,0,0.2); padding: 4px; border-radius: 4px; color: #a5d6ff;">{"agentes": [{"id": "1", "nome": "Neo", "status": "Ativo"}, {"id": "2", "nome": "Trinity", "status": "Oculto"}]}</code>
+              </p>
+            </div>
+            <div class="cyber-card">
+              <div class="card-icon">⚡</div>
+              <h3 class="card-title">2. Iniciar o Servidor</h3>
+              <p class="card-content" style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted);">
+                Abra o terminal na pasta do seu projeto e suba a API:<br>
+                <code style="font-size: 0.75rem; display: block; margin-top: 4px; background: rgba(0,0,0,0.2); padding: 4px; border-radius: 4px; color: var(--neon-cyan);">npx json-server@0.17.4 db.json --port 3000</code>
+              </p>
+            </div>
+            <div class="cyber-card purple">
+              <div class="card-icon">💻</div>
+              <h3 class="card-title">3. Escrever o Fetch</h3>
+              <p class="card-content" style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted);">
+                No seu <code>app.js</code> local, faça uma requisição <strong>GET</strong> simples e imprima o resultado no <code>console.log</code>:
+                <code style="font-size: 0.75rem; display: block; margin-top: 4px; background: rgba(0,0,0,0.2); padding: 4px; border-radius: 4px; color: var(--neon-green);">fetch('http://localhost:3000/agentes').then(r => r.json()).then(console.log);</code>
+              </p>
+            </div>
+          </div>
+
+          <div class="live-server-panel" style="margin-top: 0; margin-bottom: 24px;">
+            <div class="live-panel-header">
+              <div class="live-panel-title">📟 AUDITOR DE LEITURA (GET)</div>
+              <button class="btn-primary" id="btn-valida-get" style="font-size: 0.8rem; padding: 6px 16px;">Validar Exercício A</button>
+            </div>
+            
+            <div class="validation-terminal-container" style="margin-top: 16px;">
+              <div class="sim-header">
+                <div class="sim-dots"><div class="sim-dot"></div><div class="sim-dot"></div><div class="sim-dot"></div></div>
+                <div class="sim-title">auditoria_get.sh</div>
+              </div>
+              <div class="sim-body" id="valida-get-output" style="height: 120px; overflow-y: auto; font-family: var(--font-mono); font-size: 0.85rem; padding: 12px; line-height: 1.6; background: #070a10; border: 1px solid var(--border-color); border-radius: var(--radius-sm);">
+                <div style="color: var(--text-muted);">&gt; Aguardando clique para auditar api local...</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="checklist-container">
+            <div class="checklist-title">Checklist do Módulo 1.3</div>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" id="check-ex-get-1" data-section="aula1-mod3" disabled><span class="checklist-text">Servidor json-server respondendo 200 OK na porta 3000 (Pendente)</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" id="check-ex-get-2" data-section="aula1-mod3" disabled><span class="checklist-text">Neo e Trinity retornados corretamente no GET /agentes (Pendente)</span></label>
+          </div>
+        </section>
+
+        <!-- SECTION 1.4 -->
+        <section class="content-section" id="aula1-mod4">
+          <div class="section-header">
+            <div class="section-subtitle">
+              <span>Módulo 1.4 // Prática de Escrita</span>
+              <span class="env-badge mixed">Navegador + VS Code</span>
+            </div>
+            <h2 class="section-title">Exercício B: Enviar Dados (POST)</h2>
+            <div class="section-time-indicator">⏱ 15 Minutos</div>
+          </div>
+          
+          <p style="margin-bottom: 24px; color: var(--text-muted); font-size: 0.9rem;">
+            Agora, vamos praticar a gravação de dados usando o método <code>POST</code>. Lembre-se de que o POST exige o envio de dados no corpo (body) e a indicação de que o formato é JSON nos cabeçalhos (headers).
+          </p>
+
+          <div class="grid-cards" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin-bottom: 24px;">
+            <div class="cyber-card green">
+              <div class="card-icon">🖧</div>
+              <h3 class="card-title">Como funciona o POST?</h3>
+              <p class="card-content" style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted);">
+                Ao fazer o POST, você envia as informações estruturadas em JSON. O servidor recebe esses dados, gera a gravação persistente no arquivo e retorna status <code>201 Created</code> para confirmar.
+              </p>
+            </div>
+            <div class="cyber-card">
+              <div class="card-icon">🛠️</div>
+              <h3 class="card-title">Estrutura da Requisição</h3>
+              <p class="card-content" style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted);">
+                Você deve passar o método como <code>POST</code>, definir <code>'Content-Type': 'application/json'</code> no headers, e converter seu objeto JavaScript em texto JSON usando <code>JSON.stringify()</code>.
+              </p>
+            </div>
+            <div class="cyber-card purple">
+              <div class="card-icon">💻</div>
+              <h3 class="card-title">Desafio de Escrita</h3>
+              <p class="card-content" style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted);">
+                Substitua o código do seu <code>app.js</code> por uma chamada POST para criar um novo agente com ID <strong>9</strong>, nome <strong>Cypher</strong> e status <strong>Ativo</strong>:
+                <code style="font-size: 0.72rem; display: block; margin-top: 4px; background: rgba(0,0,0,0.2); padding: 4px; border-radius: 4px; color: var(--neon-cyan); white-space: pre-wrap;">fetch('http://localhost:3000/agentes', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ id: "9", nome: "Cypher", status: "Ativo" })
+}).then(r => r.json()).then(console.log);</code>
+              </p>
+            </div>
+          </div>
+
+          <div class="live-server-panel" style="margin-top: 0; margin-bottom: 24px;">
+            <div class="live-panel-header">
+              <div class="live-panel-title">📟 AUDITOR DE CADASTRO (POST)</div>
+              <button class="btn-primary" id="btn-valida-post" style="font-size: 0.8rem; padding: 6px 16px;">Validar Exercício B</button>
+            </div>
+            
+            <div class="validation-terminal-container" style="margin-top: 16px;">
+              <div class="sim-header">
+                <div class="sim-dots"><div class="sim-dot"></div><div class="sim-dot"></div><div class="sim-dot"></div></div>
+                <div class="sim-title">auditoria_post.sh</div>
+              </div>
+              <div class="sim-body" id="valida-post-output" style="height: 120px; overflow-y: auto; font-family: var(--font-mono); font-size: 0.85rem; padding: 12px; line-height: 1.6; background: #070a10; border: 1px solid var(--border-color); border-radius: var(--radius-sm);">
+                <div style="color: var(--text-muted);">&gt; Aguardando clique para auditar API local...</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="checklist-container">
+            <div class="checklist-title">Checklist do Módulo 1.4</div>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" id="check-ex-post-1" data-section="aula1-mod4" disabled><span class="checklist-text">Envio da requisição POST com sucesso (Pendente)</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" id="check-ex-post-2" data-section="aula1-mod4" disabled><span class="checklist-text">Persistência do agente Cypher (ID 9) confirmada no db.json (Pendente)</span></label>
+          </div>
+        </section>
+
+        <!-- SECTION 1.5 -->
+        <section class="content-section" id="aula1-mod5">
+          <div class="section-header">
+            <div class="section-subtitle">
+              <span>Módulo 1.5 // Modificação e Remoção</span>
+              <span class="env-badge mixed">Navegador + VS Code</span>
+            </div>
+            <h2 class="section-title">Exercício C: Editar e Deletar (PUT/DELETE)</h2>
+            <div class="section-time-indicator">⏱ 20 Minutos</div>
+          </div>
+          
+          <p style="margin-bottom: 24px; color: var(--text-muted); font-size: 0.9rem;">
+            Para finalizar a trilha, você deve aprender a modificar um registro inteiro usando o verbo <code>PUT</code> e a remover registros usando o verbo <code>DELETE</code>.
+          </p>
+
+          <div class="grid-cards" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin-bottom: 24px;">
+            <div class="cyber-card">
+              <div class="card-icon">🔄</div>
+              <h3 class="card-title">PUT (Substituição)</h3>
+              <p class="card-content" style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted);">
+                O <code>PUT</code> exige que você informe o identificador do recurso na URL (ex: <code>/agentes/9</code>) e envie o novo objeto completo no body. O servidor sobrescreverá o Cypher original.
+              </p>
+            </div>
+            <div class="cyber-card">
+              <div class="card-icon">🗑️</div>
+              <h3 class="card-title">DELETE (Exclusão)</h3>
+              <p class="card-content" style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted);">
+                O <code>DELETE</code> remove permanentemente o registro indicado no endpoint da URL (ex: <code>/agentes/9</code>). Não é necessário enviar nenhum body na requisição.
+              </p>
+            </div>
+            <div class="cyber-card purple">
+              <div class="card-icon">💻</div>
+              <h3 class="card-title">Desafio de Edição & Remoção</h3>
+              <p class="card-content" style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted);">
+                No seu local <code>app.js</code>, programe de forma isolada:<br>
+                1. Mude o status de Cypher para "Procurado":<br>
+                <code style="font-size: 0.72rem; display: block; background: rgba(0,0,0,0.2); padding: 4px; border-radius: 4px; color: var(--neon-cyan);">fetch('http://localhost:3000/agentes/9', { method: 'PUT', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ nome: "Cypher", status: "Procurado" }) });</code><br>
+                2. Depois, delete o Cypher do banco:<br>
+                <code style="font-size: 0.72rem; display: block; background: rgba(0,0,0,0.2); padding: 4px; border-radius: 4px; color: var(--neon-red);">fetch('http://localhost:3000/agentes/9', { method: 'DELETE' });</code>
+              </p>
+            </div>
+          </div>
+
+          <div class="live-server-panel" style="margin-top: 0; margin-bottom: 24px;">
+            <div class="live-panel-header">
+              <div class="live-panel-title">📟 AUDITOR DE EDIÇÃO E REMOÇÃO (PUT/DELETE)</div>
+              <button class="btn-primary" id="btn-valida-put-delete" style="font-size: 0.8rem; padding: 6px 16px;">Validar Exercício C</button>
+            </div>
+            
+            <div class="validation-terminal-container" style="margin-top: 16px;">
+              <div class="sim-header">
+                <div class="sim-dots"><div class="sim-dot"></div><div class="sim-dot"></div><div class="sim-dot"></div></div>
+                <div class="sim-title">auditoria_put_delete.sh</div>
+              </div>
+              <div class="sim-body" id="valida-put-delete-output" style="height: 120px; overflow-y: auto; font-family: var(--font-mono); font-size: 0.85rem; padding: 12px; line-height: 1.6; background: #070a10; border: 1px solid var(--border-color); border-radius: var(--radius-sm);">
+                <div style="color: var(--text-muted);">&gt; Aguardando clique para auditar API local...</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="checklist-container">
+            <div class="checklist-title">Checklist do Módulo 1.5</div>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" id="check-ex-put-delete-1" data-section="aula1-mod5" disabled><span class="checklist-text">Edição de Cypher (ID 9) para o status "Procurado" via PUT (Pendente)</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" id="check-ex-put-delete-2" data-section="aula1-mod5" disabled><span class="checklist-text">Remoção de Cypher (ID 9) via DELETE (Pendente)</span></label>
+          </div>
+        </section>
+        <!-- AULA 02 CONTENTS -->
+        <!-- SECTION 2.1 -->
+        <section class="content-section" id="aula2-mod1">
+          <div class="section-header">
+            <div class="section-subtitle">
+              <span>Módulo 2.1 // Assincronismo</span>
+              <span class="env-badge browser">Navegador</span>
+            </div>
+            <h2 class="section-title">Promises e Event Loop</h2>
+            <div class="section-time-indicator">⏱ 15 Minutos</div>
+          </div>
+          <p style="margin-bottom: 20px;">
+            O JavaScript executa códigos de forma <em>single-threaded</em> (síncrona). Chamadas externas ao servidor demoram para responder. Para que a interface não congele, o navegador delega essas tarefas em segundo plano e retorna o resultado em um contêiner chamado <strong>Promise</strong>.
+          </p>
+          <div class="grid-cards">
+            <div class="cyber-card green">
+              <div class="card-icon">⏳</div>
+              <h3 class="card-title">Event Loop</h3>
+              <p class="card-content" style="font-size: 0.85rem;">
+                As tarefas pesadas como <code>fetch()</code> são empurradas para a <strong>Web APIs</strong> do navegador. O loop de eventos monitora a fila de retorno (*Callback Queue*) e injeta as respostas na pilha de execução principal (*Call Stack*) assim que ela fica vazia.
+              </p>
+            </div>
+            <div class="cyber-card">
+              <div class="card-icon">📦</div>
+              <h3 class="card-title">Estados de uma Promise</h3>
+              <p class="card-content" style="font-size: 0.85rem;">
+                Toda Promise assume três estados possíveis:<br>
+                • <strong>Pending</strong>: Resposta ainda em processamento.<br>
+                • <strong>Fulfilled</strong>: Sucesso. Retorna dados úteis com <code>.then()</code>.<br>
+                • <strong>Rejected</strong>: Erro. Captura o motivo da queda no bloco <code>.catch()</code>.
+              </p>
+            </div>
+          </div>
+          <div class="checklist-container">
+            <div class="checklist-title">Checklist do Módulo 2.1</div>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula2-mod1"><span class="checklist-text">Compreendi a diferença entre operações síncronas e assíncronas.</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula2-mod1"><span class="checklist-text">Entendi a pilha Call Stack e a fila Callback Queue controladas pelo Event Loop.</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula2-mod1"><span class="checklist-text">Identifiquei os três estados de uma Promise (Pending, Fulfilled, Rejected).</span></label>
+          </div>
+        </section>
+
+        <!-- SECTION 2.2 -->
+        <section class="content-section" id="aula2-mod2">
+          <div class="section-header">
+            <div class="section-subtitle">
+              <span>Módulo 2.2 // Nova Sintaxe</span>
+              <span class="env-badge vscode">VS Code</span>
+            </div>
+            <h2 class="section-title">Refatorando com Async / Await</h2>
+            <div class="section-time-indicator">⏱ 15 Minutos</div>
+          </div>
+          <p style="margin-bottom: 24px;">
+            A sintaxe de <code>async</code> e <code>await</code> é um açucar sintático (*syntactic sugar*) criado sobre as Promises. Ela simplifica o fluxo de escrita assíncrona, fazendo com que o código pareça síncrono e linear, eliminando a dependência do encadeamento recursivo de múltiplos <code>.then()</code>.
+          </p>
+          <div class="step-container">
+            <div class="step-card">
+              <div class="step-badge">1</div>
+              <div class="step-main">
+                <h3 class="step-title">A palavra-chave async <span class="env-badge vscode">VS Code</span></h3>
+                <p class="step-desc">
+                  Toda função que precisa pausar e aguardar uma chamada externa deve ser marcada com o modificador <code>async</code> antes de sua assinatura. Isso garante que a função retorne automaticamente uma Promise.
+                </p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-badge">2</div>
+              <div class="step-main">
+                <h3 class="step-title">A palavra-chave await <span class="env-badge vscode">VS Code</span></h3>
+                <p class="step-desc">
+                  Colocada antes do <code>fetch()</code>, a instrução <code>await</code> instrui o JavaScript a pausar a execução daquela função até que a Promise mude de estado, devolvendo o valor da resposta imediatamente.
+                </p>
+                <div class="code-container">
+                  <div class="code-header"><span class="code-lang">JavaScript</span><button class="btn-copy" data-clipboard="refactor-code"><span>Copiar</span></button></div>
+                  <pre><code id="refactor-code">// Antes: com .then
+function buscar() {
+  fetch('http://localhost:3000/agentes')
+    .then(res => res.json())
+    .then(dados => console.log(dados));
+}
+
+// Depois: com async/await
+async function buscar() {
+  const resposta = await fetch('http://localhost:3000/agentes');
+  const dados = await resposta.json();
+  console.log(dados);
+}</code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="checklist-container">
+            <div class="checklist-title">Checklist do Módulo 2.2</div>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula2-mod2"><span class="checklist-text">Identifiquei a necessidade de marcar funções assíncronas com async.</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula2-mod2"><span class="checklist-text">Utilizei a palavra-chave await para extrair respostas diretas sem usar .then.</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula2-mod2"><span class="checklist-text">Comparei e compreendi a melhora na legibilidade do código refatorado.</span></label>
+          </div>
+        </section>
+
+        <!-- SECTION 2.3 -->
+        <section class="content-section" id="aula2-mod3">
+          <div class="section-header">
+            <div class="section-subtitle">
+              <span>Módulo 2.3 // Tratamento de Falhas</span>
+              <span class="env-badge vscode">VS Code</span>
+            </div>
+            <h2 class="section-title">Try/Catch e Resiliência</h2>
+            <div class="section-time-indicator">⏱ 20 Minutos</div>
+          </div>
+          <p style="margin-bottom: 24px;">
+            Ao usar <code>async/await</code>, não temos mais a função `.catch()` atrelada ao fluxo da Promise. Capturamos falhas de rede de forma estruturada englobando as instruções em blocos de exceção padrão: <strong>try/catch</strong>.
+          </p>
+          <div class="step-container">
+            <div class="step-card">
+              <div class="step-badge">01</div>
+              <div class="step-main">
+                <h3 class="step-title">Estrutura de Captura <span class="env-badge vscode">VS Code</span></h3>
+                <p class="step-desc">Se o servidor cair ou a conexão for perdida durante o <code>await fetch()</code>, a execução desvia imediatamente para o bloco do <code>catch</code>:</p>
+                <div class="code-container">
+                  <div class="code-header"><span class="code-lang">JavaScript</span><button class="btn-copy" data-clipboard="try-catch-template"><span>Copiar</span></button></div>
+                  <pre><code id="try-catch-template">async function buscarAgentes() {
+  try {
+    const res = await fetch('http://localhost:3000/agentes');
+    
+    // fetch resolve em erros HTTP comuns (ex: 404), logo devemos validar res.ok:
+    if (!res.ok) {
+      throw new Error(`Servidor respondeu com código ${res.status}`);
+    }
+    
+    const dados = await res.json();
+    console.log("Sucesso:", dados);
+  } catch (erro) {
+    // Captura erros de rede OU o erro lançado manualmente acima
+    console.error("Operação Backend falhou:", erro.message);
+  }
+}</code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="checklist-container">
+            <div class="checklist-title">Checklist do Módulo 2.3</div>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula2-mod3"><span class="checklist-text">Compreendi que a fetch() não lança erros em status HTTP de erro (ex: 404).</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula2-mod3"><span class="checklist-text">Utilizei a condicional throw new Error() para desviar erros para o catch.</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula2-mod3"><span class="checklist-text">Programei tratamentos com blocos try/catch assíncronos.</span></label>
+          </div>
+        </section>
+
+        <!-- SECTION 2.4 -->
+        <section class="content-section" id="aula2-mod4">
+          <div class="section-header">
+            <div class="section-subtitle">
+              <span>Módulo 2.4 // Sanitização</span>
+              <span class="env-badge vscode">VS Code</span>
+            </div>
+            <h2 class="section-title">Validação do Payload (Payload Validation)</h2>
+            <div class="section-time-indicator">⏱ 25 Minutos</div>
+          </div>
+          <p style="margin-bottom: 24px;">
+            A regra de ouro do Backend é: **nunca confie no cliente**. Antes de disparar requisições do tipo POST ou PUT, devemos sanitizar e validar os dados de formulários no JavaScript Frontend para impedir tráfego desnecessário de payloads defeituosos.
+          </p>
+          <div class="step-container">
+            <div class="step-card">
+              <div class="step-badge">01</div>
+              <div class="step-main">
+                <h3 class="step-title">Validação Local no Cliente <span class="env-badge vscode">VS Code</span></h3>
+                <p class="step-desc">Refatore seu arquivo <code>app.js</code> local para incorporar validações lógicas nas funções de gravação:</p>
+                <div class="code-container">
+                  <div class="code-header"><span class="code-lang">JavaScript (app.js)</span><button class="btn-copy" data-clipboard="val-js"><span>Copiar</span></button></div>
+                  <pre><code id="val-js">async function salvarAgente() {
+  const id = document.getElementById('agente-id').value.trim();
+  const nome = document.getElementById('agente-nome').value.trim();
+  const status = document.getElementById('agente-status').value;
+
+  // 1. Impedir envio de campos vazios ou formatos inválidos
+  if (!id || isNaN(id)) {
+    return alert('O ID é obrigatório e precisa ser um número!');
+  }
+  if (nome.length < 3) {
+    return alert('O nome do agente precisa ter ao menos 3 caracteres!');
+  }
+
+  try {
+    const checkRes = await fetch(`http://localhost:3000/agentes/${id}`);
+    const existe = checkRes.ok;
+
+    const res = await fetch(existe ? `http://localhost:3000/agentes/${id}` : 'http://localhost:3000/agentes', {
+      method: existe ? 'PUT' : 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id, nome, status })
+    });
+
+    if (!res.ok) throw new Error(`Status HTTP: ${res.status}`);
+    alert('Operação persistida!');
+    buscarAgentes();
+  } catch(erro) {
+    alert('Erro ao enviar: ' + erro.message);
+  }
+}</code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="checklist-container">
+            <div class="checklist-title">Checklist do Módulo 2.4</div>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula2-mod4"><span class="checklist-text">Escrevi checagens condicionais para sanitizar strings de formulários.</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula2-mod4"><span class="checklist-text">Bloqueei a execução de fetch() com retornos antecipados em dados inválidos.</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula2-mod4"><span class="checklist-text">Tratei as mensagens de erro dinamicamente na tela usando blocos try/catch.</span></label>
+          </div>
+        </section>
+
+        <!-- SECTION 2.5 -->
+        <section class="content-section" id="aula2-mod5">
+          <div class="section-header">
+            <div class="section-subtitle">
+              <span>Módulo 2.5 // Desafio Prático</span>
+              <span class="env-badge vscode">VS Code</span>
+            </div>
+            <h2 class="section-title">Desafio Try-Catch</h2>
+            <div class="section-time-indicator">⏱ 15 Minutos</div>
+          </div>
+          <p style="margin-bottom: 24px;">
+            Sua missão é testar a robustez do seu tratamento local. Desative o seu terminal local (`json-server`) apertando `Ctrl + C` e tente cadastrar um agente pelo seu formulário. A interface deve acusar o erro de rede via alerta amigável na tela sem travar a interface.
+          </p>
+          <p style="margin-bottom: 24px;">
+            Após validar, reinicie o servidor com <code>npx json-server@0.17.4 db.json</code> e salve seu trabalho no Git.
+          </p>
+          <div class="checklist-container">
+            <div class="checklist-title">Checklist do Módulo 2.5</div>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula2-mod5"><span class="checklist-text">Desliguei o json-server e atestei que a página não travou após disparar o fetch.</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula2-mod5"><span class="checklist-text">Tratei a exceção de rede com caixas de alerta amigáveis para o cliente.</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula2-mod5"><span class="checklist-text">Realizei o salvamento incremental da Aula 2 no Git.</span></label>
+          </div>
+        </section>
+
+
+        <!-- AULA 03 CONTENTS -->
+        <!-- SECTION 3.1 -->
+        <section class="content-section" id="aula3-mod1">
+          <div class="section-header">
+            <div class="section-subtitle">
+              <span>Módulo 3.1 // Parâmetros de URL</span>
+              <span class="env-badge browser">Navegador</span>
+            </div>
+            <h2 class="section-title">Query Parameters (Filtros de URL)</h2>
+            <div class="section-time-indicator">⏱ 15 Minutos</div>
+          </div>
+          <p style="margin-bottom: 24px;">
+            Para buscar dados filtrados sem sobrecarregar o cliente, utilizamos <strong>Query Parameters</strong> na URL. Eles começam com `?` e se estruturam como chave-valor `chave=valor` separados por `&`.
+          </p>
+          <div class="grid-cards">
+            <div class="cyber-card green">
+              <div class="card-icon">🔍</div>
+              <h3 class="card-title">Filtragem Direta</h3>
+              <p class="card-content" style="font-size: 0.85rem;">
+                endpoints locais como o `json-server` aceitam filtros direto na URL. Exemplo:<br>
+                <code>http://localhost:3000/agentes?status=Ativo</code><br>
+                Isso instrui o banco de dados a retornar apenas os agentes com status "Ativo".
+              </p>
+            </div>
+            <div class="cyber-card">
+              <div class="card-icon">📊</div>
+              <h3 class="card-title">Ordenação e Limites</h3>
+              <p class="card-content" style="font-size: 0.85rem;">
+                Podemos usar parâmetros especiais para formatar a resposta do servidor:<br>
+                • <code>?_sort=nome</code> (ordena por nome)<br>
+                • <code>?_limit=3</code> (traz apenas os 3 primeiros registros)<br>
+                • <code>?q=Neo</code> (busca de texto livre)
+              </p>
+            </div>
+          </div>
+          <div class="checklist-container">
+            <div class="checklist-title">Checklist do Módulo 3.1</div>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula3-mod1"><span class="checklist-text">Entendi a sintaxe de Query Parameters nas URLs HTTP.</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula3-mod1"><span class="checklist-text">Compreendi os modificadores especiais do json-server (?_sort, ?_limit, ?q).</span></label>
+          </div>
+        </section>
+
+        <!-- SECTION 3.2 -->
+        <section class="content-section" id="aula3-mod2">
+          <div class="section-header">
+            <div class="section-subtitle">
+              <span>Módulo 3.2 // Métodos Funcionais</span>
+              <span class="env-badge vscode">VS Code</span>
+            </div>
+            <h2 class="section-title">Array Map e Filter</h2>
+            <div class="section-time-indicator">⏱ 20 Minutos</div>
+          </div>
+          <p style="margin-bottom: 24px;">
+            Quando recebemos um array de objetos da API, utilizamos métodos funcionais de array para formatar ou rastrear os dados sem alterar a lista original (mantendo a imutabilidade).
+          </p>
+          <div class="step-container">
+            <div class="step-card">
+              <div class="step-badge">MAP</div>
+              <div class="step-main">
+                <h3 class="step-title">Método Map <span class="env-badge vscode">VS Code</span></h3>
+                <p class="step-desc">Varre todos os itens do array executando um callback que transforma cada elemento, retornando um novo array de mesmo tamanho. Ideal para gerar blocos de código HTML:</p>
+                <div class="code-container">
+                  <div class="code-header"><span class="code-lang">JavaScript</span><button class="btn-copy" data-clipboard="map-snippet"><span>Copiar</span></button></div>
+                  <pre><code id="map-snippet">const listaHtml = agentes.map(agente => {
+  return `&lt;li&gt;[${agente.id}] ${agente.nome}&lt;/li&gt;`;
+});
+// listaHtml agora é um array de strings HTML.
+document.getElementById('lista').innerHTML = listaHtml.join('');</code></pre>
+                </div>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-badge">FIL</div>
+              <div class="step-main">
+                <h3 class="step-title">Método Filter <span class="env-badge vscode">VS Code</span></h3>
+                <p class="step-desc">Filtra os elementos do array mantendo apenas os que passarem em uma condicional que retorne verdadeira (true). Ideal para filtros manuais rápidos na memória local:</p>
+                <div class="code-container">
+                  <div class="code-header"><span class="code-lang">JavaScript</span><button class="btn-copy" data-clipboard="filter-snippet"><span>Copiar</span></button></div>
+                  <pre><code id="filter-snippet">const ativos = agentes.filter(agente => agente.status === 'Ativo');
+// Retorna apenas elementos cuja propriedade status seja igual a 'Ativo'</code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="checklist-container">
+            <div class="checklist-title">Checklist do Módulo 3.2</div>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula3-mod2"><span class="checklist-text">Usei o método .map() para converter vetores de objetos em strings HTML.</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula3-mod2"><span class="checklist-text">Usei o método .filter() para selecionar itens específicos do array.</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula3-mod2"><span class="checklist-text">Utilizei callbacks funcionais de forma simplificada em seta (arrow functions).</span></label>
+          </div>
+        </section>
+
+        <!-- SECTION 3.3 -->
+        <section class="content-section" id="aula3-mod3">
+          <div class="section-header">
+            <div class="section-subtitle">
+              <span>Módulo 3.3 // Interface de Filtros</span>
+              <span class="env-badge vscode">VS Code</span>
+            </div>
+            <h2 class="section-title">Construindo os Inputs de Busca</h2>
+            <div class="section-time-indicator">⏱ 20 Minutos</div>
+          </div>
+          <p style="margin-bottom: 24px;">
+            Vamos implementar a caixa de busca de texto livre e os filtros rápidos de categoria na nossa página de controle local.
+          </p>
+          <div class="step-container">
+            <div class="step-card">
+              <div class="step-badge">01</div>
+              <div class="step-main">
+                <h3 class="step-title">Estrutura HTML do Painel de Filtros <span class="env-badge vscode">VS Code</span></h3>
+                <p class="step-desc">Insira a barra de pesquisa de texto livre e a seleção de status no seu <code>index.html</code> local:</p>
+                <div class="code-container">
+                  <div class="code-header"><span class="code-lang">HTML (Filtros)</span><button class="btn-copy" data-clipboard="filter-html"><span>Copiar</span></button></div>
+                  <pre><code id="filter-html">&lt;!-- Seção de Busca e Filtro --&gt;
+&lt;div id="painel-busca"&gt;
+  &lt;input type="text" id="busca-nome" placeholder="Buscar por nome..." oninput="filtrarAgentes()"&gt;
+  &lt;select id="busca-status" onchange="filtrarAgentes()"&gt;
+    &lt;option value=""&gt;Todos os status&lt;/option&gt;
+    &lt;option value="Ativo"&gt;Ativo&lt;/option&gt;
+    &lt;option value="Oculto"&gt;Oculto&lt;/option&gt;
+    &lt;option value="Procurado"&gt;Procurado&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="checklist-container">
+            <div class="checklist-title">Checklist do Módulo 3.3</div>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula3-mod3"><span class="checklist-text">Adicionei o input de buscas e seleção de status no meu index.html.</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula3-mod3"><span class="checklist-text">Conectei os eventos oninput e onchange à chamada filtrarAgentes().</span></label>
+          </div>
+        </section>
+
+        <!-- SECTION 3.4 -->
+        <section class="content-section" id="aula3-mod4">
+          <div class="section-header">
+            <div class="section-subtitle">
+              <span>Módulo 3.4 // Script de Filtros</span>
+              <span class="env-badge vscode">VS Code</span>
+            </div>
+            <h2 class="section-title">Pesquisa e Filtragem em Tempo Real</h2>
+            <div class="section-time-indicator">⏱ 20 Minutos</div>
+          </div>
+          <p style="margin-bottom: 24px;">
+            Vamos escrever a função de busca parametrizada no JavaScript, convertendo as opções do formulário em Query Parameters dinâmicos e atualizando a interface utilizando `.map()`.
+          </p>
+          <div class="step-container">
+            <div class="step-card">
+              <div class="step-badge">01</div>
+              <div class="step-main">
+                <h3 class="step-title">Implementação do Script <span class="env-badge vscode">VS Code</span></h3>
+                <p class="step-desc">Escreva a função <code>filtrarAgentes()</code> no seu arquivo <code>app.js</code> local:</p>
+                <div class="code-container">
+                  <div class="code-header"><span class="code-lang">JavaScript (app.js)</span><button class="btn-copy" data-clipboard="search-js"><span>Copiar</span></button></div>
+                  <pre><code id="search-js">async function filtrarAgentes() {
+  const nome = document.getElementById('busca-nome').value.trim();
+  const status = document.getElementById('busca-status').value;
+
+  // 1. Montar a URL dinâmica usando Query Parameters
+  let url = 'http://localhost:3000/agentes?';
+  
+  if (nome) {
+    url += `nome_like=${nome}&`; // Filtra nomes parciais (contém)
+  }
+  if (status) {
+    url += `status=${status}&`;  // Filtra por status exato
+  }
+
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error();
+    const dados = await res.json();
+    
+    // 2. Renderizar lista usando .map()
+    const lista = document.getElementById('lista-agentes');
+    lista.innerHTML = dados.map(ag => {
+      return `&lt;li&gt;[ID ${ag.id}] ${ag.nome} - &lt;em&gt;${ag.status}&lt;/em&gt;&lt;/li&gt;`;
+    }).join('');
+    
+  } catch(erro) {
+    console.error("Falha ao filtrar:", erro.message);
+  }
+}</code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="checklist-container">
+            <div class="checklist-title">Checklist do Módulo 3.4</div>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula3-mod4"><span class="checklist-text">Construí URLs dinâmicas contatenando parâmetros de consulta.</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula3-mod4"><span class="checklist-text">Utilizei map().join('') para injetar código na tela de forma otimizada.</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula3-mod4"><span class="checklist-text">Testei a busca incremental conforme digito caracteres na caixa de texto.</span></label>
+          </div>
+        </section>
+
+        <!-- SECTION 3.5 -->
+        <section class="content-section" id="aula3-mod5">
+          <div class="section-header">
+            <div class="section-subtitle">
+              <span>Módulo 3.5 // Homologação</span>
+              <span class="env-badge vscode">VS Code</span>
+            </div>
+            <h2 class="section-title">Conexões Dinâmicas</h2>
+            <div class="section-time-indicator">⏱ 15 Minutos</div>
+          </div>
+          <p style="margin-bottom: 24px;">
+            Teste as combinações de buscas (ex: nomes que contenham "o" com status "Procurado"). Garanta que o endpoint do `json-server` retorne exatamente o subconjunto filtrado.
+          </p>
+          <p style="margin-bottom: 24px;">
+            Após validar, realize o commit da Aula 3 para guardar o loot no seu HD.
+          </p>
+          <div class="checklist-container">
+            <div class="checklist-title">Checklist do Módulo 3.5</div>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula3-mod5"><span class="checklist-text">Homologuei buscas combinadas de texto + seleção de status.</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula3-mod5"><span class="checklist-text">Verifiquei que a lista exibe mensagens apropriadas caso nenhum agente seja encontrado.</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula3-mod5"><span class="checklist-text">Comitei os arquivos da Aula 3.</span></label>
+          </div>
+        </section>
+
+
+        <!-- AULA 04 CONTENTS -->
+        <!-- SECTION 4.1 -->
+        <section class="content-section" id="aula4-mod1">
+          <div class="section-header">
+            <div class="section-subtitle">
+              <span>Módulo 4.1 // Fundamentos Node</span>
+              <span class="env-badge vscode">VS Code</span>
+            </div>
+            <h2 class="section-title">Node.js e Node Modules</h2>
+            <div class="section-time-indicator">⏱ 15 Minutos</div>
+          </div>
+          <p style="margin-bottom: 20px;">
+            Chegou o momento de criar sua própria API customizada, aposentando o mock do `json-server`. O **Node.js** permite rodar JavaScript no terminal do computador. O gerenciador de pacotes **NPM** gerencia e instala dependências de mercado (*Node Modules*) no nosso projeto local.
+          </p>
+          <div class="grid-cards">
+            <div class="cyber-card green">
+              <div class="card-icon">🛠</div>
+              <h3 class="card-title">npm init</h3>
+              <p class="card-content" style="font-size: 0.85rem;">
+                Toda aplicação backend em Node se inicia rodando o comando <code>npm init -y</code> na pasta do projeto. Isso gera um manifesto chamado <strong>package.json</strong>, que armazena os metadados do projeto e a lista de pacotes instalados.
+              </p>
+            </div>
+            <div class="cyber-card">
+              <div class="card-icon">📂</div>
+              <h3 class="card-title">Node Modules</h3>
+              <p class="card-content" style="font-size: 0.85rem;">
+                Ao rodar <code>npm install express</code>, o gerenciador cria a pasta <code>node_modules</code>. Nela ficam arquivados os códigos fontes das dependências baixadas. Essa pasta **nunca** deve ser enviada ao Git (deve ser ignorada usando um arquivo <code>.gitignore</code>).
+              </p>
+            </div>
+          </div>
+          <div class="checklist-container">
+            <div class="checklist-title">Checklist do Módulo 4.1</div>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula4-mod1"><span class="checklist-text">Compreendi o papel do Node.js na execução de JS fora do navegador.</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula4-mod1"><span class="checklist-text">Identifiquei a função do manifesto package.json.</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula4-mod1"><span class="checklist-text">Entendi por que a pasta node_modules não deve ser enviada para a nuvem.</span></label>
+          </div>
+        </section>
+
+        <!-- SECTION 4.2 -->
+        <section class="content-section" id="aula4-mod2">
+          <div class="section-header">
+            <div class="section-subtitle">
+              <span>Módulo 4.2 // Framework</span>
+              <span class="env-badge vscode">VS Code</span>
+            </div>
+            <h2 class="section-title">Rotas e Middlewares (Express.js)</h2>
+            <div class="section-time-indicator">⏱ 20 Minutos</div>
+          </div>
+          <p style="margin-bottom: 24px;">
+            O framework **Express** abstrai a complexidade do protocolo HTTP no Node. Ele disponibiliza um servidor web ouvindo em uma porta específica (ex: 3000) e gerencia o roteamento de endpoints com middlewares que interceptam e processam requisições de entrada.
+          </p>
+          <div class="step-container">
+            <div class="step-card">
+              <div class="step-badge">01</div>
+              <div class="step-main">
+                <h3 class="step-title">Express Middleware <span class="env-badge vscode">VS Code</span></h3>
+                <p class="step-desc">
+                  Por padrão, APIs Express não entendem requisições com dados em formato JSON no corpo (body). Devemos ativar o interpretador global de JSON usando o middleware integrado:
+                  <code>app.use(express.json());</code>.
+                </p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-badge">02</div>
+              <div class="step-main">
+                <h3 class="step-title">Roteamento HTTP <span class="env-badge vscode">VS Code</span></h3>
+                <p class="step-desc">As rotas vinculam verbos HTTP e caminhos a funções callback de processamento:</p>
+                <div class="code-container">
+                  <div class="code-header"><span class="code-lang">JavaScript (Rotas)</span><button class="btn-copy" data-clipboard="express-route"><span>Copiar</span></button></div>
+                  <pre><code id="express-route">// Quando o cliente enviar GET para "/agentes", retorna a lista
+app.get('/agentes', (requisicao, resposta) => {
+  resposta.json(vetorAgentes);
+});</code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="checklist-container">
+            <div class="checklist-title">Checklist do Módulo 4.2</div>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula4-mod2"><span class="checklist-text">Entendi o que é uma rota web no Express e seus parâmetros req/res.</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula4-mod2"><span class="checklist-text">Identifiquei a importância do middleware express.json() para ler payloads.</span></label>
+          </div>
+        </section>
+
+        <!-- SECTION 4.3 -->
+        <section class="content-section" id="aula4-mod3">
+          <div class="section-header">
+            <div class="section-subtitle">
+              <span>Módulo 4.3 // Persistência Volátil</span>
+              <span class="env-badge vscode">VS Code</span>
+            </div>
+            <h2 class="section-title">Persistência em Memória (RAM)</h2>
+            <div class="section-time-indicator">⏱ 20 Minutos</div>
+          </div>
+          <p style="margin-bottom: 24px;">
+            Neste primeiro estágio, criaremos uma lista de agentes em um array global direto na memória RAM do servidor. Os dados persistirão enquanto o servidor estiver rodando, mas serão deletados toda vez que reiniciarmos a aplicação.
+          </p>
+          <div class="step-container">
+            <div class="step-card">
+              <div class="step-badge">01</div>
+              <div class="step-main">
+                <h3 class="step-title">Manipulação de Array <span class="env-badge vscode">VS Code</span></h3>
+                <p class="step-desc">Para cadastrar dados, interceptamos o corpo da requisição e adicionamos no array global usando o método `.push()`:</p>
+                <div class="code-container">
+                  <div class="code-header"><span class="code-lang">JavaScript</span><button class="btn-copy" data-clipboard="express-post"><span>Copiar</span></button></div>
+                  <pre><code id="express-post">app.post('/agentes', (req, res) => {
+  const novoAgente = req.body; // pega ID, Nome e Status do payload
+  listaAgentes.push(novoAgente);
+  res.status(201).json(novoAgente); // Responde com 201 Created
+});</code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="checklist-container">
+            <div class="checklist-title">Checklist do Módulo 4.3</div>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula4-mod3"><span class="checklist-text">Programei rotas POST inserindo dados estruturados em listas de memória.</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula4-mod3"><span class="checklist-text">Utilizei res.status(201) para sinalizar a criação de recursos com sucesso.</span></label>
+          </div>
+        </section>
+
+        <!-- SECTION 4.4 -->
+        <section class="content-section" id="aula4-mod4">
+          <div class="section-header">
+            <div class="section-subtitle">
+              <span>Módulo 4.4 // Laboratório Express</span>
+              <span class="env-badge vscode">VS Code</span>
+            </div>
+            <h2 class="section-title">Levantando o Servidor Real</h2>
+            <div class="section-time-indicator">⏱ 20 Minutos</div>
+          </div>
+          <p style="margin-bottom: 24px;">
+            Abra um terminal na pasta do seu projeto local no VS Code e siga as etapas práticas para subir a sua API:
+          </p>
+          <div class="step-container">
+            <div class="step-card">
+              <div class="step-badge">01</div>
+              <div class="step-main">
+                <h3 class="step-title">Inicialização e Instalação <span class="env-badge vscode">VS Code</span></h3>
+                <p class="step-desc">Inicialize o projeto Node e instale as dependências executando no terminal:</p>
+                <div class="code-container">
+                  <div class="code-header"><span class="code-lang">Terminal</span><button class="btn-copy" data-clipboard="npm-install-express"><span>Copiar</span></button></div>
+                  <pre><code id="npm-install-express">npm init -y
+npm install express cors</code></pre>
+                </div>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 6px;">
+                  💡 Nota: instalamos o pacote <strong>cors</strong> para garantir que nossa página de aulas consiga consultar a porta da nossa nova API local sem bloqueios de segurança do navegador.
+                </p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-badge">02</div>
+              <div class="step-main">
+                <h3 class="step-title">Escrever o Servidor <span class="env-badge vscode">VS Code</span></h3>
+                <p class="step-desc">Crie um arquivo chamado <code>server.js</code> e programe seu servidor básico:</p>
+                <div class="code-container">
+                  <div class="code-header"><span class="code-lang">JavaScript (server.js)</span><button class="btn-copy" data-clipboard="server-code"><span>Copiar</span></button></div>
+                  <pre><code id="server-code">const express = require('express');
+const cors = require('cors');
+const app = express();
+
+app.use(cors()); // Libera requisições de outras origens (CORS)
+
+// Permite requisições de sites públicos (Vercel) para a rede local (localhost)
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Private-Network', 'true');
+  next();
+});
+
+app.use(express.json()); // Habilita leitura de JSON
+
+let agentes = [
+  { id: "1", nome: "Neo", status: "Ativo" },
+  { id: "2", nome: "Trinity", status: "Oculto" }
+];
+
+app.get('/agentes', (req, res) => {
+  res.json(agentes);
+});
+
+app.post('/agentes', (req, res) => {
+  agentes.push(req.body);
+  res.status(201).json(req.body);
+});
+
+app.listen(3000, () => {
+  console.log("Servidor Express ativo em http://localhost:3000");
+});</code></pre>
+                </div>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-badge">03</div>
+              <div class="step-main">
+                <h3 class="step-title">A Ignição <span class="env-badge vscode">VS Code</span></h3>
+                <p class="step-desc">Coloque sua nova API para rodar no terminal:</p>
+                <div class="code-container">
+                  <div class="code-header"><span class="code-lang">Terminal</span><button class="btn-copy" data-clipboard="node-run"><span>Copiar</span></button></div>
+                  <pre><code id="node-run">node server.js</code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="checklist-container">
+            <div class="checklist-title">Checklist do Módulo 4.4</div>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula4-mod4"><span class="checklist-text">Inicializei o projeto Node e instalei o Express e o Cors.</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula4-mod4"><span class="checklist-text">Criei o arquivo server.js estruturando as rotas de GET e POST.</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula4-mod4"><span class="checklist-text">Subi o servidor com node server.js e validei o endpoint.</span></label>
+          </div>
+        </section>
+
+        <!-- SECTION 4.5 -->
+        <section class="content-section" id="aula4-mod5">
+          <div class="section-header">
+            <div class="section-subtitle">
+              <span>Módulo 4.5 // Organização</span>
+              <span class="env-badge vscode">VS Code</span>
+            </div>
+            <h2 class="section-title">Modularização ESM e Git</h2>
+            <div class="section-time-indicator">⏱ 15 Minutos</div>
+          </div>
+          <p style="margin-bottom: 24px;">
+            Para usar o padrão moderno de módulos do ES6 (usando <code>import Express from 'express'</code> em vez de <code>require</code>), você deve declarar a propriedade <code>"type": "module"</code> dentro do manifesto <code>package.json</code>.
+          </p>
+          <p style="margin-bottom: 24px;">
+            Crie também um arquivo chamado <code>.gitignore</code> e adicione a linha <code>node_modules/</code> para que a pasta de pacotes não seja indexada pelo Git. Faça o commit e finalize a Aula 4.
+          </p>
+          <div class="checklist-container">
+            <div class="checklist-title">Checklist do Módulo 4.5</div>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula4-mod5"><span class="checklist-text">Criei o arquivo .gitignore excluindo a node_modules/.</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula4-mod5"><span class="checklist-text">Comitei os arquivos da Aula 4 salvando o package.json e dependências.</span></label>
+          </div>
+        </section>
+
+
+        <!-- AULA 05 CONTENTS -->
+        <!-- SECTION 5.1 -->
+        <section class="content-section" id="aula5-mod1">
+          <div class="section-header">
+            <div class="section-subtitle">
+              <span>Módulo 5.1 // Sistema de Arquivos</span>
+              <span class="env-badge vscode">VS Code</span>
+            </div>
+            <h2 class="section-title">Manipulação Física de Arquivos (FS Module)</h2>
+            <div class="section-time-indicator">⏱ 15 Minutos</div>
+          </div>
+          <p style="margin-bottom: 20px;">
+            Na aula anterior, os dados dos agentes cadastrados sumiam ao desligar o servidor Express. Para persistir de verdade, programaremos o Node para ler e salvar as modificações de volta em um arquivo de texto físico no disco usando o módulo nativo **File System (FS)**.
+          </p>
+          <div class="grid-cards">
+            <div class="cyber-card green">
+              <div class="card-icon">💾</div>
+              <h3 class="card-title">fs.promises</h3>
+              <p class="card-content" style="font-size: 0.85rem;">
+                Para manter nosso código assíncrono e de alta performance, utilizaremos o submódulo de Promises do FS:<br>
+                <code>const fs = require('fs').promises;</code><br>
+                Isso nos permite usar o <code>await</code> para aguardar que o HD termine de ler ou gravar os arquivos JSON.
+              </p>
+            </div>
+            <div class="cyber-card">
+              <div class="card-icon">🔄</div>
+              <h3 class="card-title">Conversão JSON</h3>
+              <p class="card-content" style="font-size: 0.85rem;">
+                Como arquivos armazenam apenas texto plano (strings), devemos converter os dados antes e depois de ler:<br>
+                • <strong>Leitura</strong>: <code>JSON.parse(textoLido)</code> (converte texto para objeto/array JS).<br>
+                • <strong>Escrita</strong>: <code>JSON.stringify(objeto, null, 2)</code> (converte objeto para string formatada).
+              </p>
+            </div>
+          </div>
+          <div class="checklist-container">
+            <div class="checklist-title">Checklist do Módulo 5.1</div>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula5-mod1"><span class="checklist-text">Compreendi a importância da persistência física de dados em disco.</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula5-mod1"><span class="checklist-text">Identifiquei a diferença entre ler strings e convertê-las para objetos JS com JSON.parse.</span></label>
+          </div>
+        </section>
+
+        <!-- SECTION 5.2 -->
+        <section class="content-section" id="aula5-mod2">
+          <div class="section-header">
+            <div class="section-subtitle">
+              <span>Módulo 5.2 // Leitura e Escrita</span>
+              <span class="env-badge vscode">VS Code</span>
+            </div>
+            <h2 class="section-title">Integração do fs.promises</h2>
+            <div class="section-time-indicator">⏱ 20 Minutos</div>
+          </div>
+          <p style="margin-bottom: 24px;">
+            Vamos implementar funções utilitárias que facilitam o salvamento e carregamento no arquivo do banco de dados <code>db.json</code> local.
+          </p>
+          <div class="step-container">
+            <div class="step-card">
+              <div class="step-badge">01</div>
+              <div class="step-main">
+                <h3 class="step-title">Escrevendo os Helpers <span class="env-badge vscode">VS Code</span></h3>
+                <p class="step-desc">Declare os métodos assíncronos de controle de disco no topo do seu <code>server.js</code>:</p>
+                <div class="code-container">
+                  <div class="code-header"><span class="code-lang">JavaScript (server.js Helpers)</span><button class="btn-copy" data-clipboard="fs-helpers"><span>Copiar</span></button></div>
+                  <pre><code id="fs-helpers">const fs = require('fs').promises;
+const dbPath = './db.json';
+
+// Função para ler o arquivo do disco
+async function lerBanco() {
+  const texto = await fs.readFile(dbPath, 'utf-8');
+  return JSON.parse(texto);
+}
+
+// Função para escrever o banco no disco
+async function salvarBanco(dados) {
+  const texto = JSON.stringify(dados, null, 2);
+  await fs.writeFile(dbPath, texto, 'utf-8');
+}</code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="checklist-container">
+            <div class="checklist-title">Checklist do Módulo 5.2</div>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula5-mod2"><span class="checklist-text">Codifiquei a função lerBanco usando fs.readFile de forma assíncrona.</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula5-mod2"><span class="checklist-text">Codifiquei a função salvarBanco usando o fs.writeFile.</span></label>
+          </div>
+        </section>
+
+        <!-- SECTION 5.3 -->
+        <section class="content-section" id="aula5-mod3">
+          <div class="section-header">
+            <div class="section-subtitle">
+              <span>Módulo 5.3 // CRUD Manual 1</span>
+              <span class="env-badge vscode">VS Code</span>
+            </div>
+            <h2 class="section-title">GET e POST Manuais no Express</h2>
+            <div class="section-time-indicator">⏱ 20 Minutos</div>
+          </div>
+          <p style="margin-bottom: 24px;">
+            Agora, vamos refatorar as rotas GET e POST do nosso servidor Express para buscar e salvar informações no arquivo <code>db.json</code> usando nossos novos helpers assíncronos.
+          </p>
+          <div class="step-container">
+            <div class="step-card">
+              <div class="step-badge">01</div>
+              <div class="step-main">
+                <h3 class="step-title">Refatoração de GET e POST <span class="env-badge vscode">VS Code</span></h3>
+                <p class="step-desc">Modifique as rotas correspondentes no seu <code>server.js</code> local:</p>
+                <div class="code-container">
+                  <div class="code-header"><span class="code-lang">JavaScript (server.js GET/POST)</span><button class="btn-copy" data-clipboard="get-post-ref"><span>Copiar</span></button></div>
+                  <pre><code id="get-post-ref">// Rota de leitura (GET)
+app.get('/agentes', async (req, res) => {
+  try {
+    const banco = await lerBanco();
+    res.json(banco.agentes);
+  } catch (erro) {
+    res.status(500).json({ erro: "Erro ao ler banco de dados" });
+  }
+});
+
+// Rota de criação (POST)
+app.post('/agentes', async (req, res) => {
+  try {
+    const banco = await lerBanco();
+    const novoAgente = req.body;
+    
+    banco.agentes.push(novoAgente);
+    await salvarBanco(banco);
+    
+    res.status(201).json(novoAgente);
+  } catch (erro) {
+    res.status(500).json({ erro: "Erro ao cadastrar dados" });
+  }
+});</code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="checklist-container">
+            <div class="checklist-title">Checklist do Módulo 5.3</div>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula5-mod3"><span class="checklist-text">Refatorei a rota GET integrando as chamadas assíncronas do FS.</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula5-mod3"><span class="checklist-text">Refatorei a rota POST salvando dados fisicamente no disco rígido.</span></label>
+          </div>
+        </section>
+
+        <!-- SECTION 5.4 -->
+        <section class="content-section" id="aula5-mod4">
+          <div class="section-header">
+            <div class="section-subtitle">
+              <span>Módulo 5.4 // CRUD Manual 2</span>
+              <span class="env-badge vscode">VS Code</span>
+            </div>
+            <h2 class="section-title">PUT e DELETE Manuais</h2>
+            <div class="section-time-indicator">⏱ 20 Minutos</div>
+          </div>
+          <p style="margin-bottom: 24px;">
+            Para completar o CRUD manual, implementaremos as rotas PUT (atualização) e DELETE (remoção) usando filtros lógicos de manipulação de array no JavaScript.
+          </p>
+          <div class="step-container">
+            <div class="step-card">
+              <div class="step-badge">01</div>
+              <div class="step-main">
+                <h3 class="step-title">Criando as rotas PUT e DELETE no Servidor <span class="env-badge vscode">VS Code</span></h3>
+                <p class="step-desc">Insira os blocos das rotas no seu arquivo <code>server.js</code> local:</p>
+                <div class="code-container">
+                  <div class="code-header"><span class="code-lang">JavaScript (server.js PUT/DELETE)</span><button class="btn-copy" data-clipboard="put-del-ref"><span>Copiar</span></button></div>
+                  <pre><code id="put-del-ref">// Rota de atualização (PUT)
+app.put('/agentes/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const banco = await lerBanco();
+    const index = banco.agentes.findIndex(ag => ag.id === id);
+    
+    if (index === -1) {
+      return res.status(404).json({ erro: "Agente não encontrado" });
+    }
+    
+    // Atualiza apenas os campos enviados no body
+    banco.agentes[index] = { ...banco.agentes[index], ...req.body };
+    await salvarBanco(banco);
+    
+    res.json(banco.agentes[index]);
+  } catch (erro) {
+    res.status(500).json({ erro: "Erro ao atualizar agente" });
+  }
+});
+
+// Rota de exclusão (DELETE)
+app.delete('/agentes/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const banco = await lerBanco();
+    const filtrados = banco.agentes.filter(ag => ag.id !== id);
+    
+    if (banco.agentes.length === filtrados.length) {
+      return res.status(404).json({ erro: "Agente não encontrado" });
+    }
+    
+    banco.agentes = filtrados;
+    await salvarBanco(banco);
+    
+    res.status(200).json({ msg: "Excluído com sucesso" });
+  } catch (erro) {
+    res.status(500).json({ erro: "Erro ao excluir agente" });
+  }
+});</code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="checklist-container">
+            <div class="checklist-title">Checklist do Módulo 5.4</div>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula5-mod4"><span class="checklist-text">Programei a rota PUT utilizando findIndex() e desestruturação de objetos.</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula5-mod4"><span class="checklist-text">Desenvolvi a rota DELETE filtrando elementos indesejados e salvando no arquivo.</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula5-mod4"><span class="checklist-text">Tratei erros de ID não encontrado retornando o status 404 de forma manual.</span></label>
+          </div>
+        </section>
+
+        <!-- SECTION 5.5 -->
+        <section class="content-section" id="aula5-mod5">
+          <div class="section-header">
+            <div class="section-subtitle">
+              <span>Módulo 5.5 // Conclusão</span>
+              <span class="env-badge vscode">VS Code</span>
+            </div>
+            <h2 class="section-title">Homologação Final</h2>
+            <div class="section-time-indicator">⏱ 15 Minutos</div>
+          </div>
+          <p style="margin-bottom: 24px;">
+            Parabéns! Você concluiu a trilha. Seu servidor Express local agora manipula os dados e persiste fisicamente no arquivo <code>db.json</code> da máquina de forma autônoma.
+          </p>
+          <p style="margin-bottom: 24px;">
+            Faça testes finais cadastrando, editando e deletando registros a partir da sua interface cliente local. A seguir, comite a versão final no Git.
+          </p>
+          <div class="checklist-container">
+            <div class="checklist-title">Checklist do Módulo 5.5</div>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula5-mod5"><span class="checklist-text">Subi meu servidor Express customizado com persistência no db.json.</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula5-mod5"><span class="checklist-text">Homologuei todas as operações de escrita e leitura e confirmei a alteração do arquivo.</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" data-section="aula5-mod5"><span class="checklist-text">Comitei e finalizei o projeto completo da trilha Backend.</span></label>
+          </div>
+        </section>
+
+        <!-- REVISAO SIMULADO SECTION -->
+        <section class="content-section" id="revisao-simulado">
+          <div class="section-header">
+            <div class="section-subtitle">
+              <span>Revisão // Simulado de CRUD</span>
+              <span class="env-badge browser">Navegador + json-server</span>
+            </div>
+            <h2 class="section-title">Revisão Pré-Prova: Simulado Prático de CRUD</h2>
+            <div class="section-time-indicator">⏱ Simulado Prático</div>
+          </div>
+          <p style="margin-bottom: 24px;">
+            Esta seção serve como um simulado prático para a prova oficial. O teste executa operações CRUD (GET, POST, PUT, DELETE) contra seu servidor local do JSON Server rodando em <code>http://localhost:3000</code> para garantir que você domine todos os conceitos e operações do Módulo 1.
+          </p>
+
+          <div class="grid-cards" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin-bottom: 24px;">
+            <div class="cyber-card green">
+              <div class="card-icon">🖧</div>
+              <h3 class="card-title">O que é testado no Simulado?</h3>
+              <p class="card-content" style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted);">
+                O validador testará se a sua API local responde corretamente a chamadas completas de leitura, gravação, alteração e exclusão na rota de agentes.
+              </p>
+            </div>
+            <div class="cyber-card">
+              <div class="card-icon">⚡</div>
+              <h3 class="card-title">Instruções do Servidor</h3>
+              <p class="card-content" style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted);">
+                1. Mantenha o arquivo <code>db.json</code> limpo com Neo e Trinity.<br>
+                2. Execute o comando local:<br>
+                <code style="color: var(--neon-cyan);">npx json-server@0.17.4 db.json --port 3000</code><br>
+                3. Clique em "Executar Simulado".
+              </p>
+            </div>
+            <div class="cyber-card purple">
+              <div class="card-icon">💻</div>
+              <h3 class="card-title">Desafio: O que Programar?</h3>
+              <p class="card-content" style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted);">
+                No seu arquivo local <code>app.js</code>, programe fetches para:<br>
+                • <strong>GET /agentes</strong>: Listar os agentes iniciais.<br>
+                • <strong>POST /agentes</strong>: Cadastrar Cypher (ID 9, Ativo).<br>
+                • <strong>PUT /agentes/9</strong>: Alterar Cypher para "Procurado".<br>
+                • <strong>DELETE /agentes/9</strong>: Remover Cypher do banco.
+              </p>
+            </div>
+          </div>
+
+          <div class="live-server-panel" style="margin-top: 0; margin-bottom: 24px;">
+            <div class="live-panel-header">
+              <div class="live-panel-title">📟 SIMULADOR DE OPERAÇÕES CRUD (AULA 1)</div>
+              <button class="btn-primary" id="btn-run-revisao-tests" style="font-size: 0.8rem; padding: 6px 16px;">Executar Simulado</button>
+            </div>
+            
+            <div class="validation-terminal-container" style="margin-top: 16px;">
+              <div class="sim-header">
+                <div class="sim-dots"><div class="sim-dot"></div><div class="sim-dot"></div><div class="sim-dot"></div></div>
+                <div class="sim-title">simulado_crud.sh</div>
+              </div>
+              <div class="sim-body" id="revisao-terminal-output" style="height: 160px; overflow-y: auto; font-family: var(--font-mono); font-size: 0.85rem; padding: 12px; line-height: 1.6; background: #070a10; border: 1px solid var(--border-color); border-radius: var(--radius-sm);">
+                <div style="color: var(--text-muted);">&gt; Aguardando início do simulado...</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="checklist-container">
+            <div class="checklist-title">Checklist do Simulado de CRUD</div>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" id="check-rev-1" data-section="revisao-simulado" disabled><span class="checklist-text" id="label-rev-1">Requisito A: Resposta HTTP 200 OK com Neo e Trinity no GET /agentes (Pendente)</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" id="check-rev-2" data-section="revisao-simulado" disabled><span class="checklist-text" id="label-rev-2">Requisito B: Cadastro com sucesso no POST /agentes (Pendente)</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" id="check-rev-3" data-section="revisao-simulado" disabled><span class="checklist-text" id="label-rev-3">Requisito C: Edição de registro via PUT /agentes/9 (Pendente)</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" id="check-rev-4" data-section="revisao-simulado" disabled><span class="checklist-text" id="label-rev-4">Requisito D: Remoção do registro via DELETE /agentes/9 (Pendente)</span></label>
+          </div>
+        </section>
+
+        <!-- REVISAO SIMULADO 2 SECTION -->
+        <section class="content-section" id="revisao-simulado2">
+          <div class="section-header">
+            <div class="section-subtitle">
+              <span>Revisão // Simulado de PATCH</span>
+              <span class="env-badge browser">Navegador + json-server</span>
+            </div>
+            <h2 class="section-title">Revisão Pré-Prova II: Simulado Avançado (PATCH e GET)</h2>
+            <div class="section-time-indicator">⏱ Simulado Prático II</div>
+          </div>
+          <p style="margin-bottom: 24px;">
+            Esta seção serve como simulado avançado de preparação. O teste valida se você consegue utilizar o verbo <code>PATCH</code> para atualizações parciais e o <code>GET</code> para ler registros, simulando cenários complexos do Módulo 1.
+          </p>
+
+          <div class="grid-cards" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin-bottom: 24px;">
+            <div class="cyber-card green">
+              <div class="card-icon">🖧</div>
+              <h3 class="card-title">O que é testado no Simulado 2?</h3>
+              <p class="card-content" style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted);">
+                O validador testará se a sua API local suporta a atualização parcial (PATCH) e se a persistência mantém os campos não informados intactos.
+              </p>
+            </div>
+            <div class="cyber-card">
+              <div class="card-icon">⚡</div>
+              <h3 class="card-title">Instruções do Servidor</h3>
+              <p class="card-content" style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted);">
+                1. Mantenha o servidor local ativo na porta 3000.<br>
+                2. Certifique-se de que o <code>db.json</code> contém o agente Trinity (ID 2).<br>
+                3. Clique em "Executar Simulado 2".
+              </p>
+            </div>
+            <div class="cyber-card purple">
+              <div class="card-icon">💻</div>
+              <h3 class="card-title">Desafio: O que Programar?</h3>
+              <p class="card-content" style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted);">
+                No seu arquivo local <code>app.js</code>, programe fetches para:<br>
+                • <strong>PATCH /agentes/2</strong>: Enviar apenas <code>{ "status": "Ativo" }</code> e verificar se o nome original "Trinity" permaneceu inalterado.<br>
+                • <strong>POST /agentes</strong>: Cadastrar Niobe (ID 10, Ativo).<br>
+                • <strong>DELETE /agentes/10</strong>: Excluir Niobe.
+              </p>
+            </div>
+          </div>
+
+          <div class="live-server-panel" style="margin-top: 0; margin-bottom: 24px;">
+            <div class="live-panel-header">
+              <div class="live-panel-title">📟 SIMULADOR DE OPERAÇÕES AVANÇADAS (PATCH)</div>
+              <button class="btn-primary" id="btn-run-revisao2-tests" style="font-size: 0.8rem; padding: 6px 16px;">Executar Simulado 2</button>
+            </div>
+            
+            <div class="validation-terminal-container" style="margin-top: 16px;">
+              <div class="sim-header">
+                <div class="sim-dots"><div class="sim-dot"></div><div class="sim-dot"></div><div class="sim-dot"></div></div>
+                <div class="sim-title">simulado2_patch.sh</div>
+              </div>
+              <div class="sim-body" id="revisao2-terminal-output" style="height: 160px; overflow-y: auto; font-family: var(--font-mono); font-size: 0.85rem; padding: 12px; line-height: 1.6; background: #070a10; border: 1px solid var(--border-color); border-radius: var(--radius-sm);">
+                <div style="color: var(--text-muted);">&gt; Aguardando início do simulado 2...</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="checklist-container">
+            <div class="checklist-title">Checklist do Simulado 2</div>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" id="check-rev2-1" data-section="revisao-simulado2" disabled><span class="checklist-text" id="label-rev2-1">Requisito A: Resposta HTTP 200 OK com Neo e Trinity no GET /agentes (Pendente)</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" id="check-rev2-2" data-section="revisao-simulado2" disabled><span class="checklist-text" id="label-rev2-2">Requisito B: Atualização parcial via PATCH /agentes/2 (Parcial Trinity) (Pendente)</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" id="check-rev2-3" data-section="revisao-simulado2" disabled><span class="checklist-text" id="label-rev2-3">Requisito C: Inclusão via POST /agentes (Agente Niobe, ID 10) (Pendente)</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" id="check-rev2-4" data-section="revisao-simulado2" disabled><span class="checklist-text" id="label-rev2-4">Requisito D: Remoção via DELETE /agentes/10 (Pendente)</span></label>
+          </div>
+        </section>
+
+        <!-- REVISAO SIMULADO 3 SECTION -->
+        <section class="content-section" id="revisao-simulado3">
+          <div class="section-header">
+            <div class="section-subtitle">
+              <span>Revisão // Filtros de Busca</span>
+              <span class="env-badge browser">Navegador + json-server</span>
+            </div>
+            <h2 class="section-title">Exercício Extra: Filtros por Query Parameters (GET)</h2>
+            <div class="section-time-indicator">⏱ Exercício Avançado</div>
+          </div>
+          <p style="margin-bottom: 24px;">
+            Este exercício aborda filtros em APIs usando parâmetros de busca (query parameters). O json-server suporta filtros automáticos na URL, permitindo listar apenas registros específicos como por status (`/agentes?status=Ativo`) ou buscas parciais (`/agentes?nome_like=Neo`).
+          </p>
+
+          <div class="grid-cards" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin-bottom: 24px;">
+            <div class="cyber-card green">
+              <div class="card-icon">🔍</div>
+              <h3 class="card-title">O que é testado no Exercício 3?</h3>
+              <p class="card-content" style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted);">
+                O validador testará o suporte da sua API a filtros na query string:<br>
+                • Busca exata de ativos: <code>GET /agentes?status=Ativo</code>.<br>
+                • Busca exata de ocultos: <code>GET /agentes?status=Oculto</code>.<br>
+                • Busca por nome: <code>GET /agentes?nome=Neo</code>.
+              </p>
+            </div>
+            <div class="cyber-card">
+              <div class="card-icon">⚡</div>
+              <h3 class="card-title">Instruções do Servidor</h3>
+              <p class="card-content" style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted);">
+                1. Mantenha o servidor <code>json-server</code> ativo na porta 3000.<br>
+                2. Certifique-se de que o arquivo <code>db.json</code> contém Neo e Trinity.<br>
+                3. Clique em "Executar Validação de Filtros".
+              </p>
+            </div>
+            <div class="cyber-card purple">
+              <div class="card-icon">💻</div>
+              <h3 class="card-title">Desafio: O que Programar?</h3>
+              <p class="card-content" style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted);">
+                No seu arquivo local <code>app.js</code>, programe fetches para:<br>
+                • <strong>Filtrar ativos</strong>: Requisição <code>GET /agentes?status=Ativo</code>.<br>
+                • <strong>Filtrar ocultos</strong>: Requisição <code>GET /agentes?status=Oculto</code>.<br>
+                • <strong>Filtrar por nome</strong>: Requisição <code>GET /agentes?nome=Neo</code>.
+              </p>
+            </div>
+          </div>
+
+          <div class="live-server-panel" style="margin-top: 0; margin-bottom: 24px;">
+            <div class="live-panel-header">
+              <div class="live-panel-title">📟 VALIDADOR DE QUERY PARAMETERS (GET)</div>
+              <button class="btn-primary" id="btn-run-revisao3-tests" style="font-size: 0.8rem; padding: 6px 16px;">Executar Validação de Filtros</button>
+            </div>
+            
+            <div class="validation-terminal-container" style="margin-top: 16px;">
+              <div class="sim-header">
+                <div class="sim-dots"><div class="sim-dot"></div><div class="sim-dot"></div><div class="sim-dot"></div></div>
+                <div class="sim-title">query_params_test.sh</div>
+              </div>
+              <div class="sim-body" id="revisao3-terminal-output" style="height: 160px; overflow-y: auto; font-family: var(--font-mono); font-size: 0.85rem; padding: 12px; line-height: 1.6; background: #070a10; border: 1px solid var(--border-color); border-radius: var(--radius-sm);">
+                <div style="color: var(--text-muted);">&gt; Aguardando início dos testes de filtros...</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="checklist-container">
+            <div class="checklist-title">Checklist do Exercício Extra</div>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" id="check-rev3-1" data-section="revisao-simulado3" disabled><span class="checklist-text" id="label-rev3-1">Filtro A: GET /agentes?status=Ativo retorna apenas agentes ativos (Pendente)</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" id="check-rev3-2" data-section="revisao-simulado3" disabled><span class="checklist-text" id="label-rev3-2">Filtro B: GET /agentes?status=Oculto retorna apenas agentes ocultos (Pendente)</span></label>
+            <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" id="check-rev3-3" data-section="revisao-simulado3" disabled><span class="checklist-text" id="label-rev3-3">Filtro C: GET /agentes?nome=Neo retorna apenas o agente Neo (Pendente)</span></label>
+          </div>
+        </section>
+
+        <!-- AVALIACAO 1 SECTION -->
+        <section class="content-section" id="avaliacao1">
+          <div class="section-header">
+            <div class="section-subtitle">
+              <span>Avaliação 1 // 2º Trimestre</span>
+              <span class="env-badge browser">Navegador + json-server</span>
+            </div>
+            <h2 class="section-title">Avaliação Prática: Conexão e Verbos HTTP (json-server)</h2>
+            <div class="section-time-indicator">⏱ Avaliação Oficial</div>
+          </div>
+
+          <!-- Locked View -->
+          <div id="avaliacao-locked-view" class="evaluation-gate">
+            <div class="gate-icon">🔒</div>
+            <h3>Conteúdo Criptografado</h3>
+            <p>Insira a chave de liberação ditada pelo professor para acessar os requisitos e iniciar a bateria de testes automatizados da prova.</p>
+            <div class="gate-form">
+              <input type="password" id="avaliacao-key-input" placeholder="Chave de Acesso (Ex: MATRIXXXXX)" class="form-input" style="max-width: 300px; margin: 0 auto; text-align: center; text-transform: uppercase;">
+              <button class="btn-primary" id="btn-unlock-avaliacao" style="margin-top: 12px; width: 100%; max-width: 300px;">Desbloquear Prova</button>
+            </div>
+            <div id="avaliacao-gate-error" class="gate-error-message" style="display: none; color: var(--neon-red); font-family: var(--font-mono); font-size: 0.85rem; margin-top: 12px;">Chave incorreta. Acesso negado.</div>
+          </div>
+
+          <!-- Unlocked View -->
+          <div id="avaliacao-unlocked-view" style="display: none;">
+            <div class="cyber-alert warning" style="margin-bottom: 24px; padding: 16px;">
+              <span class="cyber-alert-icon">⚡</span>
+              <div class="cyber-alert-text">
+                <strong>Instruções de Entrega:</strong>
+                Sua prova prática consiste em demonstrar a correta ativação do seu banco de dados local usando o <code>json-server</code> na porta 3000 e responder às requisições do validador. Deixe o servidor rodando e inicie a bateria de testes abaixo para homologar seu código.
+              </div>
+            </div>
+
+            <div class="grid-cards" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin-bottom: 24px;">
+              <div class="cyber-card green">
+                <div class="card-icon">📡</div>
+                <h3 class="card-title">1. Leitura & Cadastro (GET/POST)</h3>
+                <p class="card-content" style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted);">
+                  Seu servidor local deve estar online na porta 3000.<br>
+                  • O validador testa <code>GET /agentes</code> esperando <code>200 OK</code> com os agentes Neo e Trinity.<br>
+                  • Envia <code>POST /agentes</code> cadastrando Morpheus (ID 3) com <code>201 Created</code>, e executa <code>GET /agentes/3</code> para validar se os dados foram salvos de fato.
+                </p>
+              </div>
+              <div class="cyber-card">
+                <div class="card-icon">🛠️</div>
+                <h3 class="card-title">2. Escrita & Exclusão (PUT/DELETE)</h3>
+                <p class="card-content" style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted);">
+                  • O validador testa <code>PUT /agentes/2</code> para atualizar Trinity para status "Ativo" esperando <code>200 OK</code>, e executa <code>GET /agentes/2</code> para verificar se a alteração foi de fato persistida.<br>
+                  • Envia <code>DELETE /agentes/3</code> para remover Morpheus esperando <code>200</code> ou <code>204</code>, e executa <code>GET /agentes/3</code> esperando erro <code>404 Not Found</code> para certificar a exclusão física.
+                </p>
+              </div>
+              <div class="cyber-card purple">
+                <div class="card-icon">⚡</div>
+                <h3 class="card-title">3. Parcial & Cabeçalhos (PATCH/OPTIONS)</h3>
+                <p class="card-content" style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted);">
+                  • Envia <code>PATCH /agentes/2</code> alterando apenas o status de Trinity para "Oculto" esperando <code>200 OK</code>, e executa <code>GET /agentes/2</code> para garantir que o status mudou mas o nome original "Trinity" foi preservado (sem corromper/apagar campos).<br>
+                  • Envia <code>OPTIONS /agentes</code> para checar se o servidor responde à inspeção de preflight do CORS com status <code>200</code> ou <code>204</code>.
+                </p>
+              </div>
+            </div>
+
+            <div class="live-server-panel" style="margin-top: 0; margin-bottom: 24px;">
+              <div class="live-panel-header">
+                <div class="live-panel-title">📟 VALIDADOR AUTOMATIZADO DE ENDPOINTS</div>
+                <button class="btn-primary" id="btn-run-tests" style="font-size: 0.8rem; padding: 6px 16px;">Iniciar Bateria de Testes</button>
+              </div>
+              
+              <div class="validation-terminal-container" style="margin-top: 16px;">
+                <div class="sim-header">
+                  <div class="sim-dots"><div class="sim-dot"></div><div class="sim-dot"></div><div class="sim-dot"></div></div>
+                  <div class="sim-title">test_suite_runner.sh</div>
+                </div>
+                <div class="sim-body" id="validation-terminal-output" style="height: 200px; overflow-y: auto; font-family: var(--font-mono); font-size: 0.85rem; padding: 12px; line-height: 1.6; background: #070a10; border: 1px solid var(--border-color); border-radius: var(--radius-sm);">
+                  <div style="color: var(--text-muted);">&gt; Aguardando início dos testes... Certifique-se de que sua API está online.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="checklist-container">
+              <div class="checklist-title">Status da Avaliação 1</div>
+              <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" id="check-test-1" disabled><span class="checklist-text" id="label-test-1">Teste 1: Conexão e leitura inicial via GET (Pendente)</span></label>
+              <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" id="check-test-2" disabled><span class="checklist-text" id="label-test-2">Teste 2: Inserção e validação do registro via POST (Pendente)</span></label>
+              <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" id="check-test-3" disabled><span class="checklist-text" id="label-test-3">Teste 3: Edição completa e validação via PUT (Pendente)</span></label>
+              <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" id="check-test-4" disabled><span class="checklist-text" id="label-test-4">Teste 4: Atualização parcial e validação via PATCH (Pendente)</span></label>
+              <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" id="check-test-5" disabled><span class="checklist-text" id="label-test-5">Teste 5: Remoção e validação de limpeza via DELETE (Pendente)</span></label>
+              <label class="checklist-item"><input type="checkbox" class="checklist-checkbox" id="check-test-6" disabled><span class="checklist-text" id="label-test-6">Teste 6: Inspeção de verbos permitidos via OPTIONS (Pendente)</span></label>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- TEACHER MODE PASSWORD MODAL -->
+  <div id="teacher-modal" class="cyber-modal-overlay" style="display: none;">
+    <div class="cyber-modal">
+      <div class="cyber-modal-header">
+        <span class="modal-title">🔐 SISTEMA DO INSTRUTOR: AUTENTICAÇÃO</span>
+      </div>
+      <div class="cyber-modal-body">
+        <p style="margin-bottom: 16px; font-size: 0.9rem; color: var(--text-muted);">
+          Insira a chave de criptografia privada do instrutor para carregar o painel flutuante de controle:
+        </p>
+        <input type="password" id="teacher-password-input" class="form-input" placeholder="Senha do Professor" style="width: 100%; margin-bottom: 12px; font-family: var(--font-mono); font-size: 1rem; text-align: center; letter-spacing: 0.2em;">
+        <div id="teacher-auth-error" style="color: var(--neon-red); font-size: 0.8rem; font-family: var(--font-mono); text-align: center; display: none; margin-bottom: 12px;">
+          ❌ CREDENCIAIS INVÁLIDAS. ACESSO NEGADO.
+        </div>
+      </div>
+      <div class="cyber-modal-footer">
+        <button class="btn-primary" id="btn-teacher-auth-submit">Confirmar Acesso</button>
+        <button class="btn-secondary" id="btn-teacher-auth-cancel">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOATING TEACHER PANEL -->
+  <div id="teacher-panel" class="teacher-floating-panel" style="display: none;">
+    <div class="teacher-panel-header" id="teacher-panel-drag">
+      <div class="panel-title-group">
+        <span class="panel-badge">PROF</span>
+        <span class="panel-title-text">MODO PROFESSOR // OPERADOR</span>
+      </div>
+      <div class="panel-controls">
+        <button class="btn-panel-minimize" id="btn-teacher-minimize" title="Minimizar/Maximizar Painel">_</button>
+        <button class="btn-panel-close" id="btn-teacher-logout" title="Sair do Modo Professor">×</button>
+      </div>
+    </div>
+    <div class="teacher-panel-tabs">
+      <button class="teacher-tab-btn active" data-tab="tab-guidelines">Orientações</button>
+      <button class="teacher-tab-btn" data-tab="tab-solutions">Gabarito</button>
+      <button class="teacher-tab-btn" data-tab="tab-reports">Relatório</button>
+    </div>
+    <div class="teacher-panel-body" id="teacher-panel-content">
+      <!-- Guidelines Tab -->
+      <div class="teacher-tab-content active" id="tab-guidelines">
+        <div class="guideline-content" id="teacher-guidelines-box">
+          Selecione um módulo no menu lateral para visualizar os tópicos pedagógicos.
+        </div>
+      </div>
+      <!-- Solutions Tab -->
+      <div class="teacher-tab-content" id="tab-solutions">
+        <div class="solution-code-container">
+          <div class="solution-header">
+            <span id="solution-title">Gabarito de Código</span>
+            <button class="btn-copy" data-clipboard="teacher-solution-code" style="padding: 2px 8px; font-size: 0.7rem;"><span>Copiar</span></button>
+          </div>
+          <pre style="margin: 0; max-height: 220px; overflow-y: auto; font-size: 0.75rem; background: #070a10; border-radius: var(--radius-sm); border: 1px solid var(--border-color);"><code id="teacher-solution-code">// Selecione um módulo para ver o código de referência.</code></pre>
+        </div>
+      </div>
+      <!-- Reports Tab -->
+      <div class="teacher-tab-content" id="tab-reports">
+        <div class="report-box" style="display: flex; flex-direction: column; gap: 12px; font-size: 0.8rem; font-family: var(--font-mono);">
+          <div class="report-row" style="display: flex; justify-content: space-between;">
+            <span>Estudante:</span>
+            <span id="teacher-report-name" style="color: var(--neon-cyan); font-weight: bold;">--</span>
+          </div>
+          <div class="report-row" style="display: flex; justify-content: space-between;">
+            <span>Progresso Geral:</span>
+            <span id="teacher-report-progress" style="color: var(--neon-green);">0% (0/25)</span>
+          </div>
+          <div class="report-row" style="display: flex; justify-content: space-between;">
+            <span>Simulado 1 (CRUD):</span>
+            <span id="teacher-report-simulado" style="color: var(--neon-red);">Pendente</span>
+          </div>
+          <div class="report-row" style="display: flex; justify-content: space-between;">
+            <span>Simulado 2 (PATCH):</span>
+            <span id="teacher-report-simulado2" style="color: var(--neon-red);">Pendente</span>
+          </div>
+          <div class="report-row" style="display: flex; justify-content: space-between;">
+            <span>Exercício 3 (Filtros):</span>
+            <span id="teacher-report-simulado3" style="color: var(--neon-red);">Pendente</span>
+          </div>
+          <div class="report-row" style="display: flex; justify-content: space-between;">
+            <span>Avaliação 1:</span>
+            <span id="teacher-report-exam" style="color: var(--neon-red);">Pendente</span>
+          </div>
+          <div class="report-action" style="margin-top: 8px;">
+            <button class="btn-primary" id="btn-teacher-export-report" style="width: 100%; font-size: 0.75rem; padding: 6px 12px;">Exportar Relatório do Aluno</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

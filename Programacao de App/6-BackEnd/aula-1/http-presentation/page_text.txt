@@ -1,0 +1,213 @@
+Guia de Referência Rápida: Métodos HTTP
+Desenvolvimento Web & Comunicação Cliente-Servidor
+Página 1 de 2
+
+1. TEORIA DE COMUNICAÇÃO HTTP
+O HTTP (Hypertext Transfer Protocol) é o protocolo de comunicação padrão da Web, estruturado no modelo de Requisição e Resposta. O cliente
+(navegador/aplicação) inicia o contato enviando uma mensagem de solicitação contendo uma URL (recurso de destino) e um Método HTTP (ou verbo), especificando qual
+ação semântica deseja aplicar sobre o recurso. O servidor processa a requisição e retorna uma resposta com um código de status (ex: 200 OK, 201 Created).
+
+2. PROPRIEDADES SEMÂNTICAS FUNDAMENTAIS
+Para arquitetar APIs RESTful robustas, os métodos devem aderir a duas propriedades importantes:
+
+•
+
+Métodos Seguros (Safe): Ações exclusivas de leitura. Não alteram o estado do recurso no servidor nem produzem efeitos colaterais. Podem ser cacheados com
+segurança (ex: GET, HEAD, OPTIONS).
+
+•
+
+Métodos Idempotentes: Múltiplas execuções idênticas e consecutivas da mesma requisição deixam o servidor exatamente no mesmo estado que uma única
+execução. Previne erros de duplicação em instabilidades de rede (ex: GET, PUT, DELETE).
+
+3. TABELA COMPARATIVA DE MÉTODOS
+Método
+
+Ação CRUD
+
+Seguro Idempotente
+
+Corpo Req.
+
+Corpo
+Resp.
+
+Caso de Uso Típico
+
+GET
+
+Read (Leitura)
+
+Sim
+
+Sim
+
+Não
+
+Sim
+
+Buscar dados, listar recursos ou pesquisar
+filtros.
+
+POST
+
+Create (Criação) Não
+
+Não
+
+Sim (JSON)
+
+Sim
+
+Cadastrar novos registros ou enviar
+formulários.
+
+PUT
+
+Update (Edição) Não
+
+Sim
+
+Sim
+(Completo)
+
+Sim/Não
+
+Substituir um recurso inteiro por novos dados.
+
+PATCH
+
+Update (Edição) Não
+
+Não
+
+Sim (Parcial)
+
+Sim
+
+Modificar campos específicos de um registro.
+
+DELETE
+
+Delete
+(Exclusão)
+
+Não
+
+Sim
+
+Não (Raro)
+
+Sim/Não
+
+Excluir um recurso específico do banco de
+dados.
+
+HEAD
+
+-
+
+Sim
+
+Sim
+
+Não
+
+Não
+
+Consultar cabeçalhos (tamanho, tipo,
+existência).
+
+OPTIONS -
+
+Sim
+
+Sim
+
+Não
+
+Sim
+
+Verificar verbos permitidos e CORS no
+servidor.
+
+4. DEFINIÇÕES DOS MÉTODOS PRINCIPAIS (CRUD)
+GET
+Leitura de Dados: Recupera a representação do recurso solicitado. Parâmetros são expostos na URL via Query String. Não altera estado do servidor.
+GET /usuarios?ordenacao=nome HTTP/1.1
+
+POST
+Criação de Recurso: Envia dados no corpo (body) para criar um novo registro. Não seguro e não idempotente (duplo clique gera duplicados).
+POST /usuarios HTTP/1.1 (body: JSON)
+
+PUT
+Substituição Integral: Atualiza completamente um recurso. Exige o envio do objeto inteiro; campos omitidos serão removidos ou resetados no servidor.
+
+PUT /usuarios/1 HTTP/1.1 (body: JSON)
+
+PATCH
+Atualização Parcial: Altera apenas os atributos específicos fornecidos no corpo da requisição, preservando os demais campos intocados.
+PATCH /usuarios/1 HTTP/1.1 (body: JSON)
+
+DELETE
+Exclusão de Recurso: Remove o recurso especificado na URL. É um método idempotente: uma vez deletado, o estado do recurso permanece excluído, embora
+chamadas subsequentes retornem o código 404 Not Found (não encontrado) ao invés de 204 No Content.
+DELETE /usuarios/1 HTTP/1.1
+
+Guia de Referência Rápida: Métodos HTTP Página 1 de 2
+
+Guia de Referência Rápida: Métodos HTTP
+Desenvolvimento Web & Comunicação Cliente-Servidor
+Página 2 de 2
+
+5. MÉTODOS AUXILIARES, DIAGNÓSTICO E INFRAESTRUTURA
+HEAD OPTIONS
+HEAD: Solicita cabeçalhos de resposta idênticos ao GET, mas sem corpo. Usado para testar links e validar tamanho de arquivos (Content-Length).
+OPTIONS: Obtém os cabeçalhos de controle e os métodos HTTP permitidos pelo servidor. Muito utilizado pelo navegador em requisições de CORS Preflight.
+
+CONNECT TRACE
+CONNECT: Estabelece um canal de comunicação bidirecional TCP/IP com o servidor, permitindo criar túneis HTTPS criptografados através de proxies.
+TRACE: Retorna de loopback a mensagem exata recebida pelo servidor. Usado para diagnóstico e auditoria de modificações de cabeçalho por proxies.
+
+6. ANATOMIA DE UMA TRANSAÇÃO HTTP (EXEMPLO CRU)
+
+Requisição HTTP (Cliente → Servidor)
+POST /usuarios HTTP/1.1
+Host: api.exemplo.com
+User-Agent: ClientApp/1.0
+Content-Type: application/json
+Content-Length: 39
+
+{
+"nome": "Pedro",
+"cargo": "Dev"
+
+}
+
+Resposta HTTP (Servidor → Cliente)
+HTTP/1.1 201 Created
+Date: Thu, 18 Jun 2026 14:20:00 GMT
+Server: Apache/2.4
+Content-Type: application/json
+Content-Length: 53
+
+{
+"id": 4,
+"nome": "Pedro",
+"cargo": "Dev"
+}
+7. CÓDIGOS DE STATUS HTTP COMUNS
+2xx Sucesso (Success)
+
+• 200 OK: Solicitação processada com sucesso. Comum em GET, PUT e PATCH.
+• 201 Created: Recurso criado com sucesso. Resposta padrão para POST.
+• 204 No Content: Sucesso, mas sem corpo de resposta (ex: DELETE e OPTIONS).
+4xx & 5xx Erros (Errors)
+
+• 400 Bad Request: Requisição inválida (problema de formatação ou dados).
+• 404 Not Found: O recurso ou endpoint solicitado não foi encontrado no servidor.
+• 500 Internal Server Error: Falha crítica interna no processamento do servidor.
+
+Guia de Referência Rápida: Métodos HTTP Página 2 de 2
+
+
