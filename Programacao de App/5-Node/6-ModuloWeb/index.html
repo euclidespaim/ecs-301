@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulos Web: A Internet por Trás das Telas - Turma 301</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Slide 1: Capa -->
+    <div class="slide-container active">
+        <div class="title-layout">
+            <h1>Módulos Web: <br><span>A Internet por Trás das Telas</span></h1>
+            <p class="subtitle">Desmistificando conexões: Requisições HTTP, Protocolo TCP e Sockets em Tempo Real.</p>
+            <div class="footer-info">Professor Euclides Paim | Programação de Aplicativos</div>
+        </div>
+    </div>
+
+    <!-- Slide 2: Divisor Parte 1 -->
+    <div class="slide-container">
+        <div class="section-title-layout">
+            <i class="fa-solid fa-network-wired section-icon"></i>
+            <h2>Parte 1: O que é um Servidor Web?</h2>
+            <hr>
+            <p>Compreendendo como sistemas distribuídos se conversam na arquitetura de rede.</p>
+        </div>
+    </div>
+
+    <!-- Slide 3: Hardware vs Software -->
+    <div class="slide-container">
+        <h2 class="slide-title">O Conceito de Servidor</h2>
+        <div class="content-area">
+            <div class="two-column tiled">
+                <div>
+                    <div class="card-icon"><i class="fa-solid fa-hard-drive"></i></div>
+                    <h3>O Servidor Físico (Hardware)</h3>
+                    <p>É um computador físico montado em um rack de datacenter. Ele tem processador, memória RAM e armazenamento, mas não possui monitor ou teclado conectados diretamente.</p>
+                </div>
+                <div>
+                    <div class="card-icon"><i class="fa-solid fa-server"></i></div>
+                    <h3>O Servidor de Software (Serviço)</h3>
+                    <p>É o programa que nós criamos usando Node.js. Ele fica rodando na máquina invisivelmente, escutando uma porta específica de rede e devolvendo dados quando alguém chama.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Arquitetura em 4 Camadas -->
+    <div class="slide-container">
+        <h2 class="slide-title">A Arquitetura em 4 Camadas</h2>
+        <div class="content-area">
+            <div class="timeline-layout">
+                <div class="timeline-line"></div>
+                <div class="timeline-item">
+                    <div class="content-wrapper">
+                        <span class="step-number">1</span>
+                        <h3>Cliente</h3>
+                        <p>O navegador web que faz o pedido visual na tela.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="content-wrapper">
+                        <span class="step-number">2</span>
+                        <h3>Servidor Web</h3>
+                        <p>O Node.js recebendo a conexão de rede pura.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="content-wrapper">
+                        <span class="step-number">3</span>
+                        <h3>Lógica</h3>
+                        <p>As regras de negócio que nós programamos por trás.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="content-wrapper">
+                        <span class="step-number">4</span>
+                        <h3>Dados</h3>
+                        <p>Os arquivos e bancos de dados salvos para sempre.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Divisor Parte 2 -->
+    <div class="slide-container">
+        <div class="section-title-layout">
+            <i class="fa-solid fa-envelope-open-text section-icon"></i>
+            <h2>Parte 2: O Módulo HTTP</h2>
+            <hr>
+            <p>Entendendo a dinâmica clássica de envio de cartas na internet.</p>
+        </div>
+    </div>
+
+    <!-- Slide 6: Como funciona o HTTP? -->
+    <div class="slide-container">
+        <h2 class="slide-title">A Metáfora da Carta (HTTP)</h2>
+        <div class="content-area">
+            <div class="two-column">
+                <div>
+                    <div class="metaphor-box envelope-border">
+                        <h4><i class="fa-solid fa-mail-bulk"></i> Ciclo Fechado: Envio e Resposta</h4>
+                        <p>O protocolo HTTP funciona exatamente como enviar uma carta tradicional pelos Correios. O cliente envia uma requisição (Request), o servidor lê, processa, joga a resposta de volta (Response) e <strong>fecha a conexão imediatamente</strong>.</p>
+                    </div>
+                    <p style="margin-top: 10px; font-size: 18px; color: var(--text-muted);">O servidor não sabe quem você é depois que a resposta foi entregue. É um modelo sem estado fixo (Stateless).</p>
+                </div>
+                <div class="chart-container" style="padding: 25px; text-align: center;">
+                    <i class="fa-solid fa-arrow-right-arrows-left" style="font-size: 50px; color: var(--cyber-purple); margin-bottom: 15px;"></i>
+                    <h3>Conexão Temporária</h3>
+                    <p style="font-size: 16px; color: var(--text-muted);">O canal de comunicação se destrói assim que os arquivos terminam de carregar.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Código Prático - Servidor de Arquivos -->
+    <div class="slide-container">
+        <h2 class="slide-title">Código Prático: Servidor de Arquivos</h2>
+        <div class="content-area">
+            <p style="margin-bottom: 15px; font-size: 18px;">Combinando o módulo <code>http</code> com o módulo <code>fs</code> para entregar uma página HTML real:</p>
+            <pre>
+const http = require('http');
+const fs = require('fs');
+
+http.createServer((req, res) => {
+    // Busca o arquivo físico na pasta
+    fs.readFile('pagina.html', 'utf-8', (err, dados) => {
+        if (err) {
+            res.writeHead(404, {'Content-Type': 'text/plain; charset=utf-8'});
+            return res.end('Página não encontrada! ❌');
+        }
+        res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
+        res.end(dados); // Entrega o HTML renderizado!
+    });
+}).listen(8080, () => {
+    console.log('Servidor HTTP rodando em http://localhost:8080');
+});
+            </pre>
+        </div>
+    </div>
+
+    <!-- Slide 8: Divisor Parte 3 -->
+    <div class="slide-container">
+        <div class="section-title-layout">
+            <i class="fa-solid fa-walkie-talkie section-icon"></i>
+            <h2>Parte 3: Sockets e TCP</h2>
+            <hr>
+            <p>Conexões persistentes e canais de dados abertos em tempo real.</p>
+        </div>
+    </div>
+
+    <!-- Slide 9: O que é um Socket? -->
+    <div class="slide-container">
+        <h2 class="slide-title">A Metáfora do Walkie-Talkie</h2>
+        <div class="content-area">
+            <div class="two-column">
+                <div>
+                    <div class="metaphor-box socket-border">
+                        <h4><i class="fa-solid fa-headset"></i> Canal Aberto em Tempo Real</h4>
+                        <p>Diferente do HTTP, o modelo de <strong>Sockets TCP</strong> funciona como um Walkie-Talkie ou uma ligação telefônica ativa. Os computadores se plugam na rede e o cano de comunicação <strong>continua aberto</strong> por tempo indeterminado.</p>
+                    </div>
+                    <p style="margin-top: 15px; font-size: 18px;">Qualquer um dos lados pode enviar dados a qualquer momento sem precisar pedir permissão de novo. É a base de jogos online e chats de mensagens rápidos.</p>
+                </div>
+                <div class="chart-container" style="padding: 25px; text-align: center;">
+                    <i class="fa-solid fa-infinity" style="font-size: 50px; color: var(--cyber-purple); margin-bottom: 15px;"></i>
+                    <h3>Fluxo Contínuo</h3>
+                    <p style="font-size: 16px; color: var(--text-muted);">Comunicação Bidirecional (Full-Duplex) ativa até que alguém decida desligar a tomada.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 10: TCP: Conexão Confiável -->
+    <div class="slide-container">
+        <h2 class="slide-title">Por que usamos o TCP?</h2>
+        <div class="content-area">
+            <p class="description-text">O protocolo TCP (Transmission Control Protocol) garante a <strong>confiabilidade absoluta</strong> da entrega:</p>
+            <div class="bullet-list" style="margin-top: 25px;">
+                <ul>
+                    <li><i class="fa-solid fa-shield-heart"></i> <strong>Sem perdas:</strong> Se um pedaço do dado cair no caminho, o protocolo pede para reenviar automaticamente.</li>
+                    <li><i class="fa-solid fa-list-check"></i> <strong>Ordem Correta:</strong> Os pacotes de informação chegam e são organizados exatamente na ordem em que foram enviados.</li>
+                    <li><i class="fa-solid fa-handshake"></i> <strong>Aperto de Mão:</strong> Antes de enviar o primeiro caractere, ele faz o "Handshake" para garantir que o outro lado está pronto para ouvir.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 11: Código Prático: Servidor TCP -->
+    <div class="slide-container">
+        <h2 class="slide-title">Código Prático: Servidor TCP</h2>
+        <div class="content-area">
+            <p style="margin-bottom: 10px; font-size: 18px;">Criando um servidor de rede puro com o módulo nativo <code>net</code> do Node.js:</p>
+            <pre style="font-size: 15px;">
+const net = require('net');
+
+// Toda nova conexão de cliente cria um objeto 'socket' diferente
+const servidor = net.createServer((socket) => {
+    console.log('🔌 Um cliente acabou de se conectar na nossa tomada!');
+
+    // Fica escutando as mensagens que chegam desse cano de dados
+    socket.on('data', (dados) => {
+        console.log('Recebido do cliente: ' + dados.toString());
+        socket.write('Servidor diz: Recebi seu texto! -> ' + dados);
+    });
+});
+
+servidor.listen(3000, () => {
+    console.log('🚀 Servidor TCP escutando na porta 3000');
+});
+            </pre>
+        </div>
+    </div>
+
+    <!-- Slide 12: Código Prático: Cliente TCP -->
+    <div class="slide-container">
+        <h2 class="slide-title">Código Prático: Cliente TCP</h2>
+        <div class="content-area">
+            <p style="margin-bottom: 10px; font-size: 18px;">O script que vai rodar no terminal do segundo computador para se conectar ao servidor:</p>
+            <pre style="font-size: 15px;">
+const net = require('net');
+
+// Conecta direto na máquina do colega usando o IP ou localhost
+const cliente = net.createConnection({ port: 3000 }, () => {
+    console.log('✅ Conectado com sucesso ao servidor TCP!');
+    cliente.write('Olá! Esta mensagem veio do computador da dupla 301!');
+});
+
+// Ouve o que o servidor mandar de volta
+cliente.on('data', (dados) => {
+    console.log('Mensagem do Servidor: ' + dados.toString());
+    cliente.end(); // Fecha o cano ao terminar
+});
+            </pre>
+        </div>
+    </div>
+
+    <!-- Slide 13: Divisor Parte 4 -->
+    <div class="slide-container">
+        <div class="section-title-layout">
+            <i class="fa-solid fa-comments section-icon"></i>
+            <h2>Parte 4: Desafio Prático</h2>
+            <hr>
+            <p>Colocando os computadores do laboratório para conversarem entre si.</p>
+        </div>
+    </div>
+
+    <!-- Slide 14: Desafio das Duplas -->
+    <div class="slide-container">
+        <h2 class="slide-title">Desafio Prático: Chat de Terminal</h2>
+        <div class="content-area">
+            <div class="challenge-box">
+                <h3><i class="fa-solid fa-network-wired"></i> Hackers da Rede:</h3>
+                <ol>
+                    <li>Trabalhem na mesma bancada de computadores. O <strong>Computador A</strong> será o Servidor e o <strong>Computador B</strong> será o Cliente.</li>
+                    <li>No Computador A, rode o arquivo do Servidor TCP na porta <code>3000</code>. Descubra o IP da máquina usando o comando <code>ipconfig</code> ou <code>ifconfig</code> no console.</li>
+                    <li>No Computador B, altere o código do Cliente TCP para apontar para o IP do computador A (Ex: <code>host: '10.90.x.x', port: 3000</code>).</li>
+                    <li>Execute os scripts simultaneamente e veja a conversa acontecer em tempo real direto pelas janelas pretas do terminal do VS Code!</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interface de Controle Inferior -->
+    <div id="slide-controls">
+        <button onclick="prevSlide()"><i class="fa-solid fa-chevron-left"></i> Anterior</button>
+        <span id="slide-num">1 / 14</span>
+        <button onclick="nextSlide()">Próximo <i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

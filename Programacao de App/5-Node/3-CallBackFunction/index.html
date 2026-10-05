@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funções de Callback: O Telefone do Node.js - Turma 301</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="slide-container active">
+        <div class="title-layout">
+            <h1>Funções de Callback: <br><span>O Telefone do Node.js</span></h1>
+            <p class="subtitle">Aprendendo Programação Reativa e Funções que Sabem Esperar.</p>
+            <div class="footer-info">Professor Euclides Paim | Desenvolvimento Web II</div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="section-title-layout">
+            <i class="fa-solid fa-phone-volume section-icon"></i>
+            <h2>Parte 1: O que é uma Callback?</h2>
+            <hr>
+            <p>Entendendo o conceito básico de "retorno de chamada" sem sustos.</p>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2 class="slide-title">A Analogia da Encomenda</h2>
+        <div class="content-area">
+            <div class="two-column tiled">
+                <div>
+                    <div class="card-icon"><i class="fa-solid fa-store"></i></div>
+                    <h3>O Jeito Errado (Bloqueante)</h3>
+                    <p>Você vai a uma loja comprar um jogo que acabou. Você decide ficar sentado na cadeira da loja esperando o caminhão do estoque chegar daqui a 3 dias. Ninguém mais na fila é atendido.</p>
+                </div>
+                <div>
+                    <div class="card-icon"><i class="fa-solid fa-phone-flip"></i></div>
+                    <h3>O Jeito Certo (Callback)</h3>
+                    <p>Você deixa seu <strong>número de telefone</strong> com o vendedor e vai para casa viver sua vida. Quando o jogo chega, o vendedor usa seu número para te ligar. O telefone é a <strong>Callback</strong>!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2 class="slide-title">Funções têm Superpoderes</h2>
+        <div class="content-area">
+            <p class="description-text">No JavaScript, funções são tratadas como "Cidadãs de Primeira Classe". Isso significa algo muito simples:</p>
+            <div class="metaphor-box info-border" style="margin-top: 20px;">
+                <h4><i class="fa-solid fa-lightbulb"></i> Funções podem ser passadas como pacotes</h4>
+                <p>Assim como você guarda um número ou um texto dentro de uma variável, você também pode guardar uma <strong>função inteira</strong> dentro de uma variável e passá-la como argumento para outra função.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="section-title-layout">
+            <i class="fa-solid fa-graduation-cap section-icon"></i>
+            <h2>Parte 2: Funções de Ordem Superior</h2>
+            <hr>
+            <p>Quem é o "Chefe" que decide a hora de ligar de volta?</p>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2 class="slide-title">High-Order Functions</h2>
+        <div class="content-area">
+            <div class="two-column">
+                <div>
+                    <p>Uma <strong>Função de Ordem Superior</strong> é a função "Dona da Loja".</p>
+                    <p style="margin-top: 15px;">Ela é a função principal que aceita a nossa Callback como se fosse um argumento (um parâmetro) e a guarda na memória.</p>
+                    <p style="margin-top: 15px; color: var(--matrix-neon);">Ela contém a lógica interna para decidir o momento exato de disparar (ligar para) a nossa callback.</p>
+                </div>
+                <div class="chart-container" style="padding: 30px; text-align: center;">
+                    <i class="fa-solid fa-user-tie" style="font-size: 60px; color: var(--matrix-neon); margin-bottom: 15px;"></i>
+                    <h3>Função Principal</h3>
+                    <p style="font-size: 16px;">Ela recebe a Callback por parâmetro e gerencia a execução.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2 class="slide-title">Anatomia Básica do Código</h2>
+        <div class="content-area">
+            <p style="margin-bottom: 15px; font-size: 18px;">Observe como passamos a função de aviso para dentro da função principal:</p>
+            <pre>
+// 1. Criamos a nossa função de callback (o telefone)
+function avisarAluno() {
+    console.log("🔔 Professor Paim: Nota lançada no sistema!");
+}
+
+// 2. A função principal recebe a callback como parâmetro
+function calcularMedia(nome, callback) {
+    console.log("Calculando notas de " + nome + "...");
+    // ... faz os cálculos ...
+    callback(); // Dispara o telefone!
+}
+
+// 3. Execução: Passamos a função sem os parênteses ()
+calcularMedia("Gabriel", avisarAluno);
+            </pre>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="section-title-layout">
+            <i class="fa-solid fa-cubes section-icon"></i>
+            <h2>Parte 3: As Callbacks no Node.js</h2>
+            <hr>
+            <p>Como a arquitetura assíncrona do Node sobrevive usando esse padrão.</p>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2 class="slide-title">Por que o Node.js ama Callbacks?</h2>
+        <div class="content-area">
+            <div class="two-column">
+                <div>
+                    <div class="metaphor-box async-border">
+                        <h4><i class="fa-solid fa-bolt"></i> O Garçom Assíncrono</h4>
+                        <p>Como vimos, o Node.js trabalha com uma única linha de execução (Single Thread). Para não travar enquanto lê um arquivo gigante do HD, ele dispara a tarefa e diz ao sistema operacional:</p>
+                        <p style="margin-top: 10px; font-weight: bold; color: var(--matrix-neon);">"Tome aqui esta Callback. Quando terminar de ler os dados, me avise executando ela!"</p>
+                    </div>
+                </div>
+                <div class="chart-container" style="padding: 25px;">
+                    <div class="bar">
+                        <div class="label">Sem Callback (Espera)</div>
+                        <div class="bar-inner"><div class="bar-fill error-bar" style="width: 25%;">TRAVADO</div></div>
+                    </div>
+                    <div class="bar" style="margin-top: 20px;">
+                        <div class="label">Com Callback (Livre)</div>
+                        <div class="bar-inner"><div class="bar-fill async-bar" style="width: 100%;">100% FLUIDO</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2 class="slide-title">O Padrão Error-First</h2>
+        <div class="content-area">
+            <p class="description-text">No Node.js, existe uma convenção obrigatória de segurança nas Callbacks: <strong>O erro sempre vem em primeiro lugar!</strong></p>
+            <pre style="margin-top: 15px;">
+const fs = require('fs');
+
+// O primeiro parâmetro é o 'err', o segundo são os 'dados'
+fs.readFile('arquivo.txt', 'utf-8', (err, dados) => {
+    if (err) {
+        return console.log("🚨 Deu ruim na leitura: " + err.message);
+    }
+    console.log("📄 Conteúdo lido: " + dados);
+});
+            </pre>
+            <p style="margin-top: 15px; font-size: 16px; color: var(--text-muted);">Isso garante que o programa trate falhas (como arquivo inexistente) antes de tentar mexer em dados nulos.</p>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2 class="slide-title">Prática: Simulando a Espera</h2>
+        <div class="content-area">
+            <p style="margin-bottom: 10px; font-size: 18px;">Utilizamos o <code>setTimeout</code> para simular uma tarefa demorada de rede de forma simples:</p>
+            <pre>
+console.log("1. Cliquei para baixar o mod do jogo...");
+
+// Espera 3000 milissegundos (3 segundos) antes de disparar a callback
+setTimeout(function() {
+    console.log("2. 🎁 Download concluído! Arquivos instalados.");
+}, 3000);
+
+console.log("3. Continuei navegando no Discord enquanto baixa...");
+            </pre>
+            <p style="color: var(--matrix-cyan); margin-top: 10px; font-weight: bold; font-size: 18px;">Ordem no Terminal: 1 → 3 → (espera 3s) → 2</p>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2 class="slide-title">O Labirinto: Callback Hell</h2>
+        <div class="content-area">
+            <div class="two-column">
+                <div>
+                    <p><strong>O Perigo das Funções Aninhadas:</strong></p>
+                    <p style="margin-top: 10px;">Quando colocamos uma Callback dentro da outra, e mais outra dentro dela, criamos o chamado <em>Callback Hell</em> (Inferno de Callbacks) ou Pirâmide da Perdição.</p>
+                    <p style="margin-top: 10px; color: #ff4444;">O código começa a crescer para a direita em forma de ">", ficando impossível de ler e de consertar.</p>
+                </div>
+                <div>
+                    <pre style="font-size: 13px; color: #ff6666; border-color: #ff4444;">
+fazerLogin((err, user) => {
+    buscarPerfil(user.id, (err, perfil) => {
+        carregarFotos(perfil.albumId, (err, fotos) => {
+            renderizarTela(fotos, (err) => {
+                // Socorro! O código sumiu da tela!
+            });
+        });
+    });
+});
+                    </pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="section-title-layout">
+            <i class="fa-solid fa-trophy section-icon"></i>
+            <h2>Parte 4: Desafio Prático</h2>
+            <hr>
+            <p>Hora de criar suas próprias Callbacks no laboratório.</p>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2 class="slide-title">Desafio Prático (Em Duplas)</h2>
+        <div class="content-area">
+            <div class="challenge-box">
+                <h3><i class="fa-solid fa-laptop-code"></i> O Simulador de Download:</h3>
+                <ol>
+                    <li>Crie um arquivo chamado <code>download.js</code> no VS Code.</li>
+                    <li>Escreva uma função chamada <code>baixarInstalador(jogo, callback)</code>. Dentro dela, exiba um log dizendo que o download começou.</li>
+                    <li>Use o método <code>setTimeout</code> para aguardar 4 segundos dentro da função principal.</li>
+                    <li>Ao terminar os 4 segundos, execute a <code>callback()</code> passando o nome do jogo. A callback deve exibir de forma estilizada e limpa: "Instalação concluída com sucesso para o jogo: [nome]!".</li>
+                    <li>Execute o script no terminal usando <code>node download.js</code> e valide o fluxo de reatividade!</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <div id="slide-controls">
+        <button onclick="prevSlide()"><i class="fa-solid fa-chevron-left"></i> Anterior</button>
+        <span id="slide-num">1 / 14</span>
+        <button onclick="nextSlide()">Próximo <i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

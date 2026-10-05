@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NPM: A Loja de Superpoderes do Node.js</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="slide-container active">
+        <div class="title-layout">
+            <h1>NPM: A Loja de <span>Superpoderes</span></h1>
+            <p class="subtitle">Turbina os teus projetos reutilizando blocos de código prontos do ecossistema Node.js.</p>
+            <div class="footer-info">Professor Euclides Paim | Programação de Aplicativos</div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="section-title-layout">
+            <i class="fa-solid fa-cubes section-icon"></i>
+            <h2>Parte 1: O que é o NPM?</h2>
+            <hr>
+            <p>Compreender o conceito de gestão de pacotes sem complicações.</p>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2 class="slide-title">A Analogia da App Store</h2>
+        <div class="content-area">
+            <div class="two-column tiled">
+                <div>
+                    <div class="card-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                    <h3>No Telemóvel</h3>
+                    <p>Nós não desenvolvemos o teclado, o maps ou a câmara do zero. Vamos no Google Play ou App Store e baixamos uma aplicação pronta a usar.</p>
+                </div>
+                <div>
+                    <div class="card-icon"><i class="fa-solid fa-box-open"></i></div>
+                    <h3>No Node.js (NPM)</h3>
+                    <p>O NPM é a "App Store" dos programadores. Precisamos de um gerador de PDFs, gráficos ou cores no terminal? Basta descarregar o pacote pronto.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2 class="slide-title">Local vs Global: A Diferença</h2>
+        <div class="content-area">
+            <div class="two-column">
+                <div class="metaphor-box local-border">
+                    <h4><i class="fa-solid fa-folder-minus"></i> Instalação Local (Padrão)</h4>
+                    <p>O pacote fica guardado estritamente dentro da pasta do projeto atual. Se criarmos uma pasta nova, precisamos de descarregar novamente. Não interfere com outros projetos.</p>
+                </div>
+                <div class="metaphor-box global-border">
+                    <h4><i class="fa-solid fa-earth-americas"></i> Instalação Global (<code>-g</code>)</h4>
+                    <p>O pacote é instalado diretamente no sistema operacional da nossa máquina. Fica disponível como um comando de terminal acessível a partir de qualquer diretório.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="section-title-layout">
+            <i class="fa-solid fa-file-id section-icon"></i>
+            <h2>Parte 2: A Certidão de Nascimento</h2>
+            <hr>
+            <p>Como o Node organiza a identidade e o inventário do projeto.</p>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2 class="slide-title">O Arquivo package.json</h2>
+        <div class="content-area">
+            <div class="two-column">
+                <div>
+                    <p class="description-text">Este arquivo funciona como o <strong>inventário ou manifesto</strong> do teu software.</p>
+                    <p style="margin-top: 15px;">Ele guarda o nome do projeto, versão, autor e, o mais importante: a lista detalhada de todas as ferramentas e pacotes externos que o teu código necessita para funcionar.</p>
+                </div>
+                <div class="visual-manifest-box">
+                    <pre style="font-size: 14px;">
+{
+  "name": "projeto-da-turma-301",
+  "version": "1.0.0",
+  "description": "Aula Prática de NPM",
+  "main": "app.js",
+  "author": "Euclides Paim",
+  "dependencies": {}
+}
+                    </pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2 class="slide-title">Criar o Manifesto em 1 Segundo</h2>
+        <div class="content-area">
+            <div class="highlight-numbers-layout">
+                <div class="number">init</div>
+                <div>
+                    <p class="number-label">npm init -y</p>
+                    <p>Este comando diz ao NPM para criar a "certidão de nascimento" do projeto instantaneamente, preenchendo todas as respostas burocráticas por defeito (yes).</p>
+                    <pre style="margin-top: 15px;">$ npm init -y</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="section-title-layout">
+            <i class="fa-solid fa-download section-icon"></i>
+            <h2>Parte 3: Instalar Peças</h2>
+            <hr>
+            <p>Adicionar módulos externos à tua caixa de ferramentas.</p>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2 class="slide-title">O Comando Sagrado</h2>
+        <div class="content-area">
+            <p style="margin-bottom: 20px; font-size: 22px;">Para descarregar qualquer recurso da nuvem pública do NPM, usamos a seguinte sintaxe no terminal:</p>
+            <pre style="font-size: 24px; text-align: center; color: var(--npm-yellow);">
+$ npm install &lt;nome-do-pacote&gt;
+            </pre>
+            <p style="margin-top: 20px; text-align: center; font-size: 18px; color: var(--text-muted);">
+                Abreviação permitida em ambiente de produção: <code>npm i &lt;nome-do-pacote&gt;</code>.
+            </p>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2 class="slide-title">A Pasta node_modules</h2>
+        <div class="content-area">
+            <div class="two-column">
+                <div>
+                    <div class="metaphor-box local-border">
+                        <h4><i class="fa-solid fa-folder-tree"></i> O Contentor de Códigos</h4>
+                        <p>Ao instalar um pacote, o NPM cria automaticamente uma pasta chamada <code>node_modules</code>. É aí dentro que ficam os ficheiros de código real que descarregaste da nuvem.</p>
+                    </div>
+                    <p style="color: #ff4444; font-weight: 600; font-size: 18px;"><i class="fa-solid fa-triangle-exclamation"></i> Regra de Ouro: Nunca alteres nada manualmente dentro desta pasta!</p>
+                </div>
+                <div class="chart-container" style="text-align: center; padding: 40px;">
+                    <i class="fa-solid fa-weight-hanging" style="font-size: 80px; color: var(--npm-yellow);"></i>
+                    <h3 style="margin-top: 20px;">Atenção ao Peso</h3>
+                    <p style="font-size: 16px;">Esta pasta cresce rapidamente porque um pacote pode depender de outros dez. É por isso que nunca a enviamos para o Git.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2 class="slide-title">Prática: Terminal Colorido</h2>
+        <div class="content-area">
+            <p style="margin-bottom: 10px; font-size: 18px;">Instala a versão 4 do pacote <code>chalk</code> (compatível com CommonJS) e personaliza as saídas:</p>
+            <pre style="font-size: 15px; margin-bottom: 10px;">$ npm install chalk@4</pre>
+            <pre style="font-size: 16px;">
+const chalk = require('chalk');
+
+console.log(chalk.blue.bold('Olá, Turma 301! 👋'));
+console.log(chalk.black.bgYellow(' AVISO: Servidor Node Ativo! '));
+console.log(chalk.green('Operação concluída com sucesso. ✔'));
+            </pre>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2 class="slide-title">Manutenção de Pacotes</h2>
+        <div class="content-area">
+            <div class="table-layout">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>O que queres fazer?</th>
+                            <th>Comando do Terminal</th>
+                            <th>O que acontece por trás?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Remover</strong> uma peça</td>
+                            <td><code>npm uninstall nome-do-pacote</code></td>
+                            <td>Apaga os ficheiros de <code>node_modules</code> e atualiza o manifesto.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Atualizar</strong> uma peça</td>
+                            <td><code>npm update nome-do-pacote</code></td>
+                            <td>Procura por correções de bugs ou melhorias estáveis na nuvem.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="section-title-layout">
+            <i class="fa-solid fa-terminal section-icon"></i>
+            <h2>Parte 4: Desafio Hacker</h2>
+            <hr>
+            <p>Escreve, instala e executa a tua própria aplicação customizada.</p>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2 class="slide-title">Desafio de Laboratório (Em Duplas)</h2>
+        <div class="content-area">
+            <div class="challenge-box">
+                <h3><i class="fa-solid fa-gamepad"></i> Hackers do Terminal:</h3>
+                <ol>
+                    <li>Cria uma pasta chamada <code>desafio-npm</code> e inicia o manifesto com <code>npm init -y</code>.</li>
+                    <li>Instala o pacote de estilos rodando o comando <code>npm install chalk@4</code>.</li>
+                    <li>Cria o ficheiro <code>index.js</code> e escreve um script que mostre no terminal o nome dos integrantes da dupla com cores diferentes (ex: um em verde e o outro em ciano).</li>
+                    <li><strong>Missão Extra:</strong> Executa a aplicação utilizando o comando <code>node index.js</code> e mostra o resultado no monitor ao Professor!</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <div id="slide-controls">
+        <button onclick="prevSlide()"><i class="fa-solid fa-chevron-left"></i> Anterior</button>
+        <span id="slide-num">1 / 14</span>
+        <button onclick="nextSlide()">Próximo <i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

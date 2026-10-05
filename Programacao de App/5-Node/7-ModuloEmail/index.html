@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node.js: Módulo de E-mail Moderno - Turma 301</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="slide-container active">
+        <div class="title-layout">
+            <h1>Resend: <span>O Drone de Encomendas</span></h1>
+            <p class="subtitle">Abandonando o SMTP e dominando o envio de e-mails via API com Node.js.</p>
+            <div class="footer-info">Professor Euclides Paim | Desenvolvimento Web II</div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="section-title-layout">
+            <i class="fa-solid fa-paper-plane section-icon"></i>
+            <h2>Parte 1: Por que automatizar e-mails?</h2>
+            <hr>
+            <p>Entendendo o papel vital da comunicação direta em sistemas modernos.</p>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2 class="slide-title">Aplicações no Mundo Real</h2>
+        <div class="content-area">
+            <div class="two-column tiled">
+                <div>
+                    <div class="card-icon"><i class="fa-solid fa-user-plus"></i></div>
+                    <h3>Onboarding</h3>
+                    <p>E-mail de "Boas-vindas" enviado no segundo exato em que o usuário termina o cadastro no seu site.</p>
+                </div>
+                <div>
+                    <div class="card-icon"><i class="fa-solid fa-key"></i></div>
+                    <h3>Segurança</h3>
+                    <p>Links para recuperação de senha, avisos de novo login ou códigos de verificação em duas etapas.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2 class="slide-title">O Problema do Passado (SMTP)</h2>
+        <div class="content-area">
+            <div class="two-column">
+                <div>
+                    <div class="metaphor-box red-border">
+                        <h4><i class="fa-solid fa-truck-ramp-box"></i> O Correio Antigo</h4>
+                        <p>No modelo SMTP clássico (Nodemailer), você precisava configurar hosts, portas (587, 465), lidar com firewalls bloqueados e selar cada envelope manualmente.</p>
+                        <p style="margin-top: 10px; color: #ff6b6b; font-weight: bold;">É burocrático, lento e falha muito em redes de laboratório.</p>
+                    </div>
+                </div>
+                <div class="chart-container" style="text-align: center; padding: 25px;">
+                    <i class="fa-solid fa-triangle-exclamation" style="font-size: 50px; color: #ff6b6b; margin-bottom: 15px;"></i>
+                    <h3>Configurações de Rede</h3>
+                    <p style="font-size: 16px;">Muitas vezes o firewall da escola bloqueia portas de e-mail tradicionais.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2 class="slide-title">A Revolução: Envio via API</h2>
+        <div class="content-area">
+            <div class="two-column">
+                <div class="metaphor-box mint-border">
+                    <h4><i class="fa-solid fa-helicopter"></i> A Entrega por Drone</h4>
+                    <p>No modelo de API (Resend), você não configura portas. Você aperta um botão no seu código e o "Drone" da nuvem decola e joga a mensagem no quintal do cliente.</p>
+                </div>
+                <div class="chart-container" style="text-align: center; padding: 30px;">
+                    <i class="fa-solid fa-cloud-arrow-up" style="font-size: 60px; color: var(--mint-neon);"></i>
+                    <h3>Funciona em Qualquer Rede</h3>
+                    <p style="font-size: 16px;">Se o computador abre o Google, ele envia o e-mail. Sem erros de porta!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="section-title-layout">
+            <i class="fa-solid fa-bolt-lightning section-icon"></i>
+            <h2>Parte 2: Conhecendo o Resend</h2>
+            <hr>
+            <p>A ferramenta padrão ouro para desenvolvedores modernos.</p>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2 class="slide-title">O que é o Resend?</h2>
+        <div class="content-area">
+            <div class="bullet-list">
+                <ul>
+                    <li><i class="fa-solid fa-check"></i> <strong>Sintaxe Minimalista:</strong> Envie e-mails com 5 linhas de código.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>Dashboard Incrível:</strong> Veja se o cliente abriu ou clicou no e-mail.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>Foco em DX:</strong> Criado por desenvolvedores, para desenvolvedores.</li>
+                    <li><i class="fa-solid fa-terminal"></i> <code>npm install resend</code></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="section-title-layout">
+            <i class="fa-solid fa-key section-icon"></i>
+            <h2>Parte 3: O Crachá da Nuvem</h2>
+            <hr>
+            <p>Entendendo a chave de segurança para dar ordens ao drone.</p>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2 class="slide-title">O que é uma API Key?</h2>
+        <div class="content-area">
+            <p class="description-text">Para o Resend saber que você tem permissão de enviar e-mails pela conta dele, você precisa de um "Crachá Secreto":</p>
+            <div class="metaphor-box blueprint-border" style="margin-top: 20px;">
+                <h4><i class="fa-solid fa-id-card"></i> API Key (Chave Secreta)</h4>
+                <p>É uma string gigante de caracteres que funciona como senha. Ela identifica sua conta e garante que os custos (ou limites) de envio caiam no seu perfil. <strong>Nunca compartilhe sua chave!</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2 class="slide-title">Código: O Envio Simples</h2>
+        <div class="content-area">
+            <p style="margin-bottom: 10px; font-size: 18px;">Observe como o código fica limpo e legível:</p>
+            <pre>
+const { Resend } = require('resend');
+
+// Instancia o drone com seu crachá
+const resend = new Resend('re_sua_chave_aqui');
+
+resend.emails.send({
+  from: 'onboarding@resend.dev',
+  to: 'aluno@ifc.edu.br',
+  subject: 'Olá Turma 301!',
+  text: 'Este e-mail foi enviado via Drone (API)!'
+});
+            </pre>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2 class="slide-title">Subindo o Nível com HTML</h2>
+        <div class="content-area">
+            <p style="margin-bottom: 10px;">Podemos enviar layouts profissionais usando apenas tags HTML:</p>
+            <pre style="font-size: 14px;">
+resend.emails.send({
+  from: 'suporte@resend.dev',
+  to: 'aluno@ifc.edu.br',
+  subject: 'Alerta de Sistema',
+  html: `
+    <h1 style="color: #00ffcc;">Drone Ativo!</h1>
+    <p>O seu servidor Node.js acaba de decolar.</p>
+    <hr>
+    <button style="background: black; color: white;">Ver Detalhes</button>
+  `
+});
+            </pre>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2 class="slide-title">Segurança: O Arquivo .env</h2>
+        <div class="content-area">
+            <p class="description-text">Jamais coloque sua API Key direto no arquivo principal! Use um "Cofre" chamado <code>.env</code>.</p>
+            <div class="two-column" style="margin-top: 20px;">
+                <div class="visual-manifest-box">
+                    <p style="color: #8b949e; font-size: 14px; margin-bottom: 5px;"># Arquivo .env (O Cofre)</p>
+                    <code>RESEND_KEY=re_123456789</code>
+                </div>
+                <div class="visual-manifest-box">
+                    <p style="color: #8b949e; font-size: 14px; margin-bottom: 5px;"># No seu App.js</p>
+                    <code>process.env.RESEND_KEY</code>
+                </div>
+            </div>
+            <p style="margin-top: 20px; font-size: 16px; color: var(--text-muted);">Isso evita que hackers roubem sua chave quando você subir o código para o GitHub.</p>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="section-title-layout">
+            <i class="fa-solid fa-trophy section-icon"></i>
+            <h2>Parte 4: Desafio Prático</h2>
+            <hr>
+            <p>Hora de colocar o Drone do Resend para voar no laboratório.</p>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2 class="slide-title">Desafio: Alerta de Invasão</h2>
+        <div class="content-area">
+            <div class="challenge-box">
+                <h3><i class="fa-solid fa-shield-virus"></i> Missão em Duplas:</h3>
+                <ol>
+                    <li>Crie uma pasta <code>drone-email</code> e inicie o projeto com <code>npm init -y</code>.</li>
+                    <li>Instale o módulo rodando <code>npm install resend</code>.</li>
+                    <li>Crie um script que simule um sistema de segurança. Quando executado, ele deve enviar um e-mail com o assunto <strong>"⚠️ Alerta: Novo Login Detectado"</strong>.</li>
+                    <li>O corpo do e-mail deve ser em <strong>HTML</strong>, contendo um título vermelho e um botão de "Bloquear Acesso".</li>
+                    <li><strong>Missão Extra:</strong> Mostre o e-mail chegando no dashboard do Resend para o Professor!</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <div id="slide-controls">
+        <button onclick="prevSlide()"><i class="fa-solid fa-chevron-left"></i> Anterior</button>
+        <span id="slide-num">1 / 14</span>
+        <button onclick="nextSlide()">Próximo <i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apresentação: Node.js e Eventos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="slide active">
+        <div class="title-layout">
+            <h1>Node.js: <span>Poder dos Eventos</span></h1>
+            <p class="subtitle">Dominando a Programação Reativa e Customizada</p>
+            <p style="margin-top: 40px;">Professor Euclides Paim | Turma 301</p>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="section-title-layout">
+            <hr>
+            <h2>Parte 1: O Paradigma</h2>
+            <p>Entendendo como o Node.js "pensa".</p>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2 class="slide-title">O que é um Evento?</h2>
+        <div class="content-area">
+            <div class="tiled-content">
+                <div class="tile">
+                    <i class="fa-solid fa-mouse-pointer"></i>
+                    <h3>Ocorrência</h3>
+                    <p>Qualquer ação reconhecida pelo software, como um clique ou um erro no sistema.</p>
+                </div>
+                <div class="tile">
+                    <i class="fa-solid fa-bolt"></i>
+                    <h3>Assíncrono</h3>
+                    <p>Eventos acontecem a qualquer momento, sem seguir uma linha reta obrigatória.</p>
+                </div>
+                <div class="tile">
+                    <i class="fa-solid fa-reply"></i>
+                    <h3>Resposta</h3>
+                    <p>O software "ouve" a ocorrência e dispara uma função para tratá-la imediatamente.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2 class="slide-title">Modelos de Programação</h2>
+        <div class="content-area">
+            <div class="two-column">
+                <div class="tile">
+                    <h3 style="color: #94a3b8;">Sequencial</h3>
+                    <p>Executa instruções de cima para baixo. Cada tarefa deve terminar para a próxima começar. É rígido e previsível.</p>
+                </div>
+                <div class="tile" style="border-color: #026e00;">
+                    <h3 style="color: #00f2ff;">Orientado a Eventos</h3>
+                    <p>O fluxo é determinado por triggers externos. O programa "espera" e "reage" de forma dinâmica.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2 class="slide-title">Por que o Node.js é rápido?</h2>
+        <div class="content-area">
+            <div class="two-column">
+                <div>
+                    <p>Diferente de tecnologias antigas, o Node.js não fica "parado" esperando o banco de dados ou um arquivo carregar.</p>
+                    <p style="margin-top: 20px;">Através do <strong>Event Loop</strong>, ele delega a tarefa e continua processando outras requisições. Quando a tarefa termina, um evento avisa: "Estou pronto!".</p>
+                    <p style="margin-top: 20px; color: #00f2ff;">Eficiência máxima de CPU e memória.</p>
+                </div>
+                <div class="image-wrapper">
+                    <div class="placeholder-graphic">EVENT LOOP ACTIVE</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="section-title-layout">
+            <hr>
+            <h2>Parte 2: EventEmitter</h2>
+            <p>A ferramenta central para criar eventos.</p>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2 class="slide-title">A Analogia do Alarme</h2>
+        <div class="content-area">
+            <div class="two-column">
+                <div>
+                    <p>Pense no <strong>EventEmitter</strong> como a central de um alarme residencial.</p>
+                    <p style="margin-top: 20px;">A central não sabe quando a janela será aberta, mas ela tem um <strong>sensor</strong> (ouvinte) pronto para tocar a <strong>sirene</strong> (ação) no momento da <strong>invasão</strong> (evento).</p>
+                </div>
+                <div class="tile" style="justify-content: center; align-items: center; background: #1e1e1e;">
+                    <i class="fa-solid fa-shield-halved" style="font-size: 80px; color: #ff9900;"></i>
+                    <h3 style="margin-top: 20px;">Central de Controle</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2 class="slide-title">Os 3 Passos Fundamentais</h2>
+        <div class="content-area">
+            <div class="tiled-content">
+                <div class="tile">
+                    <i class="fa-solid fa-box-open"></i>
+                    <h3>1. Preparar</h3>
+                    <p>Importar o módulo <code>events</code> e criar a nossa "central" (emissor).</p>
+                </div>
+                <div class="tile">
+                    <i class="fa-solid fa-ear-listen"></i>
+                    <h3>2. Ouvir</h3>
+                    <p>Definir o que o sistema deve fazer quando o evento X ocorrer.</p>
+                </div>
+                <div class="tile">
+                    <i class="fa-solid fa-rocket"></i>
+                    <h3>3. Disparar</h3>
+                    <p>Apertar o gatilho manualmente para executar a reação programada.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2 class="slide-title">Passo 1: Importar o Módulo</h2>
+        <div class="content-area">
+            <p>Tudo começa com a importação da classe nativa do Node.js.</p>
+            <pre style="margin-top: 20px;">const events = require('events');</pre>
+            <p style="margin-top: 20px;">Esta variável agora contém todo o poder necessário para gerenciar fluxos de dados.</p>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2 class="slide-title">Passo 2: Criar o Emissor</h2>
+        <div class="content-area">
+            <div class="highlight-numbers-layout">
+                <div class="number">01</div>
+                <div>
+                    <p class="number-label">Instanciar a Central</p>
+                    <p>Criamos um objeto que será o responsável por emitir e ouvir os sinais.</p>
+                    <pre style="margin-top: 20px;">const emissor = new events.EventEmitter();</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2 class="slide-title">Passo 3: O Ouvinte (.on)</h2>
+        <div class="content-area">
+            <div class="two-column">
+                <div>
+                    <p>O método <code>.on()</code> é o sensor. Ele fica "escutando" um nome específico de evento.</p>
+                    <pre style="margin-top: 20px;">
+emissor.on('fogo', () => {
+  console.log('🚨 Água ativada!');
+});
+                    </pre>
+                </div>
+                <div class="tile" style="justify-content: center; align-items: center;">
+                    <i class="fa-solid fa-satellite-dish" style="font-size: 70px;"></i>
+                    <p>Monitorando canal...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2 class="slide-title">Disparando a Ação (.emit)</h2>
+        <div class="content-area">
+            <div class="tiled-content">
+                <div class="tile">
+                    <i class="fa-solid fa-bullhorn"></i>
+                    <h3>Gatilho</h3>
+                    <p>O comando <code>emit</code> avisa a todos que o evento ocorreu.</p>
+                </div>
+                <div class="tile">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    <h3>Dados</h3>
+                    <p>Você pode enviar informações extras junto com o disparo do evento.</p>
+                </div>
+                <div class="tile" style="background: #000;">
+                    <pre>emissor.emit('fogo');</pre>
+                    <p style="font-size: 16px; color: #888; margin-top: 10px;">Imediatamente, a função vinculada ao 'fogo' começa a rodar.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="section-title-layout">
+            <hr>
+            <h2>Parte 3: Exemplos Práticos</h2>
+            <p>Aplicando a lógica no mundo real.</p>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2 class="slide-title">Exemplo 1: O Alarme Simples</h2>
+        <div class="content-area">
+            <div class="table-layout">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nome do Evento</th>
+                            <th>Gatilho (.emit)</th>
+                            <th>Reação (.on)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>'invasao'</code></td>
+                            <td>Janela aberta indevidamente</td>
+                            <td>Chamar a Polícia / Enviar Push</td>
+                        </tr>
+                        <tr>
+                            <td><code>'fogo'</code></td>
+                            <td>Sensor de fumaça detectou calor</td>
+                            <td>Ligar Sprinklers de água</td>
+                        </tr>
+                        <tr>
+                            <td><code>'panico'</code></td>
+                            <td>Botão físico pressionado</td>
+                            <td>Tocar sirene na potência máxima</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2 class="slide-title">Exemplo 2: Sistema de Som</h2>
+        <div class="content-area">
+            <p style="margin-bottom: 20px;">Monitorando picos de volume em decibéis (dB):</p>
+            <div class="chart-container">
+                <div class="bar">
+                    <div class="label">Volume Normal</div>
+                    <div class="bar-inner"><div class="bar-fill" style="width: 40%;">40 dB</div></div>
+                </div>
+                <div class="bar">
+                    <div class="label">Alerta Conforto</div>
+                    <div class="bar-inner"><div class="bar-fill" style="width: 75%; background: #ff9900;">75 dB</div></div>
+                </div>
+                <div class="bar">
+                    <div class="label">Evento 'max_volume'</div>
+                    <div class="bar-inner"><div class="bar-fill" style="width: 100%; background: #ff3333;">100 dB</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2 class="slide-title">Exemplo 3: Automação</h2>
+        <div class="content-area">
+            <div class="tiled-content">
+                <div class="tile">
+                    <h3>Iluminação</h3>
+                    <p>Evento: <code>'sunset'</code><br>Ação: Ligar lâmpadas externas do pátio.</p>
+                </div>
+                <div class="tile">
+                    <h3>Climatização</h3>
+                    <p>Evento: <code>'temp_30'</code><br>Ação: Acionar o Ar-Condicionado no modo Eco.</p>
+                </div>
+                <div class="tile">
+                    <h3>Acesso</h3>
+                    <p>Evento: <code>'chegada'</code><br>Ação: Destrancar portão eletrônico via aproximação.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="section-title-layout">
+            <hr>
+            <h2>Parte 4: Dominando Recursos</h2>
+            <p>Gerenciando ouvintes e memória do sistema.</p>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2 class="slide-title">Ouvir apenas uma vez (.once)</h2>
+        <div class="content-area">
+            <div class="two-column">
+                <div class="tile">
+                    <h3>Método <code>.on()</code></h3>
+                    <p>O ouvinte continua ativo por tempo indeterminado. Toda vez que o evento for disparado, a função roda novamente.</p>
+                </div>
+                <div class="tile" style="border-color: #00f2ff;">
+                    <h3>Método <code>.once()</code></h3>
+                    <p>O ouvinte é de disparo único. Ele executa a função correspondente apenas na primeira ocorrência e se auto-destrói.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2 class="slide-title">Múltiplos Ouvintes</h2>
+        <div class="content-area">
+            <p>Um único evento pode disparar uma cadeia de ações paralelas sem que um script interfira no outro:</p>
+            <pre style="margin-top: 20px;">
+emissor.on('venda', emitirNotaFiscal);
+emissor.on('venda', atualizarEstoque);
+emissor.on('venda', dispararEmailMarketing);
+            </pre>
+            <p style="margin-top: 20px; font-size: 18px; color: #00f2ff;">Modularidade completa: cada função cuida estritamente do seu escopo.</p>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2 class="slide-title">Tratamento de Erros ('error')</h2>
+        <div class="content-area">
+            <div class="two-column">
+                <div>
+                    <p>No Node.js, o evento chamado <code>'error'</code> possui comportamento especial da arquitetura.</p>
+                    <p style="margin-top: 20px;">Se a aplicação emitir um erro e não houver um ouvinte programado para capturá-lo, o Node **derruba o processo imediatamente**.</p>
+                </div>
+                <pre style="color: #ff5555;">
+emissor.on('error', (err) => {
+  console.log('Capturado: ' + err.message);
+});
+                </pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2 class="slide-title">Removendo Ouvintes (.off)</h2>
+        <div class="content-area">
+            <div class="highlight-numbers-layout">
+                <div class="number">00</div>
+                <div>
+                    <p class="number-label">Desconectar Sensores</p>
+                    <p>Podemos desligar ouvintes específicos em tempo de execução para evitar consumo desnecessário de memória da VPS.</p>
+                    <pre style="margin-top: 20px;">emissor.off('alarme', tocarSirene);</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="section-title-layout">
+            <hr>
+            <h2>Parte 5: Prática de Laboratório</h2>
+            <p>Colocando os scripts para rodar no terminal.</p>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2 class="slide-title">Desafio Prático: Eventos Customizados</h2>
+        <div class="content-area">
+            <div style="background: #161b22; padding: 40px; border-radius: 16px; border: 1px solid #026e00;">
+                <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 15px;">
+                    <li><i class="fa-solid fa-terminal" style="color: #00f2ff; margin-right: 15px;"></i> Crie um arquivo chamado <code>app.js</code> no VS Code.</li>
+                    <li><i class="fa-solid fa-terminal" style="color: #00f2ff; margin-right: 15px;"></i> Instancie um novo <code>EventEmitter</code> próprio.</li>
+                    <li><i class="fa-solid fa-terminal" style="color: #00f2ff; margin-right: 15px;"></i> Programe dois tratadores diferentes usando o método <code>.on()</code>.</li>
+                    <li><i class="fa-solid fa-terminal" style="color: #00f2ff; margin-right: 15px;"></i> Dispare o evento simulado usando <code>.emit()</code> passando parâmetros.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="qa-layout">
+            <h2>Dúvidas?</h2>
+            <p style="margin-top: 20px;">Consolide os conceitos praticando!</p>
+            <div class="contact-info">
+                <i class="fa-solid fa-envelope"></i> euclidespaim@gmail.com<br>
+                <i class="fa-brands fa-github"></i> github.com/euclidespaim
+            </div>
+        </div>
+    </div>
+
+    <div id="controls-footer">
+        <button onclick="changeSlide(-1)"><i class="fa-solid fa-arrow-left"></i> Anterior</button>
+        <span id="slide-counter">1 / 24</span>
+        <button onclick="changeSlide(1)">Próximo <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

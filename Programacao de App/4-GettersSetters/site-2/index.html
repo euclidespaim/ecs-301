@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Getters e Setters</title>
+</head>
+<body>
+    <section class="enunciado">
+        <h2>Missão: Proteção de Dados (Encapsulamento)</h2>
+        <p>
+            Você foi contratado para programar o sistema de um ar-condicionado de alta precisão.
+            Sua tarefa é garantir que o compressor nunca receba temperaturas fora da faixa de
+            <strong>16°C a 30°C</strong>.
+        </p>
+        <p>
+            1. Nosso objeto <code>arCondicionado</code>, utiliza o propriedade privada <code>#temp</code> (ES2022).<br>
+            2. Implemente um <strong>Setter</strong> que bloqueie valores inválidos.<br>
+            3. Implemente um <strong>Getter</strong> que entregue o valor formatado para o visor.
+        </p>
+    </section>
+
+    <div class="painel-ac">
+        <span class="label-status">System Status: Active</span>
+        <div class="display-digital">
+            <p id="visor-temp">--°C</p>
+        </div>
+
+        <div class="controles">
+            <input type="number" id="input-usuario" placeholder="22">
+            <button onclick="enviarComando()">Seta Temperatura</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

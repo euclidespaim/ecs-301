@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node.js: File System - Turma 301</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="slide-container active">
+        <div class="title-layout">
+            <h1>Node.js: <span>File System</span></h1>
+            <p class="subtitle">Dominando a Chave do HD: Aprendendo a Ler, Escrever e Deletar Arquivos de Forma Assíncrona.</p>
+            <div class="footer-info">Professor Euclides Paim | Programação de Aplicativos</div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="section-title-layout">
+            <i class="fa-solid fa-floppy-disk section-icon"></i>
+            <h2>Parte 1: O que é o File System?</h2>
+            <hr>
+            <p>Descobrindo o módulo nativo que nos dá acesso direto ao disco rígido.</p>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2 class="slide-title">A Analogia do Almoxarifado</h2>
+        <div class="content-area">
+            <div class="two-column tiled">
+                <div>
+                    <div class="card-icon"><i class="fa-brands fa-chrome" style="color: #ff4444;"></i></div>
+                    <h3>No Navegador (Segurança)</h3>
+                    <p>Por questões de segurança, o JavaScript do navegador é proibido de mexer no seu computador. Um site não pode criar ou apagar arquivos do seu HD.</p>
+                </div>
+                <div>
+                    <div class="card-icon"><i class="fa-solid fa-warehouse"></i></div>
+                    <h3>No Servidor (Node.js)</h3>
+                    <p>O Node.js roda direto na máquina. Ele tem um ajudante nativo chamado <strong><code>fs</code></strong> (File System), que funciona como o almoxarife: ele busca, escreve ou tritura os arquivos para você.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2 class="slide-title">Por que isso muda o jogo?</h2>
+        <div class="content-area">
+            <p class="description-text">Até a nossa última aula, tudo o que fazíamos sumia quando o programa fechava:</p>
+            <div class="metaphor-box blueprint-border" style="margin-top: 20px;">
+                <h4><i class="fa-solid fa-database"></i> A Persistência de Dados</h4>
+                <p>Variáveis e arrays vivem apenas na memória RAM (temporária). Com o módulo <code>fs</code>, nós salvamos as informações no HD para sempre. Podemos criar históricos de pontuação de jogos, relatórios de acessos ou pequenos bancos de dados em arquivos de texto comuns.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="section-title-layout">
+            <i class="fa-solid fa-book-open section-icon"></i>
+            <h2>Parte 2: Lendo Arquivos</h2>
+            <hr>
+            <p>Como trazer o conteúdo de um arquivo de texto para dentro do nosso terminal.</p>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2 class="slide-title">O Método readFile()</h2>
+        <div class="content-area">
+            <div class="two-column">
+                <div>
+                    <p>Para ler dados, chamamos o <code>fs.readFile()</code>.</p>
+                    <p style="margin-top: 15px;">Ele precisa de 3 coisas fundamentais:</p>
+                    <ul class="slide-list" style="margin-top: 15px; padding-left: 20px; color: var(--text-muted); font-size: 18px; line-height: 1.8;">
+                        <li><strong>O nome do arquivo:</strong> Ex: <code>'pedido.txt'</code></li>
+                        <li><strong>A codificação:</strong> Sempre usamos <code>'utf-8'</code> para os acentos não quebrarem.</li>
+                        <li><strong>A Callback:</strong> A função que vai receber o erro ou o texto quando o HD responder.</li>
+                    </ul>
+                </div>
+                <div class="chart-container" style="padding: 30px; text-align: center;">
+                    <i class="fa-solid fa-file-import" style="font-size: 60px; color: var(--blueprint-cyan); margin-bottom: 15px;"></i>
+                    <h3>fs.readFile()</h3>
+                    <p style="font-size: 16px;">Operação Não-Bloqueante: o Node faz o pedido ao HD e continua rodando o resto do script.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2 class="slide-title">Código Prático: Lendo o Pedido</h2>
+        <div class="content-area">
+            <p style="margin-bottom: 15px; font-size: 18px;">Script simples para ler o arquivo que criamos nas aulas anteriores:</p>
+            <pre>
+const fs = require('fs');
+
+// Dispara a leitura no HD de forma assíncrona
+fs.readFile('pedido.txt', 'utf-8', (err, conteudo) => {
+    if (err) {
+        return console.log("🚨 Erro ao ler o arquivo: " + err.message);
+    }
+    console.log("🍔 Conteúdo do Pedido:\\n" + conteudo);
+});
+            </pre>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="section-title-layout">
+            <i class="fa-solid fa-pen-to-square section-icon"></i>
+            <h2>Parte 3: Escrevendo Arquivos</h2>
+            <hr>
+            <p>Como fazer o Node criar documentos e salvar novos dados de forma automática.</p>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2 class="slide-title">O Método writeFile()</h2>
+        <div class="content-area">
+            <p class="description-text">O método <code>fs.writeFile()</code> é extremamente inteligente e segue duas regras automáticas:</p>
+            <div class="two-column" style="margin-top: 20px;">
+                <div class="metaphor-box rule-border">
+                    <h4><i class="fa-solid fa-plus"></i> Se o arquivo NÃO existe</h4>
+                    <p>O Node cria um arquivo novo com esse nome instantaneamente na pasta e injeta o texto dentro dele.</p>
+                </div>
+                <div class="metaphor-box rule-border">
+                    <h4><i class="fa-solid fa-eraser"></i> Se o arquivo JÁ existe</h4>
+                    <p>O Node limpa todo o conteúdo antigo, apaga o texto velho e grava o texto novo por cima.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2 class="slide-title">Código Prático: Gravando Recordes</h2>
+        <div class="content-area">
+            <p style="margin-bottom: 15px; font-size: 18px;">Copia este código no VS Code para criar um registrador de pontuação de jogos:</p>
+            <pre>
+const fs = require('fs');
+
+const conteudo = "Jogador: Gabriel_301\\nPontuação: 9500 pontos\\nNível: Máster 🏆";
+
+// Cria ou sobrescreve o arquivo 'highscore.txt'
+fs.writeFile('highscore.txt', conteudo, 'utf-8', (err) => {
+    if (err) {
+        return console.log("🚨 Erro ao salvar o recorde: " + err.message);
+    }
+    console.log("💾 Arquivo salvo com sucesso na pasta do projeto!");
+});
+            </pre>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="section-title-layout">
+            <i class="fa-solid fa-trash-can section-icon"></i>
+            <h2>Parte 4: Deletando Arquivos</h2>
+            <hr>
+            <p>Como limpar a casa e remover arquivos do computador via código.</p>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2 class="slide-title">O Método unlink()</h2>
+        <div class="content-area">
+            <div class="two-column">
+                <div>
+                    <p>Para apagar um arquivo, o Node utiliza o método <code>fs.unlink()</code>.</p>
+                    <p style="margin-top: 15px;">O nome "unlink" (desvincular) existe porque, no sistema de arquivos, nós removemos o link ou ponteiro que aponta para aquele espaço no disco físico.</p>
+                </div>
+                <div>
+                    <pre>
+const fs = require('fs');
+
+// Remove o arquivo permanentemente do computador
+fs.unlink('highscore.txt', (err) => {
+    if (err) {
+        return console.log("🚨 Arquivo não encontrado!");
+    }
+    console.log("🗑️ Arquivo triturado com sucesso!");
+});
+                    </pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="section-title-layout">
+            <i class="fa-solid fa-laptop-code section-icon"></i>
+            <h2>Parte 5: Desafio de Laboratório</h2>
+            <hr>
+            <p>Chegou a hora de criar o seu próprio sistema de logs interativo.</p>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2 class="slide-title">Desafio Prático: Caixa Preta do Servidor</h2>
+        <div class="content-area">
+            <div class="challenge-box">
+                <h3><i class="fa-solid fa-terminal"></i> Roteiro para as Duplas:</h3>
+                <ol>
+                    <li>Crie um arquivo chamado <code>app.js</code> no seu VS Code.</li>
+                    <li>Use o método <code>fs.writeFile</code> para criar de forma automática um arquivo chamado <code>historico.txt</code> com o texto: <em>"Acesso realizado com sucesso pela dupla [Nome1] e [Nome2]"</em>.</li>
+                    <li>Abra a barra lateral do VS Code e verifique se o arquivo surgiu na pasta!</li>
+                    <li><strong>Missão Extra:</strong> Altere seu script usando o <code>fs.readFile</code> para ler o conteúdo de <code>historico.txt</code> e exibir o texto no terminal do VS Code. Mostre o resultado ao Professor!</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <div id="slide-controls">
+        <button onclick="prevSlide()"><i class="fa-solid fa-chevron-left"></i> Anterior</button>
+        <span id="slide-num">1 / 14</span>
+        <button onclick="nextSlide()">Próximo <i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

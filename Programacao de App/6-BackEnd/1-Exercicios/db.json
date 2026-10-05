@@ -1,0 +1,20 @@
+{
+  "agentes": [
+    {
+      "id": "1",
+      "nome": "Neo",
+      "status": "Ativo"
+    },
+    {
+      "nome": "Trinity",
+      "status": "Oculto",
+      "id": "2"
+    },
+    {
+      "id": "9",
+      "nome": "Cypher",
+      "status": "Ativo"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

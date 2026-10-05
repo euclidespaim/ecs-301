@@ -1,0 +1,292 @@
+/* ==========================================================================
+   1. CONFIGURAÇÃO DE CORES (DARK MINT CYBER)
+   ========================================================================== */
+:root {
+    --bg-dark: #0b0d11;
+    --card-bg: #161b22;
+    --mint-neon: #00ffcc; /* Cor oficial para a aula de Resend */
+    --text-white: #e6edf3;
+    --text-muted: #8b949e;
+    --border-grey: #30363d;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #010409;
+    color: var(--text-white);
+    font-family: 'Urbanist', sans-serif;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* ==========================================================================
+   2. ESTRUTURA DOS SLIDES
+   ========================================================================== */
+.slide-container {
+    background-color: var(--bg-dark);
+    width: 1280px;
+    height: 720px;
+    padding: 60px 80px;
+    display: none;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 0 30px 80px rgba(0, 255, 204, 0.05);
+    border: 1px solid var(--border-grey);
+    border-radius: 12px;
+}
+
+.slide-container.active {
+    display: flex;
+}
+
+/* Grid Cibernética de Fundo */
+.slide-container::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: radial-gradient(var(--border-grey) 1px, transparent 1px);
+    background-size: 35px 35px;
+    opacity: 0.15;
+    z-index: 0;
+}
+
+.slide-container > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* ==========================================================================
+   3. TIPOGRAFIA
+   ========================================================================== */
+h1 {
+    font-size: 72px;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+h1 span {
+    color: var(--mint-neon);
+    text-shadow: 0 0 20px rgba(0, 255, 204, 0.3);
+}
+
+.slide-title {
+    font-size: 38px;
+    color: var(--mint-neon);
+    margin-bottom: 35px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-left: 6px solid var(--mint-neon);
+    padding-left: 18px;
+}
+
+.content-area {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+/* ==========================================================================
+   4. LAYOUTS MÓDULOS
+   ========================================================================== */
+.title-layout {
+    text-align: center;
+    margin-top: 120px;
+}
+
+.title-layout .subtitle {
+    font-size: 26px;
+    color: var(--text-muted);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.title-layout .footer-info {
+    margin-top: 80px;
+    font-size: 18px;
+    color: var(--mint-neon);
+    font-weight: 600;
+}
+
+.section-title-layout {
+    text-align: center;
+    margin: auto 0;
+}
+
+.section-icon {
+    font-size: 75px;
+    color: var(--mint-neon);
+    margin-bottom: 20px;
+}
+
+.section-title-layout h2 {
+    font-size: 56px;
+}
+
+.section-title-layout hr {
+    width: 120px;
+    height: 4px;
+    background: var(--mint-neon);
+    border: none;
+    margin: 25px auto;
+}
+
+.two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+    width: 100%;
+}
+
+.two-column.tiled > div {
+    background: var(--card-bg);
+    padding: 35px;
+    border-radius: 12px;
+    border: 1px solid var(--border-grey);
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card-icon {
+    font-size: 45px;
+    color: var(--mint-neon);
+    margin-bottom: 15px;
+}
+
+/* Blocos de Analogias */
+.metaphor-box {
+    padding: 25px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.01);
+}
+
+.mint-border { border-left: 5px solid var(--mint-neon); }
+.red-border { border-left: 5px solid #ff6b6b; background: #1a0d0d; }
+.blueprint-border { border-left: 5px solid #58a6ff; background: #0d111a; }
+
+.metaphor-box h4 {
+    font-size: 22px;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+/* ==========================================================================
+   5. CÓDIGO (SINTAXE HIGHLIGHT)
+   ========================================================================== */
+pre {
+    background: #000000;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid var(--border-grey);
+    color: #a9ffea; /* Mint Code */
+    font-family: 'Fira Code', monospace;
+    font-size: 16px;
+    line-height: 1.5;
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.7);
+    text-align: left;
+}
+
+code {
+    font-family: 'Fira Code', monospace;
+    background: #000;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--mint-neon);
+}
+
+.visual-manifest-box {
+    background: #000;
+    border: 1px solid var(--border-grey);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+}
+
+/* ==========================================================================
+   6. DESAFIOS E LISTAS
+   ========================================================================== */
+.challenge-box {
+    background: #081412;
+    border: 1px solid #1f5c53;
+    padding: 35px;
+    border-radius: 8px;
+}
+
+.challenge-box h3 {
+    color: var(--mint-neon);
+    margin-bottom: 15px;
+}
+
+.challenge-box ol {
+    padding-left: 20px;
+}
+
+.challenge-box li {
+    font-size: 19px;
+    margin-bottom: 12px;
+    color: #c4fce0;
+    line-height: 1.5;
+}
+
+.bullet-list li {
+    font-size: 22px;
+    list-style: none;
+    margin-bottom: 20px;
+}
+
+.bullet-list i {
+    color: var(--mint-neon);
+    margin-right: 15px;
+}
+
+/* ==========================================================================
+   7. CONTROLES DE NAVEGAÇÃO
+   ========================================================================== */
+#slide-controls {
+    position: fixed;
+    bottom: 25px;
+    right: 50px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    z-index: 100;
+}
+
+#slide-controls button {
+    background: var(--card-bg);
+    border: 1px solid var(--border-grey);
+    color: var(--text-white);
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+#slide-controls button:hover {
+    background: var(--mint-neon);
+    color: #000;
+    border-color: var(--mint-neon);
+}
+
+#slide-num {
+    font-size: 18px;
+    color: var(--text-muted);
+    font-weight: 700;
+    min-width: 70px;
+    text-align: center;
+}

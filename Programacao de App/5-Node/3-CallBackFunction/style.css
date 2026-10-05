@@ -1,0 +1,325 @@
+/* ==========================================================================
+   1. CORES BASE & RESET (ESTÉTICA MATRIX TERM)
+   ========================================================================== */
+:root {
+    --bg-dark: #05070a;
+    --card-bg: #0d121a;
+    --matrix-neon: #00ff66; /* Verde Matrix */
+    --matrix-cyan: #00f0ff; /* Ciano de Destaque */
+    --text-white: #e2e8f0;
+    --text-muted: #8a99ad;
+    --border-grey: #1f293d;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #010204;
+    color: var(--text-white);
+    font-family: 'Urbanist', sans-serif;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* ==========================================================================
+   2. CONTROLADORES DOS SLIDES
+   ========================================================================== */
+.slide-container {
+    background-color: var(--bg-dark);
+    width: 1280px;
+    height: 720px;
+    padding: 60px 80px;
+    display: none;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 0 30px 70px rgba(0, 255, 102, 0.05);
+    border: 1px solid var(--border-grey);
+    border-radius: 12px;
+}
+
+.slide-container.active {
+    display: flex;
+}
+
+/* Grid tecnológico de fundo */
+.slide-container::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: linear-gradient(var(--border-grey) 1px, transparent 1px),
+                      linear-gradient(90deg, var(--border-grey) 1px, transparent 1px);
+    background-size: 50px 50px;
+    opacity: 0.08;
+    z-index: 0;
+}
+
+.slide-container > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* ==========================================================================
+   3. TIPOGRAFIA
+   ========================================================================== */
+h1 {
+    font-size: 68px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+h1 span {
+    color: var(--matrix-neon);
+    text-shadow: 0 0 15px rgba(0, 255, 102, 0.3);
+}
+
+.slide-title {
+    font-size: 38px;
+    color: var(--matrix-neon);
+    margin-bottom: 35px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-left: 6px solid var(--matrix-neon);
+    padding-left: 18px;
+}
+
+h3 {
+    font-size: 26px;
+    margin-bottom: 12px;
+    color: var(--text-white);
+}
+
+p {
+    font-size: 20px;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* ==========================================================================
+   4. LAYOUTS INTERNOS
+   ========================================================================== */
+.content-area {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+.title-layout {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.title-layout .subtitle {
+    font-size: 26px;
+    color: var(--text-muted);
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+.title-layout .footer-info {
+    margin-top: 80px;
+    font-size: 18px;
+    color: var(--matrix-neon);
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.section-title-layout {
+    text-align: center;
+    margin: auto 0;
+}
+
+.section-icon {
+    font-size: 75px;
+    color: var(--matrix-neon);
+    margin-bottom: 25px;
+}
+
+.section-title-layout h2 {
+    font-size: 56px;
+}
+
+.section-title-layout hr {
+    width: 120px;
+    height: 4px;
+    background: var(--matrix-neon);
+    border: none;
+    margin: 25px auto;
+}
+
+.two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+    width: 100%;
+}
+
+.two-column.tiled > div {
+    background: var(--card-bg);
+    padding: 35px;
+    border-radius: 12px;
+    border: 1px solid var(--border-grey);
+    height: 310px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card-icon {
+    font-size: 45px;
+    color: var(--matrix-neon);
+    margin-bottom: 15px;
+}
+
+.metaphor-box {
+    padding: 25px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.01);
+}
+
+.async-border { border-left: 5px solid var(--matrix-neon); }
+.info-border { border-left: 5px solid var(--matrix-cyan); }
+
+.metaphor-box h4 {
+    font-size: 22px;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+/* ==========================================================================
+   5. DECORAÇÃO DE SINTAXE DE CÓDIGO
+   ========================================================================== */
+pre {
+    background: #000000;
+    padding: 22px;
+    border-radius: 8px;
+    border: 1px solid var(--border-grey);
+    color: #33ff66; /* Verde Terminal */
+    font-family: 'Fira Code', monospace;
+    font-size: 16px;
+    line-height: 1.5;
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.9);
+    text-align: left;
+    white-space: pre-wrap;
+}
+
+code {
+    font-family: 'Fira Code', monospace;
+    background: #000000;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--matrix-cyan);
+}
+
+/* ==========================================================================
+   6. GRÁFICOS E TABELAS
+   ========================================================================== */
+.chart-container {
+    background: var(--card-bg);
+    border: 1px solid var(--border-grey);
+    border-radius: 12px;
+}
+
+.bar {
+    display: flex;
+    align-items: center;
+}
+
+.bar .label {
+    width: 220px;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.bar .bar-inner {
+    flex-grow: 1;
+    background: #101622;
+    height: 35px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.bar .bar-fill {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    font-weight: 700;
+}
+
+.error-bar { background: #ff3333; color: white !important; }
+.async-bar { background: var(--matrix-neon); color: #000; }
+
+.challenge-box {
+    background: #06140e;
+    border: 1px solid #1f5c3d;
+    padding: 35px;
+    border-radius: 8px;
+}
+
+.challenge-box h3 {
+    color: var(--matrix-neon);
+    margin-bottom: 15px;
+}
+
+.challenge-box ol {
+    padding-left: 20px;
+}
+
+.challenge-box li {
+    font-size: 19px;
+    margin-bottom: 12px;
+    color: #c4fce0;
+    line-height: 1.5;
+}
+
+/* ==========================================================================
+   7. INTERFACE DE COMPORTAMENTO (BOTÕES)
+   ========================================================================== */
+#slide-controls {
+    position: fixed;
+    bottom: 25px;
+    right: 50px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    z-index: 100;
+}
+
+#slide-controls button {
+    background: var(--card-bg);
+    border: 1px solid var(--border-grey);
+    color: var(--text-white);
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+#slide-controls button:hover {
+    background: var(--matrix-neon);
+    color: #000;
+    border-color: var(--matrix-neon);
+    box-shadow: 0 0 10px rgba(0, 255, 102, 0.4);
+}
+
+#slide-num {
+    font-size: 18px;
+    color: var(--text-muted);
+    font-weight: 700;
+    min-width: 70px;
+    text-align: center;
+}

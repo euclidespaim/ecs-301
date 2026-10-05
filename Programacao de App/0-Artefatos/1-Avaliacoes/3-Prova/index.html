@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio System - Lab 301</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <section class="enunciado">
+        <h2>Desafio: Console de Áudio High-End</h2>
+        <p>Programe o controle de volume protegendo o hardware:</p>
+        <ul>
+            <li>Use o campo privado <code>#volume</code>.</li>
+            <li>O <strong>Setter</strong> deve limitar o volume entre 0 e 100.</li>
+            <li>Se o volume for 0, o <strong>Getter</strong> deve retornar "MUTE".</li>
+            <li>O <strong>Setter</strong> deve atualizar o visor automaticamente.</li>
+        </ul>
+    </section>
+
+    <div class="audio-card">
+        <div class="brand">PRO-AUDIO v1.0</div>
+        
+        <div class="display-container">
+            <h1 id="visor-volume">MUTE</h1>
+        </div>
+
+        <div class="controls">
+            <input type="number" id="input-volume" placeholder="20">
+            <button onclick="enviarComando()">Set Volume</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
